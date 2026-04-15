@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="/static/styles/my-bookings.css">
+{% endblock %}
+
+{% block content %}
+<div class="bookings-container">
+    <div class="bookings-header">
+        <h1>My Bookings</h1>
+        <div class="bookings-controls">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="past">Past</button>
+                <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search bookings...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="bookings-alerts" id="bookingsAlerts">
+        <!-- Alerts will appear here -->
+    </div>
+
+    <div class="bookings-list" id="bookingsList">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading your bookings...</p>
+        </div>
+    </div>
+
+    <!-- Modal for booking details and editing -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Booking Details</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Close</button>
+                <button class="btn-danger" id="cancelBookingBtn" style="display: none;">Cancel Booking</button>
+                <button class="btn-primary" id="saveBookingBtn" style="display: none;">Save Changes</button>
+                <button class="btn-primary" id="viewBoardingPassBtn" style="display: none;">View Boarding Pass</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/my-bookings.js"></script>
+{% endblock %}

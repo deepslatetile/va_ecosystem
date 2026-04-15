@@ -1,0 +1,21 @@
+{
+  "name": "Cathay Pacific",
+  "short_name": "Cathay Pacific",
+  "description": "Cathay Pacific - now in your pocket",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#24322b",
+  "theme_color": "#008f81",
+  "icons": [
+    {
+      "src": "/static/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

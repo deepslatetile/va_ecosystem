@@ -1,0 +1,129 @@
+.page-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--green);
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.page-meta {
+    color: var(--green);
+    font-size: 0.9rem;
+}
+
+.page-content {
+    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--green);
+    min-height: 400px;
+}
+
+.content-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.loading-spinner {
+    text-align: center;
+    color: var(--green);
+}
+
+.loading-spinner i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.page-content h2 {
+    color: var(--green);
+    margin: 2rem 0 1rem 0;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--green);
+    padding-bottom: 0.5rem;
+}
+
+.page-content h3 {
+    color: var(--dark);
+    margin: 1.5rem 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.page-content p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--green);
+}
+
+.page-content ul,
+.page-content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+    color: var(--green);
+}
+
+.page-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.page-content strong {
+    color: var(--dark);
+    /*font-weight: 600;*/
+}
+
+.page-content a {
+    color: var(--green);
+    text-decoration: none;
+}
+
+.page-content a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    text-align: center;
+    color: #ff6b6b;
+    padding: 2rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--green);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.privacy-highlight {
+    background: rgba(0, 100, 90, 0.2);
+    border-left: 4px solid var(--green);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .page-content {
+        padding: 1.5rem;
+    }
+}

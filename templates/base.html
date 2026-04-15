@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#00645a" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Cathay Pacific">
+    <link rel="apple-touch-icon" href="/static/images/icon-192x192.png">
+    <title>Cathay Pacific PTFS | Book flights to 81 destinations</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles/base.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header class="header">
+
+    <!-- ── TOP BAR ─────────────────────────────────────── -->
+    <div class="header-topbar">
+        <div class="container">
+
+            <!-- Left: Join us Today -->
+            <div class="topbar-left">
+                <a href="/register" class="topbar-item topbar-join">
+                    <i class="fas fa-paper-plane"></i> Join us Today
+                </a>
+            </div>
+
+            <!-- Right: Help · Notification · Dark toggle -->
+            <div class="topbar-right">
+                <a href="/help" class="topbar-item">
+                    <img src="https://www.cathaypacific.com/content/dam/header-footer-lrp/icons/help.originalimage.svg" alt="">
+                    Help &amp; support
+                </a>
+
+                <button class="topbar-item" id="notifBtn" title="Notification centre">
+                    <div class="notif-wrap">
+                        <img src="https://www.cathaypacific.com/content/dam/header-footer-lrp/icons/bell.originalimage.svg" alt="">
+                        <span class="notif-dot" id="notifDot" style="display:none;"></span>
+                    </div>
+                    Notification centre
+                </button>
+
+                <!-- Dark mode toggle — rightmost -->
+                <button class="dark-toggle" id="darkToggle" title="Toggle dark mode" onclick="toggleDarkMode()">
+                    <span class="toggle-icon" id="toggleIcon">☀️</span>
+                    <div class="toggle-pill"></div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── BOTTOM BAR ──────────────────────────────────── -->
+    <div class="header-bottombar">
+        <div class="container">
+            <nav class="nav-container">
+
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="/">
+                        <img class="header_img"
+                             src="https://www.cathaypacific.com/content/dam/header-footer-lrp/cathay80-en.originalimage.svg"
+                             alt="Cathay Pacific">
+                        <img class="header_img header_img_mobile"
+                             src="/static/images/logo_white_square.png"
+                             alt="Cathay Pacific">
+                    </a>
+                </div>
+
+                <!-- Desktop nav links (filled by JS) -->
+                <ul class="nav-menu" id="navMenu"></ul>
+
+                <!-- Right side: auth + oneworld -->
+                <div class="nav-right">
+                    <div class="auth-buttons" id="authButtons"></div>
+
+                    <!-- Oneworld logo — real Cathay has this far right -->
+                    <a href="https://www.cathaypacific.com/cx/en_NP/rewards-and-partnerships/oneworld.html"
+                       target="_blank" rel="noopener" title="oneworld">
+                        <img class="oneworld-logo"
+                             src="https://www.cathaypacific.com/content/dam/header-footer-lrp/Oneworld.originalimage.svg"
+                             alt="oneworld">
+                    </a>
+
+                    <!-- Hamburger (mobile only) -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <!-- Mobile dropdown (filled by JS) -->
+    <div class="mobile-dropdown" id="mobileDropdown">
+        <ul class="mobile-dropdown-menu" id="mobileDropdownMenu"></ul>
+    </div>
+
+</header>
+
+<main class="main-content">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p class="footer_link">© 2026 Cathay Pacific. All rights reserved.</p>
+        <p class="footer_link">Website provided by <a class="footer_link" href="https://discord.gg/NhkQVBzCPr">© 24Departures</a></p>
+        <div class="footer-links">
+            <a class="footer_link" href="/tos">Terms of service</a>
+            <a class="footer_link" href="/privacy-policy">Privacy Policy</a>
+        </div>
+        <a style="opacity: 0;" href="/admin">admin panel</a>
+    </div>
+</footer>
+
+<script src="/static/js/base.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(r => console.log('SW registered:', r))
+        .catch(e => console.log('SW error:', e));
+}
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

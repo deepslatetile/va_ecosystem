@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/styles/index.css">
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span><span class="flag_style">🇭🇰</span> oneworld Member · Move Beyond</span>
+        </div>
+        <h1 class="stylish-font"><span class="brand-highlight stylish-font">Cathay Pacific</span> 國泰航空</h1>
+        <p class="hero-description stylish-font">Move Beyond — take your journey further</p>
+
+        <div class="hero-buttons">
+            <a href="/book" class="cta-btn primary">
+                <i class="fas fa-calendar-alt"></i>
+                Book Flight
+            </a>
+            <a href="/schedule" class="cta-btn secondary">
+                <i class="fas fa-search"></i>
+                View Schedule
+            </a>
+            <a href="/profile" class="cta-btn outline">
+                <i class="fas fa-user"></i>
+                My Account
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="floating-plane">
+            <i class="fas fa-plane"></i>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="section-header">
+        <h2 class="stylish-font">Welcome to Cathay Pacific</h2>
+        <p class="stylish-font">We want to do more than just move you from A to B. We want to take you further.</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-globe-asia"></i>
+            </div>
+            <h3>Move Beyond</h3>
+            <p>Connect to meaningful people, places and experiences</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Thoughtful, progressive, can-do spirit</li>
+                <li><i class="fas fa-check"></i> Empowering communities to move beyond the expected</li>
+                <li><i class="fas fa-check"></i> Proud member of the oneworld alliance</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <h3>Asia Miles & Modern Fleet</h3>
+            <p>Elevate your adventures in the skies</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Earn Asia Miles with every flight</li>
+                <li><i class="fas fa-check"></i> Exceptional comfort and innovation</li>
+                <li><i class="fas fa-check"></i> Modern fleet for a superior journey</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3>One Team, One Spirit</h3>
+            <p>From pilots to ground staff, we go above and beyond</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Bringing people together through service</li>
+                <li><i class="fas fa-check"></i> Outstanding dedication from every team member</li>
+                <li><i class="fas fa-check"></i> Join our family — we're recruiting!</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <div class="cta-content">
+        <h2>Join Us at Cathay Pacific</h2>
+        <p>Whether you're a pilot, cabin crew, engineer, or ground staff — come Move Beyond with us.</p>
+        <div class="cta-buttons">
+            <a href="https://discord.gg/vmQP3kjH9U" class="cta-btn primary large" target="_blank">
+                <i class="fab fa-discord"></i>
+                Join Us Today
+            </a>
+            <a href="/schedule" class="cta-btn outline large">
+                <i class="fas fa-search"></i>
+                Explore Flights
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/index.js"></script>
+{% endblock %}
