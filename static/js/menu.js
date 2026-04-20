@@ -1,4 +1,3 @@
-
 let allMeals = [];
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -14,12 +13,12 @@ async function loadMenu() {
             displayMenu(allMeals);
             updateFilters();
         } else {
-            throw new Error('Failed to load menu');
+            throw new Error('Не удалось загрузить меню');
         }
 
     } catch (error) {
-        console.error('Error loading menu:', error);
-        document.getElementById('menuLoading').innerHTML = '<div class="error"><i class="fas fa-exclamation-triangle"></i><p>Failed to load menu. Please try again later.</p></div>';
+        console.error('Ошибка загрузки меню:', error);
+        document.getElementById('menuLoading').innerHTML = '<div class="error"><i class="fas fa-exclamation-triangle"></i><p>Не удалось загрузить меню. Пожалуйста, попробуйте позже.</p></div>';
     }
 }
 
@@ -90,12 +89,12 @@ function updateFilters() {
     const classHierarchy = ["First", "Business", "Economy"];
     const orderedClasses = classHierarchy.filter(cls => classes.includes(cls));
 
-    classSelect.innerHTML = '<option value="all">All Classes</option>';
+    classSelect.innerHTML = '<option value="all">Все классы</option>';
     orderedClasses.forEach(className => {
         classSelect.innerHTML += '<option value="' + className + '">' + className + '</option>';
     });
 
-    timeSelect.innerHTML = '<option value="all">All Times</option>';
+    timeSelect.innerHTML = '<option value="all">Все время</option>';
     times.forEach(time => {
         const timeDisplay = time.charAt(0).toUpperCase() + time.slice(1);
         timeSelect.innerHTML += '<option value="' + time + '">' + timeDisplay + '</option>';

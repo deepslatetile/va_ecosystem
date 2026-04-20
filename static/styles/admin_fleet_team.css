@@ -9,7 +9,7 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin-bottom: 0.5rem;
     display: flex;
@@ -18,11 +18,11 @@
 }
 
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -44,24 +44,24 @@
 }
 
 .admin-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .admin-card h2 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1.5rem;
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     padding-bottom: 0.5rem;
 }
 
 .table-container {
     overflow-x: auto;
     border-radius: 8px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 #fleetTable,
@@ -74,17 +74,17 @@
 #fleetTable th,
 #teamTable th {
     background: rgba(255, 255, 255, 0.05);
-    color: var(--green);
+    color: #bfd730;
     padding: 1rem;
     text-align: left;
     /*font-weight: 600;*/
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 #fleetTable td,
 #teamTable td {
     padding: 1rem;
-    color: var(--green);
+    color: #ccc;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -101,7 +101,7 @@
 .loading-cell {
     text-align: center;
     padding: 3rem !important;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .action-buttons {
@@ -122,13 +122,13 @@
 }
 
 .btn-edit {
-    background: rgba(0, 100, 90, 0.2);
-    color: var(--green);
-    border: 1px solid var(--green);
+    background: rgba(191, 215, 48, 0.2);
+    color: #bfd730;
+    border: 1px solid #bfd730;
 }
 
 .btn-edit:hover {
-    background: rgba(0, 100, 90, 0.3);
+    background: rgba(15, 111, 229, 0.3);
 }
 
 .btn-delete {
@@ -143,8 +143,8 @@
 
 .btn-toggle {
     background: rgba(0, 200, 81, 0.2);
-    color: var(--lightgreen);
-    border: 1px solid var(--lightgreen);
+    color: #00C851;
+    border: 1px solid #00C851;
 }
 
 .btn-toggle:hover {
@@ -171,8 +171,8 @@
 
 .badge-active {
     background: rgba(0, 200, 81, 0.2);
-    color: var(--lightgreen);
-    border: 1px solid var(--lightgreen);
+    color: #00C851;
+    border: 1px solid #00C851;
 }
 
 .badge-inactive {
@@ -197,11 +197,11 @@
 }
 
 .modal-content {
-    background: var(--lightgreen);
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     border-radius: 12px;
     width: 100%;
     max-width: 600px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-height: 90vh;
     overflow-y: auto;
@@ -212,7 +212,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     position: sticky;
     top: 0;
     background: inherit;
@@ -220,20 +220,20 @@
 }
 
 .modal-header h3 {
-    color: var(--green);
+    color: #bfd730;
     margin: 0;
     font-size: 1.3rem;
 }
 
 .close {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.5rem;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .close:hover {
-    color: var(--dark);
+    color: #fff;
 }
 
 .modal-body {
@@ -254,7 +254,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
 }
 
@@ -264,9 +264,9 @@
     width: 100%;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
     box-sizing: border-box;
@@ -281,13 +281,13 @@
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .form-group input::placeholder {
-    color: var(--green);
+    color: #ccc;
 }
 
 .form-actions {
@@ -296,7 +296,7 @@
     justify-content: flex-end;
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
     flex-wrap: wrap;
 }
 
@@ -317,19 +317,19 @@
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
     transform: translateY(-1px);
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -351,18 +351,16 @@
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .alert-error {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
-option {
-    background-color: var(--green);
-}
+
 
 /* Mobile */
 @media (max-width: 768px) {

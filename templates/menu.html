@@ -7,21 +7,21 @@
 {% block content %}
 <div class="menu-container">
     <div class="menu-header">
-        <h1><i class="fas fa-utensils"></i> In-Flight Menu</h1>
-        <p>Discover our exquisite culinary offerings for your journey</p>
+        <h1><i class="fas fa-utensils"></i> Бортовое меню</h1>
+        <p>Откройте для себя изысканные кулинарные предложения для вашего путешествия</p>
     </div>
 
     <div class="menu-filters">
         <div class="filter-group">
-            <label for="classSelect">Service Class:</label>
+            <label for="classSelect">Класс обслуживания:</label>
             <select id="classSelect" onchange="filterMenu()">
-                <option value="all">All Classes</option>
+                <option value="all">Все классы</option>
             </select>
         </div>
         <div class="filter-group">
-            <label for="timeSelect">Meal Time:</label>
+            <label for="timeSelect">Время приёма пищи:</label>
             <select id="timeSelect" onchange="filterMenu()">
-                <option value="all">All Times</option>
+                <option value="all">Всё время</option>
             </select>
         </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="menu-content">
         <div id="menuLoading" class="loading">
             <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading menu...</p>
+            <p>Загрузка меню...</p>
         </div>
 
         <div id="menuItems" class="menu-items" style="display: none;">
@@ -37,8 +37,8 @@
 
         <div id="noMeals" class="no-meals" style="display: none;">
             <i class="fas fa-utensils"></i>
-            <h3>No meals available</h3>
-            <p>No meals found for the selected filters</p>
+            <h3>Блюда не найдены</h3>
+            <p>Для выбранных фильтров нет доступных блюд</p>
         </div>
     </div>
 </div>

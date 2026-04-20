@@ -7,8 +7,8 @@
 {% block content %}
 <div class="admin-dashboard">
     <div class="admin-header">
-        <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
-        <p>Flight System Management Panel</p>
+        <h1><i class="fas fa-cog"></i> Панель администратора</h1>
+        <p>Система управления авиакомпанией «Вектор»</p>
     </div>
 
     <div class="admin-grid">
@@ -16,10 +16,10 @@
             <div class="card-icon">
                 <i class="fas fa-ticket-alt"></i>
             </div>
-            <h3>Bookings Management</h3>
-            <p>View, manage, and process flight bookings and reservations.</p>
+            <h3>Управление бронированиями</h3>
+            <p>Просмотр, управление и обработка бронирований.</p>
             <a href="/admin/bookings" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Bookings
+                <i class="fas fa-external-link-alt"></i> Управление бронированиями
             </a>
         </div>
 
@@ -27,10 +27,10 @@
             <div class="card-icon">
                 <i class="fas fa-money-bill-wave"></i>
             </div>
-            <h3>Payments Management</h3>
-            <p>Monitor transactions, process refunds, and manage payment issues.</p>
+            <h3>Управление платежами</h3>
+            <p>Мониторинг транзакций, возвраты и управление платежами.</p>
             <a href="/admin/payments" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> View Payments
+                <i class="fas fa-external-link-alt"></i> Платежи
             </a>
         </div>
 
@@ -38,10 +38,10 @@
             <div class="card-icon">
                 <i class="fas fa-plane-departure"></i>
             </div>
-            <h3>Create Flight</h3>
-            <p>Create new flight schedules and configure flight parameters.</p>
+            <h3>Создать рейс</h3>
+            <p>Создание новых рейсов и настройка параметров.</p>
             <a href="/admin/create_flight" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Create New Flight
+                <i class="fas fa-external-link-alt"></i> Создать рейс
             </a>
         </div>
 
@@ -49,12 +49,12 @@
             <div class="card-icon">
                 <i class="fas fa-edit"></i>
             </div>
-            <h3>Edit Flight</h3>
-            <p>Modify existing flight schedules and configurations.</p>
+            <h3>Редактировать рейс</h3>
+            <p>Изменение существующих рейсов.</p>
             <div class="flight-edit-form">
-                <input type="text" id="flightNumberInput" placeholder="Enter flight number (e.g., AU1)">
+                <input type="text" id="flightNumberInput" placeholder="Введите номер рейса (например, VK1)">
                 <button onclick="goToEditFlight()" class="btn btn-secondary">
-                    <i class="fas fa-pencil-alt"></i> Edit Flight
+                    <i class="fas fa-pencil-alt"></i> Редактировать
                 </button>
             </div>
         </div>
@@ -63,10 +63,10 @@
             <div class="card-icon">
                 <i class="fas fa-sliders-h"></i>
             </div>
-            <h3>Flight Configurations</h3>
-            <p>Manage cabin layouts, boarding styles, and service configurations.</p>
+            <h3>Конфигурации рейсов</h3>
+            <p>Управление схемами салонов, стилями посадки и услугами.</p>
             <a href="/admin/flight_configs" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Configs
+                <i class="fas fa-external-link-alt"></i> Управление конфигурациями
             </a>
         </div>
 
@@ -74,10 +74,10 @@
             <div class="card-icon">
                 <i class="fas fa-utensils"></i>
             </div>
-            <h3>Meals Management</h3>
-            <p>Create and manage meal services for different flight classes.</p>
+            <h3>Управление питанием</h3>
+            <p>Создание и управление меню для разных классов.</p>
             <a href="/admin/meals" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Meals
+                <i class="fas fa-external-link-alt"></i> Управление меню
             </a>
         </div>
 
@@ -85,10 +85,10 @@
             <div class="card-icon">
                 <i class="fas fa-sitemap"></i>
             </div>
-            <h3>Navigation Management</h3>
-            <p>Manage website pages and navigation menu items.</p>
+            <h3>Управление навигацией</h3>
+            <p>Управление страницами сайта и пунктами меню.</p>
             <a href="/admin/web_configs" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Navigation
+                <i class="fas fa-external-link-alt"></i> Управление навигацией
             </a>
         </div>
 
@@ -96,10 +96,10 @@
             <div class="card-icon">
                 <i class="fas fa-comment-alt"></i>
             </div>
-            <h3>Phrases Management</h3>
-            <p>Manage frequently used phrases with copy-to-clipboard functionality.</p>
+            <h3>Управление фразами</h3>
+            <p>Управление часто используемыми фразами.</p>
             <a href="/admin/phrases" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Phrases
+                <i class="fas fa-external-link-alt"></i> Управление фразами
             </a>
         </div>
 
@@ -107,32 +107,10 @@
             <div class="card-icon">
                 <i class="fas fa-cloud-sun"></i>
             </div>
-            <h3>Weather Management</h3>
-            <p>Get real-time METAR weather data for airports worldwide.</p>
+            <h3>Управление погодой</h3>
+            <p>Получение METAR-данных для аэропортов.</p>
             <a href="/admin/weather" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> View Weather
-            </a>
-        </div>
-
-        <div class="admin-card">
-            <div class="card-icon">
-                <i class="fas fa-microphone"></i>
-            </div>
-            <h3>Text-to-Speech</h3>
-            <p>Convert text to AI speech</p>
-            <a href="https://colab.research.google.com/drive/1Cc1QxN_T7Sv_pisY4s3VYUumP-zrEO_J?usp=sharing" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Create TTS
-            </a>
-        </div>
-
-        <div class="admin-card">
-            <div class="card-icon">
-                <i class="fas fa-globe"></i>
-            </div>
-            <h3>Webhook messaging</h3>
-            <p>Send info via webhooks</p>
-            <a href="/admin/webhooks" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Send message
+                <i class="fas fa-external-link-alt"></i> Погода
             </a>
         </div>
 
@@ -140,10 +118,10 @@
             <div class="card-icon">
                 <i class="fas fa-users"></i>
             </div>
-            <h3>Users Management</h3>
-            <p>View, manage, and edit user accounts and permissions.</p>
+            <h3>Управление пользователями</h3>
+            <p>Просмотр, управление и редактирование пользователей.</p>
             <a href="/admin/users" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Users
+                <i class="fas fa-external-link-alt"></i> Управление пользователями
             </a>
         </div>
 
@@ -151,10 +129,10 @@
             <div class="card-icon">
                 <i class="fas fa-plane"></i>
             </div>
-            <h3>Fleet Management</h3>
-            <p>Manage aircraft fleet information and specifications.</p>
+            <h3>Управление флотом</h3>
+            <p>Управление информацией о воздушных судах.</p>
             <a href="/admin/fleet" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Fleet
+                <i class="fas fa-external-link-alt"></i> Управление флотом
             </a>
         </div>
 
@@ -162,10 +140,10 @@
             <div class="card-icon">
                 <i class="fas fa-users-cog"></i>
             </div>
-            <h3>Team Management</h3>
-            <p>Manage team members, positions, and profiles.</p>
+            <h3>Управление командой</h3>
+            <p>Управление членами команды и должностями.</p>
             <a href="/admin/team" class="btn btn-primary">
-                <i class="fas fa-external-link-alt"></i> Manage Team
+                <i class="fas fa-external-link-alt"></i> Управление командой
             </a>
         </div>
     </div>

@@ -10,13 +10,13 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
 .admin-header p {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1rem;
 }
 
@@ -27,10 +27,10 @@
 }
 
 .admin-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -45,18 +45,18 @@
 
 .card-icon {
     font-size: 2.5rem;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1rem;
 }
 
 .admin-card h3 {
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
 
 .admin-card p {
-    color: var(--green);
+    color: #ccc;
     margin-bottom: 1.5rem;
     line-height: 1.5;
     flex: 1;
@@ -65,8 +65,8 @@
 .btn {
     display: inline-block;
     padding: 12px 20px;
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
     text-decoration: none;
     border-radius: 6px;
     /*font-weight: 600;*/
@@ -79,13 +79,13 @@
 }
 
 .btn:hover {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover {
@@ -102,17 +102,14 @@
 .flight-edit-form input {
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
 }
 
-.flight-edit-form input::placeholder {
-    color: var(--green);
-}
 
 /* Mobile */
 @media (max-width: 768px) {

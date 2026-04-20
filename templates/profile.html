@@ -7,46 +7,46 @@
 {% block content %}
 <div class="profile-container">
     <div class="profile-header">
-        <h1>User Profile</h1>
+        <h1>Профиль пользователя</h1>
         <div id="profileAlerts">
             {% if request.args.get('success') %}
             <div class="alert alert-success">
-                {% if request.args.get('success') == 'discord_linked' %}
-                ✅ Discord account successfully linked!
-                {% elif request.args.get('success') == 'roblox_linked' %}
-                ✅ Roblox account successfully linked! Virtual ID updated.
+                {% if request.args.get('success') == 'SOCIALNWK_linked' %}
+                ✅ Аккаунт SOCIALNWK успешно привязан!
+                {% elif request.args.get('success') == 'VIRTUALNWK_linked' %}
+                ✅ Аккаунт VIRTUALNWK успешно привязан! Виртуальный ID обновлён.
                 {% elif request.args.get('success') == 'password_reset' %}
-                ✅ Password has been successfully changed!
+                ✅ Пароль успешно изменён!
                 {% endif %}
             </div>
             {% endif %}
 
             {% if request.args.get('error') %}
             <div class="alert alert-error">
-                {% if request.args.get('error') == 'discord_already_linked' %}
-                ❌ This Discord account is already linked to another user
-                {% elif request.args.get('error') == 'discord_auth_failed' %}
-                ❌ Discord authentication failed
-                {% elif request.args.get('error') == 'discord_not_configured' %}
-                ❌ Discord OAuth is not configured on the server
-                {% elif request.args.get('error') == 'discord_no_code' %}
-                ❌ Discord authorization code not provided
-                {% elif request.args.get('error') == 'discord_unexpected_error' %}
-                ❌ An unexpected error occurred
-                {% elif request.args.get('error') == 'roblox_already_linked' %}
-                ❌ This Roblox account is already linked to another user
-                {% elif request.args.get('error') == 'roblox_auth_failed' %}
-                ❌ Roblox authentication failed
-                {% elif request.args.get('error') == 'roblox_not_configured' %}
-                ❌ Roblox OAuth is not configured on the server
-                {% elif request.args.get('error') == 'roblox_no_code' %}
-                ❌ Roblox authorization code not provided
-                {% elif request.args.get('error') == 'roblox_no_user_id' %}
-                ❌ Could not get Roblox User ID
-                {% elif request.args.get('error') == 'roblox_unexpected_error' %}
-                ❌ An unexpected error occurred
+                {% if request.args.get('error') == 'SOCIALNWK_already_linked' %}
+                ❌ Этот аккаунт SOCIALNWK уже привязан к другому пользователю
+                {% elif request.args.get('error') == 'SOCIALNWK_auth_failed' %}
+                ❌ Ошибка аутентификации SOCIALNWK
+                {% elif request.args.get('error') == 'SOCIALNWK_not_configured' %}
+                ❌ SOCIALNWK OAuth не настроен на сервере
+                {% elif request.args.get('error') == 'SOCIALNWK_no_code' %}
+                ❌ Код авторизации SOCIALNWK не предоставлен
+                {% elif request.args.get('error') == 'SOCIALNWK_unexpected_error' %}
+                ❌ Произошла непредвиденная ошибка
+                {% elif request.args.get('error') == 'VIRTUALNWK_already_linked' %}
+                ❌ Этот аккаунт VIRTUALNWK уже привязан к другому пользователю
+                {% elif request.args.get('error') == 'VIRTUALNWK_auth_failed' %}
+                ❌ Ошибка аутентификации VIRTUALNWK
+                {% elif request.args.get('error') == 'VIRTUALNWK_not_configured' %}
+                ❌ VIRTUALNWK OAuth не настроен на сервере
+                {% elif request.args.get('error') == 'VIRTUALNWK_no_code' %}
+                ❌ Код авторизации VIRTUALNWK не предоставлен
+                {% elif request.args.get('error') == 'VIRTUALNWK_no_user_id' %}
+                ❌ Не удалось получить ID пользователя VIRTUALNWK
+                {% elif request.args.get('error') == 'VIRTUALNWK_unexpected_error' %}
+                ❌ Произошла непредвиденная ошибка
                 {% else %}
-                ❌ An error occurred
+                ❌ Произошла ошибка
                 {% endif %}
             </div>
             {% endif %}
@@ -55,7 +55,7 @@
 
     <div class="profile-content">
         <div class="profile-card">
-            <h2>Account Information</h2>
+            <h2>Информация об аккаунте</h2>
             <div class="user-info">
                 <div class="avatar-section">
                     <div class="avatar" id="userAvatar">
@@ -64,48 +64,48 @@
                 </div>
                 <div class="info-section">
                     <div class="info-item">
-                        <label>Username:</label>
-                        <span id="userUsername">Loading...</span>
+                        <label>Имя пользователя:</label>
+                        <span id="userUsername">Загрузка...</span>
                     </div>
                     <div class="info-item">
-                        <label>User ID:</label>
-                        <span id="userId">Loading...</span>
+                        <label>ID пользователя:</label>
+                        <span id="userId">Загрузка...</span>
                     </div>
                     <div class="info-item">
-                        <label>Member since:</label>
-                        <span id="userCreatedAt">Loading...</span>
+                        <label>Участник с:</label>
+                        <span id="userCreatedAt">Загрузка...</span>
                     </div>
                     <div class="info-item">
-                        <label>Miles:</label>
-                        <span id="userMiles">Loading...</span>
+                        <label>Мили:</label>
+                        <span id="userMiles">Загрузка...</span>
                     </div>
                     <div class="info-item">
-                        <label>User Group:</label>
-                        <span id="userGroup">Loading...</span>
+                        <label>Группа пользователя:</label>
+                        <span id="userGroup">Загрузка...</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="profile-card">
-            <h2>Password Management</h2>
+            <h2>Управление паролем</h2>
             <div class="password-section">
                 <div class="password-form" id="passwordForm">
                     <div class="form-group">
-                        <label for="currentPassword">Current Password:</label>
-                        <input type="password" id="currentPassword" placeholder="Enter current password">
+                        <label for="currentPassword">Текущий пароль:</label>
+                        <input type="password" id="currentPassword" placeholder="Введите текущий пароль">
                     </div>
                     <div class="form-group">
-                        <label for="newPassword">New Password:</label>
-                        <input type="password" id="newPassword" placeholder="Enter new password (min 6 characters)">
+                        <label for="newPassword">Новый пароль:</label>
+                        <input type="password" id="newPassword" placeholder="Введите новый пароль (мин. 6 символов)">
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm New Password:</label>
-                        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                        <label for="confirmPassword">Подтвердите новый пароль:</label>
+                        <input type="password" id="confirmPassword" placeholder="Подтвердите новый пароль">
                     </div>
                     <div class="form-actions">
                         <button class="btn-primary" id="resetPasswordBtn">
-                            <i class="fas fa-key"></i> Change Password
+                            <i class="fas fa-key"></i> Сменить пароль
                         </button>
                     </div>
                 </div>
@@ -114,63 +114,63 @@
         </div>
 
         <div class="profile-card">
-            <h2>Connected Services</h2>
+            <h2>Подключённые сервисы</h2>
             <div class="services-section">
-                <div class="service-item" id="discordService">
+                <div class="service-item" id="SOCIALNWKService">
                     <div class="service-info">
-                        <div class="service-icon discord">
-                            <i class="fab fa-discord"></i>
+                        <div class="service-icon SOCIALNWK">
+                            <i class="fab fa-SOCIALNWK"></i>
                         </div>
                         <div class="service-details">
-                            <h3>Discord</h3>
-                            <p id="discordStatus">Checking connection...</p>
-                            <div id="discordDetails" style="display: none; margin-top: 0.5rem;">
-                                <small style="color: #a0b3e5;">Connected as: <span id="discordUsername" style="color: #fff; font-weight: 500;"></span></small>
+                            <h3>SOCIALNWK</h3>
+                            <p id="SOCIALNWKStatus">Проверка подключения...</p>
+                            <div id="SOCIALNWKDetails" style="display: none; margin-top: 0.5rem;">
+                                <small style="color: #a0b3e5;">Подключён как: <span id="SOCIALNWKUsername" style="color: #fff; font-weight: 500;"></span></small>
                                 <br>
-                                <small style="color: #a0b3e5;">Connected since: <span id="discordConnectedSince" style="color: #fff; font-weight: 500;"></span></small>
+                                <small style="color: #a0b3e5;">Подключён с: <span id="SOCIALNWKConnectedSince" style="color: #fff; font-weight: 500;"></span></small>
                             </div>
                         </div>
                     </div>
                     <div class="service-actions">
-                        <a title="OAuth temporarily unavailable" id="discordConnectBtn" class="btn-primary" style="filter: grayscale(100%);opacity: 0.6;cursor: not-allowed;">
-                            <i class="fab fa-discord"></i> Connect Discord
+                        <a title="OAuth временно недоступен" id="SOCIALNWKConnectBtn" class="btn-primary" style="filter: grayscale(100%);opacity: 0.6;cursor: not-allowed;">
+                            <i class="fab fa-SOCIALNWK"></i> Подключить SOCIALNWK
                         </a>
-                        <button id="discordDisconnectBtn" class="btn-danger" style="display: none;">
-                            <i class="fas fa-unlink"></i> Disconnect
+                        <button id="SOCIALNWKDisconnectBtn" class="btn-danger" style="display: none;">
+                            <i class="fas fa-unlink"></i> Отключить
                         </button>
                         </div>
                     </div>
                     <div class="manual_link_div">
                         <div class="form-group">
-                        <label for="manual_discord_id">Or input your <a href="https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID" style="text-decoration: underline;">Discord ID</a> manually:</label>
-                            <input type="text" id="manual_discord_id" placeholder="Discord ID">
-                            <a onclick="updDiscordManually()" id="manual_discord_id_btn" class="btn-primary">
-                                <i class="fab fa-discord"></i> Update
+                        <label for="manual_SOCIALNWK_id">Или введите ваш <a href="https://support.SOCIALNWK.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID" style="text-decoration: underline;">SOCIALNWK ID</a> вручную:</label>
+                            <input type="text" id="manual_SOCIALNWK_id" placeholder="SOCIALNWK ID">
+                            <a onclick="updSOCIALNWKManually()" id="manual_SOCIALNWK_id_btn" class="btn-primary">
+                                <i class="fab fa-SOCIALNWK"></i> Обновить
                             </a>
                     </div>
                 </div>
 
-                <div class="service-item" id="robloxService">
+                <div class="service-item" id="VIRTUALNWKService">
                     <div class="service-info">
-                        <div class="service-icon roblox">
+                        <div class="service-icon VIRTUALNWK">
                             <i class="fas fa-gamepad"></i>
                         </div>
                         <div class="service-details">
-                            <h3>Roblox</h3>
-                            <p id="robloxStatus">Checking connection...</p>
-                            <div id="robloxDetails" style="display: none; margin-top: 0.5rem;">
-                                <small style="color: #a0b3e5;">Connected as: <span id="robloxUsername" style="color: #fff; font-weight: 500;"></span></small>
+                            <h3>VIRTUALNWK</h3>
+                            <p id="VIRTUALNWKStatus">Проверка подключения...</p>
+                            <div id="VIRTUALNWKDetails" style="display: none; margin-top: 0.5rem;">
+                                <small style="color: #a0b3e5;">Подключён как: <span id="VIRTUALNWKUsername" style="color: #fff; font-weight: 500;"></span></small>
                                 <br>
-                                <small style="color: #a0b3e5;">Connected since: <span id="robloxConnectedSince" style="color: #fff; font-weight: 500;"></span></small>
+                                <small style="color: #a0b3e5;">Подключён с: <span id="VIRTUALNWKConnectedSince" style="color: #fff; font-weight: 500;"></span></small>
                             </div>
                         </div>
                     </div>
                     <div class="service-actions">
-                        <a href="/auth/roblox" id="robloxConnectBtn" class="btn-primary">
-                            <i class="fas fa-gamepad"></i> Connect Roblox
+                        <a href="/auth/VIRTUALNWK" id="VIRTUALNWKConnectBtn" class="btn-primary">
+                            <i class="fas fa-gamepad"></i> Подключить VIRTUALNWK
                         </a>
-                        <button id="robloxDisconnectBtn" class="btn-danger" style="display: none;">
-                            <i class="fas fa-unlink"></i> Disconnect
+                        <button id="VIRTUALNWKDisconnectBtn" class="btn-danger" style="display: none;">
+                            <i class="fas fa-unlink"></i> Отключить
                         </button>
                     </div>
                 </div>
@@ -178,13 +178,13 @@
         </div>
 
         <div class="profile-card">
-            <h2>Account Actions</h2>
+            <h2>Действия с аккаунтом</h2>
             <div class="actions-section">
                 <button class="btn-primary" id="myBookingsBtn">
-                    <i class="fas fa-ticket-alt"></i> My Bookings
+                    <i class="fas fa-ticket-alt"></i> Мои бронирования
                 </button>
                 <button class="btn-danger" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                    <i class="fas fa-sign-out-alt"></i> Выйти
                 </button>
             </div>
         </div>

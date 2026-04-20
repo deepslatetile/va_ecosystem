@@ -10,7 +10,7 @@ async function loadUserProfile() {
             document.getElementById('userGroup').textContent = user.user_group + ' | ' + user.subgroup;
 
             if (user.pfp) {
-                document.getElementById('userAvatar').innerHTML = `<img src="${user.pfp}" alt="Avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\\'fas fa-user\\'></i>'">`;
+                document.getElementById('userAvatar').innerHTML = `<img src="${user.pfp}" alt="Аватар" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\\'fas fa-user\\'></i>'">`;
             }
         } else {
             if (userResponse.status === 401) {
@@ -20,130 +20,130 @@ async function loadUserProfile() {
         }
 
     } catch (error) {
-        console.error('Error loading profile:', error);
-        document.getElementById('discordStatus').textContent = 'Error loading connection status';
-        document.getElementById('robloxStatus').textContent = 'Error loading connection status';
+        console.error('Ошибка загрузки профиля:', error);
+        document.getElementById('SOCIALNWKStatus').textContent = 'Ошибка загрузки статуса подключения';
+        document.getElementById('VIRTUALNWKStatus').textContent = 'Ошибка загрузки статуса подключения';
     }
 }
 
-function updateDiscordUI(discord) {
-    console.log("Discord connection data:", discord);
+function updateSOCIALNWKUI(SOCIALNWK) {
+    console.log("Данные подключения SOCIALNWK:", SOCIALNWK);
 
-    if (discord.connected) {
-        document.getElementById('discordStatus').textContent = 'Connected';
-        document.getElementById('discordConnectBtn').style.display = 'none';
-        document.getElementById('discordDisconnectBtn').style.display = 'block';
-        document.getElementById('discordDetails').style.display = 'block';
+    if (SOCIALNWK.connected) {
+        document.getElementById('SOCIALNWKStatus').textContent = 'Подключён';
+        document.getElementById('SOCIALNWKConnectBtn').style.display = 'none';
+        document.getElementById('SOCIALNWKDisconnectBtn').style.display = 'block';
+        document.getElementById('SOCIALNWKDetails').style.display = 'block';
 
-        document.getElementById('discordUsername').textContent = `User ID: ${discord.provider_user_id}`;
+        document.getElementById('SOCIALNWKUsername').textContent = `ID пользователя: ${SOCIALNWK.provider_user_id}`;
 
-        if (discord.connected_at) {
-            document.getElementById('discordConnectedSince').textContent = new Date(discord.connected_at * 1000).toLocaleDateString();
+        if (SOCIALNWK.connected_at) {
+            document.getElementById('SOCIALNWKConnectedSince').textContent = new Date(SOCIALNWK.connected_at * 1000).toLocaleDateString();
         }
     } else {
-        document.getElementById('discordStatus').textContent = 'Not connected';
-        document.getElementById('discordConnectBtn').style.display = 'block';
-        document.getElementById('discordDisconnectBtn').style.display = 'none';
-        document.getElementById('discordDetails').style.display = 'none';
+        document.getElementById('SOCIALNWKStatus').textContent = 'Не подключён';
+        document.getElementById('SOCIALNWKConnectBtn').style.display = 'block';
+        document.getElementById('SOCIALNWKDisconnectBtn').style.display = 'none';
+        document.getElementById('SOCIALNWKDetails').style.display = 'none';
     }
 }
 
-function updateRobloxUI(roblox) {
-    console.log("Roblox connection data:", roblox);
+function updateVIRTUALNWKUI(VIRTUALNWK) {
+    console.log("Данные подключения VIRTUALNWK:", VIRTUALNWK);
 
-    if (roblox.connected) {
-        document.getElementById('robloxStatus').textContent = 'Connected';
-        document.getElementById('robloxConnectBtn').style.display = 'none';
-        document.getElementById('robloxDisconnectBtn').style.display = 'block';
-        document.getElementById('robloxDetails').style.display = 'block';
+    if (VIRTUALNWK.connected) {
+        document.getElementById('VIRTUALNWKStatus').textContent = 'Подключён';
+        document.getElementById('VIRTUALNWKConnectBtn').style.display = 'none';
+        document.getElementById('VIRTUALNWKDisconnectBtn').style.display = 'block';
+        document.getElementById('VIRTUALNWKDetails').style.display = 'block';
 
-        if (roblox.connected_at) {
-            document.getElementById('robloxConnectedSince').textContent = new Date(roblox.connected_at * 1000).toLocaleDateString();
+        if (VIRTUALNWK.connected_at) {
+            document.getElementById('VIRTUALNWKConnectedSince').textContent = new Date(VIRTUALNWK.connected_at * 1000).toLocaleDateString();
         }
     } else {
-        document.getElementById('robloxStatus').textContent = 'Not connected';
-        document.getElementById('robloxConnectBtn').style.display = 'block';
-        document.getElementById('robloxDisconnectBtn').style.display = 'none';
-        document.getElementById('robloxDetails').style.display = 'none';
+        document.getElementById('VIRTUALNWKStatus').textContent = 'Не подключён';
+        document.getElementById('VIRTUALNWKConnectBtn').style.display = 'block';
+        document.getElementById('VIRTUALNWKDisconnectBtn').style.display = 'none';
+        document.getElementById('VIRTUALNWKDetails').style.display = 'none';
     }
 }
 
-async function loadDiscordConnection() {
+async function loadSOCIALNWKConnection() {
     try {
-        console.log("Loading Discord connection...");
-        document.getElementById('discordStatus').textContent = 'Checking...';
+        console.log("Загрузка подключения SOCIALNWK...");
+        document.getElementById('SOCIALNWKStatus').textContent = 'Проверка...';
 
-        const discordResponse = await fetch('/auth/discord/connection');
-        if (discordResponse.ok) {
-            const discord = await discordResponse.json();
-            console.log("Discord connection response:", discord);
-            updateDiscordUI(discord);
+        const SOCIALNWKResponse = await fetch('/auth/SOCIALNWK/connection');
+        if (SOCIALNWKResponse.ok) {
+            const SOCIALNWK = await SOCIALNWKResponse.json();
+            console.log("Ответ подключения SOCIALNWK:", SOCIALNWK);
+            updateSOCIALNWKUI(SOCIALNWK);
 
-            if (discord.connected) {
-                console.log("Loading Discord user info...");
-                const userinfoResponse = await fetch('/auth/discord/userinfo');
+            if (SOCIALNWK.connected) {
+                console.log("Загрузка информации о пользователе SOCIALNWK...");
+                const userinfoResponse = await fetch('/auth/SOCIALNWK/userinfo');
                 if (userinfoResponse.ok) {
                     const userinfo = await userinfoResponse.json();
-                    console.log("Discord userinfo response:", userinfo);
+                    console.log("Ответ userinfo SOCIALNWK:", userinfo);
 
-                    if (userinfo.discord_user) {
-                        const discordUser = userinfo.discord_user;
-                        const username = discordUser.global_name || discordUser.username || `User #${discordUser.id}`;
-                        document.getElementById('discordUsername').textContent = username;
+                    if (userinfo.SOCIALNWK_user) {
+                        const SOCIALNWKUser = userinfo.SOCIALNWK_user;
+                        const username = SOCIALNWKUser.global_name || SOCIALNWKUser.username || `Пользователь #${SOCIALNWKUser.id}`;
+                        document.getElementById('SOCIALNWKUsername').textContent = username;
 
-                        if (discordUser.avatar && !document.querySelector('#userAvatar img')) {
-                            const avatarUrl = `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`;
-                            document.getElementById('userAvatar').innerHTML = `<img src="${avatarUrl}" alt="Discord Avatar" style="width: 100%; height: 100%; object-fit: cover;">`;
+                        if (SOCIALNWKUser.avatar && !document.querySelector('#userAvatar img')) {
+                            const avatarUrl = `https://cdn.SOCIALNWKapp.com/avatars/${SOCIALNWKUser.id}/${SOCIALNWKUser.avatar}.png`;
+                            document.getElementById('userAvatar').innerHTML = `<img src="${avatarUrl}" alt="Аватар SOCIALNWK" style="width: 100%; height: 100%; object-fit: cover;">`;
                         }
                     }
                 } else {
-                    console.log("Failed to load Discord userinfo:", userinfoResponse.status);
+                    console.log("Не удалось загрузить userinfo SOCIALNWK:", userinfoResponse.status);
                 }
             }
         } else {
-            console.log("Failed to load Discord connection:", discordResponse.status);
-            document.getElementById('discordStatus').textContent = 'Not connected';
+            console.log("Не удалось загрузить подключение SOCIALNWK:", SOCIALNWKResponse.status);
+            document.getElementById('SOCIALNWKStatus').textContent = 'Не подключён';
         }
     } catch (error) {
-        console.error('Error loading Discord connection:', error);
-        document.getElementById('discordStatus').textContent = 'Error loading connection';
+        console.error('Ошибка загрузки подключения SOCIALNWK:', error);
+        document.getElementById('SOCIALNWKStatus').textContent = 'Ошибка загрузки подключения';
     }
 }
 
-async function loadRobloxConnection() {
+async function loadVIRTUALNWKConnection() {
     try {
-        console.log("Loading Roblox connection...");
-        document.getElementById('robloxStatus').textContent = 'Checking...';
+        console.log("Загрузка подключения VIRTUALNWK...");
+        document.getElementById('VIRTUALNWKStatus').textContent = 'Проверка...';
 
-        const robloxResponse = await fetch('/auth/roblox/connection');
-        if (robloxResponse.ok) {
-            const roblox = await robloxResponse.json();
-            console.log("Roblox connection response:", roblox);
-            updateRobloxUI(roblox);
+        const VIRTUALNWKResponse = await fetch('/auth/VIRTUALNWK/connection');
+        if (VIRTUALNWKResponse.ok) {
+            const VIRTUALNWK = await VIRTUALNWKResponse.json();
+            console.log("Ответ подключения VIRTUALNWK:", VIRTUALNWK);
+            updateVIRTUALNWKUI(VIRTUALNWK);
 
-            if (roblox.connected) {
-                console.log("Loading Roblox user info...");
-                const userinfoResponse = await fetch('/auth/roblox/userinfo');
+            if (VIRTUALNWK.connected) {
+                console.log("Загрузка информации о пользователе VIRTUALNWK...");
+                const userinfoResponse = await fetch('/auth/VIRTUALNWK/userinfo');
                 if (userinfoResponse.ok) {
                     const userinfo = await userinfoResponse.json();
-                    console.log("Roblox userinfo response:", userinfo);
+                    console.log("Ответ userinfo VIRTUALNWK:", userinfo);
 
-                    if (userinfo.roblox_user) {
-                        const robloxUser = userinfo.roblox_user;
-                        const username = robloxUser.name || robloxUser.nickname || robloxUser.preferred_username || `User #${robloxUser.id}`;
-                        document.getElementById('robloxUsername').textContent = username;
+                    if (userinfo.VIRTUALNWK_user) {
+                        const VIRTUALNWKUser = userinfo.VIRTUALNWK_user;
+                        const username = VIRTUALNWKUser.name || VIRTUALNWKUser.nickname || VIRTUALNWKUser.preferred_username || `Пользователь #${VIRTUALNWKUser.id}`;
+                        document.getElementById('VIRTUALNWKUsername').textContent = username;
                     }
                 } else {
-                    console.log("Failed to load Roblox userinfo:", userinfoResponse.status);
+                    console.log("Не удалось загрузить userinfo VIRTUALNWK:", userinfoResponse.status);
                 }
             }
         } else {
-            console.log("Failed to load Roblox connection:", robloxResponse.status);
-            document.getElementById('robloxStatus').textContent = 'Not connected';
+            console.log("Не удалось загрузить подключение VIRTUALNWK:", VIRTUALNWKResponse.status);
+            document.getElementById('VIRTUALNWKStatus').textContent = 'Не подключён';
         }
     } catch (error) {
-        console.error('Error loading Roblox connection:', error);
-        document.getElementById('robloxStatus').textContent = 'Error loading connection';
+        console.error('Ошибка загрузки подключения VIRTUALNWK:', error);
+        document.getElementById('VIRTUALNWKStatus').textContent = 'Ошибка загрузки подключения';
     }
 }
 
@@ -155,17 +155,17 @@ async function resetPassword() {
 
     // Валидация
     if (!currentPassword || !newPassword || !confirmPassword) {
-        showMessage('Please fill in all fields', 'error');
+        showMessage('Пожалуйста, заполните все поля', 'error');
         return;
     }
 
     if (newPassword.length < 6) {
-        showMessage('New password must be at least 6 characters', 'error');
+        showMessage('Новый пароль должен содержать не менее 6 символов', 'error');
         return;
     }
 
     if (newPassword !== confirmPassword) {
-        showMessage('New passwords do not match', 'error');
+        showMessage('Новые пароли не совпадают', 'error');
         return;
     }
 
@@ -190,11 +190,11 @@ async function resetPassword() {
             document.getElementById('newPassword').value = '';
             document.getElementById('confirmPassword').value = '';
         } else {
-            showMessage(result.error || 'Failed to change password', 'error');
+            showMessage(result.error || 'Не удалось изменить пароль', 'error');
         }
     } catch (error) {
-        console.error('Error resetting password:', error);
-        showMessage('Error changing password', 'error');
+        console.error('Ошибка сброса пароля:', error);
+        showMessage('Ошибка изменения пароля', 'error');
     }
 }
 
@@ -210,13 +210,13 @@ function showMessage(message, type) {
     }, 5000);
 }
 
-async function updDiscordManually() {
+async function updSOCIALNWKManually() {
     try {
-        const discordId = document.getElementById('manual_discord_id').value; // убраны скобки ()
+        const SOCIALNWKId = document.getElementById('manual_SOCIALNWK_id').value; // убраны скобки ()
 
         // Проверка на пустое значение
-        if (!discordId.trim()) {
-            alert('Please enter a Discord ID');
+        if (!SOCIALNWKId.trim()) {
+            alert('Пожалуйста, введите SOCIALNWK ID');
             return;
         }
 
@@ -224,7 +224,7 @@ async function updDiscordManually() {
             method: 'PUT',
             body: JSON.stringify({ // Добавлен JSON.stringify
                 'manual': true,
-                'social_id': discordId
+                'social_id': SOCIALNWKId
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -232,29 +232,29 @@ async function updDiscordManually() {
         });
 
         if (response.ok) {
-            alert('Discord account updated successfully!');
-            await loadDiscordConnection();
+            alert('Аккаунт SOCIALNWK успешно обновлён!');
+            await loadSOCIALNWKConnection();
             await loadUserProfile();
         } else {
             const error = await response.json();
-            alert('Failed to update Discord account: ' + error.error);
+            alert('Не удалось обновить аккаунт SOCIALNWK: ' + error.error);
         }
     } catch (error) {
-        console.error('Error updating Discord:', error);
-        alert('Error updating Discord account');
+        console.error('Ошибка обновления SOCIALNWK:', error);
+        alert('Ошибка обновления аккаунта SOCIALNWK');
     }
 }
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("Profile page loaded, initializing...");
+    console.log("Страница профиля загружена, инициализация...");
 
     // Initialize event listeners
-    if (document.getElementById('discordDisconnectBtn')) {
-        document.getElementById('discordDisconnectBtn').addEventListener('click', async function () {
-            if (confirm('Are you sure you want to disconnect your Discord account?')) {
+    if (document.getElementById('SOCIALNWKDisconnectBtn')) {
+        document.getElementById('SOCIALNWKDisconnectBtn').addEventListener('click', async function () {
+            if (confirm('Вы уверены, что хотите отключить аккаунт SOCIALNWK?')) {
                 try {
-                    const response = await fetch('/auth/discord/disconnect', {
+                    const response = await fetch('/auth/SOCIALNWK/disconnect', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -262,26 +262,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
 
                     if (response.ok) {
-                        alert('Discord account disconnected successfully!');
-                        await loadDiscordConnection();
+                        alert('Аккаунт SOCIALNWK успешно отключён!');
+                        await loadSOCIALNWKConnection();
                         await loadUserProfile();
                     } else {
                         const error = await response.json();
-                        alert('Failed to disconnect Discord account: ' + error.error);
+                        alert('Не удалось отключить аккаунт SOCIALNWK: ' + error.error);
                     }
                 } catch (error) {
-                    console.error('Error disconnecting Discord:', error);
-                    alert('Error disconnecting Discord account');
+                    console.error('Ошибка отключения SOCIALNWK:', error);
+                    alert('Ошибка отключения аккаунта SOCIALNWK');
                 }
             }
         });
     }
 
-    if (document.getElementById('robloxDisconnectBtn')) {
-        document.getElementById('robloxDisconnectBtn').addEventListener('click', async function () {
-            if (confirm('Are you sure you want to disconnect your Roblox account? Your Virtual ID will be reset.')) {
+    if (document.getElementById('VIRTUALNWKDisconnectBtn')) {
+        document.getElementById('VIRTUALNWKDisconnectBtn').addEventListener('click', async function () {
+            if (confirm('Вы уверены, что хотите отключить аккаунт VIRTUALNWK? Ваш виртуальный ID будет сброшен.')) {
                 try {
-                    const response = await fetch('/auth/roblox/disconnect', {
+                    const response = await fetch('/auth/VIRTUALNWK/disconnect', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -289,16 +289,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
 
                     if (response.ok) {
-                        alert('Roblox account disconnected successfully!');
-                        await loadRobloxConnection();
+                        alert('Аккаунт VIRTUALNWK успешно отключён!');
+                        await loadVIRTUALNWKConnection();
                         await loadUserProfile();
                     } else {
                         const error = await response.json();
-                        alert('Failed to disconnect Roblox account: ' + error.error);
+                        alert('Не удалось отключить аккаунт VIRTUALNWK: ' + error.error);
                     }
                 } catch (error) {
-                    console.error('Error disconnecting Roblox:', error);
-                    alert('Error disconnecting Roblox account');
+                    console.error('Ошибка отключения VIRTUALNWK:', error);
+                    alert('Ошибка отключения аккаунта VIRTUALNWK');
                 }
             }
         });
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (document.getElementById('logoutBtn')) {
         document.getElementById('logoutBtn').addEventListener('click', async function () {
-            if (confirm('Are you sure you want to logout?')) {
+            if (confirm('Вы уверены, что хотите выйти?')) {
                 try {
                     const response = await fetch('/api/auth/logout', {
                         method: 'POST'
@@ -319,11 +319,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.ok) {
                         window.location.href = '/';
                     } else {
-                        alert('Failed to logout');
+                        alert('Не удалось выйти');
                     }
                 } catch (error) {
-                    console.error('Error logging out:', error);
-                    alert('Error logging out');
+                    console.error('Ошибка выхода:', error);
+                    alert('Ошибка выхода');
                 }
             }
         });
@@ -340,8 +340,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Load profile data
     loadUserProfile();
-    loadDiscordConnection();
-    loadRobloxConnection();
+    loadSOCIALNWKConnection();
+    loadVIRTUALNWKConnection();
 
     // Setup alerts auto-hide
     setupAlerts();
@@ -352,10 +352,10 @@ function checkUrlParameters() {
     const success = urlParams.get('success');
     const error = urlParams.get('error');
 
-    if (success === 'discord_linked' || success === 'roblox_linked') {
-        console.log(`Success: ${success}, reloading connections...`);
-        loadDiscordConnection();
-        loadRobloxConnection();
+    if (success === 'SOCIALNWK_linked' || success === 'VIRTUALNWK_linked') {
+        console.log(`Успех: ${success}, перезагрузка подключений...`);
+        loadSOCIALNWKConnection();
+        loadVIRTUALNWKConnection();
         loadUserProfile();
         window.history.replaceState({}, document.title, window.location.pathname);
     }

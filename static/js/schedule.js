@@ -1,12 +1,12 @@
 async function loadSchedule() {
     const scheduleList = document.getElementById('scheduleList');
-    scheduleList.innerHTML = '<div class="loading">Loading flight schedule...</div>';
+    scheduleList.innerHTML = '<div class="loading">Загрузка расписания рейсов...</div>';
 
     try {
         const response = await fetch('/api/get/schedule');
 
         if (!response.ok) {
-            throw new Error('Failed to load schedule');
+            throw new Error('Не удалось загрузить расписание');
         }
 
         const flights = await response.json();
@@ -15,8 +15,8 @@ async function loadSchedule() {
             scheduleList.innerHTML = `
                 <div class="no-flights">
                     <i class="fas fa-plane-slash" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                    <h3>No flights scheduled</h3>
-                    <p>Check back later for updated flight schedules</p>
+                    <h3>Нет запланированных рейсов</h3>
+                    <p>Загляните позже для обновления расписания</p>
                 </div>
             `;
             return;
@@ -26,7 +26,7 @@ async function loadSchedule() {
             return `
             <div class="flight-card">
                 <div class="flight-header">
-                    <div class="flight-number">Flight ${flight.flight_number}</div>
+                    <div class="flight-number">Рейс ${flight.flight_number}</div>
                     <div class="flight-status status-${flight.status.toLowerCase()}">
                         ${flight.status}
                     </div>
@@ -34,28 +34,28 @@ async function loadSchedule() {
                 <div class="flight-details">
                     <div class="route-info">
                         <div class="airport">${flight.display_departure || flight.departure}</div>
-                        <div class="city">From</div>
+                        <div class="city">Откуда</div>
                     </div>
                     <div class="route-arrow">
                         <i class="fas fa-long-arrow-alt-right"></i>
                     </div>
                     <div class="route-info">
                         <div class="airport">${flight.display_arrival || flight.arrival}</div>
-                        <div class="city">To</div>
+                        <div class="city">Куда</div>
                     </div>
                 </div>
                 <div class="time-info">
                     <div class="datetime">${formatDate(new Date(flight.datetime * 1000))}</div>
-                    <div class="duration">Arrival: ${formatDate(new Date(flight.arrival_time * 1000))}</div>
+                    <div class="duration">Прилёт: ${formatDate(new Date(flight.arrival_time * 1000))}</div>
                 </div>
                 <div class="flight-meta">
                     <div class="meta-item">
-                        <div class="meta-label">Aircraft</div>
+                        <div class="meta-label">Воздушное судно</div>
                         <div class="meta-value">${flight.aircraft}</div>
                     </div>
                     <div class="meta-item">
-                        <div class="meta-label">Flying</div>
-                        <div class="meta-value">${flight.flying_count || 0} passengers</div>
+                        <div class="meta-label">Летят</div>
+                        <div class="meta-value">${flight.flying_count || 0} пассажиров</div>
                     </div>
                 </div>
             </div>
@@ -63,8 +63,8 @@ async function loadSchedule() {
         }).join('');
 
     } catch (error) {
-        console.error('Error loading schedule:', error);
-        scheduleList.innerHTML = '<div class="alert alert-error">Failed to load flight schedule. Please try again.</div>';
+        console.error('Ошибка загрузки расписания:', error);
+        scheduleList.innerHTML = '<div class="alert alert-error">Не удалось загрузить расписание рейсов. Пожалуйста, попробуйте снова.</div>';
     }
 }
 

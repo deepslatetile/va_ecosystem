@@ -18,7 +18,7 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
   console.log('Received background message:', payload);
 
-  const notificationTitle = payload.notification?.title || 'Cathay Pacific';
+  const notificationTitle = payload.notification?.title || 'TAP Air Portugal';
   const notificationOptions = {
     body: payload.notification?.body || 'New notification',
     icon: '/static/images/icon-192x192.png',
@@ -39,7 +39,7 @@ messaging.onBackgroundMessage((payload) => {
   return self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
-const CACHE_NAME = 'Aer-Lingus-pwa-v1';
+const CACHE_NAME = 'aurus-pwa-v1';
 const urlsToCache = [
   '/',
   '/static/styles/base.css',

@@ -7,133 +7,133 @@
 {% block content %}
 <div class="admin-panel">
     <div class="admin-header">
-        <h1>Payments</h1>
+        <h1>Платежи</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> /
-            Payments
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> /
+            Платежи
         </div>
     </div>
 
     <div class="payment-section">
-        <h2>Process Booking Payment</h2>
+        <h2>Оплата бронирования</h2>
         <div class="payment-form">
             <div class="form-group">
-                <label for="bookingId">Booking ID:</label>
-                <input type="text" id="bookingId" placeholder="Enter booking ID...">
+                <label for="bookingId">ID бронирования:</label>
+                <input type="text" id="bookingId" placeholder="Введите ID бронирования...">
                 <button onclick="loadBookingInfo()" class="load-btn">
-                    <i class="fas fa-search"></i> Load Booking
+                    <i class="fas fa-search"></i> Загрузить бронирование
                 </button>
             </div>
 
             <div id="bookingInfo" class="booking-info" style="display: none;">
                 <div class="info-grid">
                     <div class="info-item">
-                        <span class="label">Flight:</span>
+                        <span class="label">Рейс:</span>
                         <span id="infoFlight"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Passenger:</span>
+                        <span class="label">Пассажир:</span>
                         <span id="infoPassenger"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Seat:</span>
+                        <span class="label">Место:</span>
                         <span id="infoSeat"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Services Total:</span>
+                        <span class="label">Стоимость услуг:</span>
                         <span id="infoServicesTotal">$0.00</span>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="paymentAmount">Payment Amount ($):</label>
-                <input type="number" id="paymentAmount" step="0.01" placeholder="Enter amount...">
+                <label for="paymentAmount">Сумма платежа ($):</label>
+                <input type="number" id="paymentAmount" step="0.01" placeholder="Введите сумму...">
             </div>
 
             <div class="form-group">
-                <label for="paymentDescription">Description:</label>
-                <input type="text" id="paymentDescription" placeholder="Payment description...">
+                <label for="paymentDescription">Описание:</label>
+                <input type="text" id="paymentDescription" placeholder="Описание платежа...">
             </div>
 
             <button onclick="processBookingPayment()" class="process-btn">
-                <i class="fas fa-credit-card"></i> Process Payment
+                <i class="fas fa-credit-card"></i> Оплатить
             </button>
         </div>
     </div>
 
     <div class="payment-section">
-        <h2>User Payment/Refund</h2>
+        <h2>Платёж/Возврат пользователю</h2>
         <div class="payment-form">
             <div class="form-group">
-                <label for="userIdentifier">User ID / Virtual ID / Social ID:</label>
-                <input type="text" id="userIdentifier" placeholder="Enter user identifier...">
+                <label for="userIdentifier">ID пользователя / Виртуальный ID / Социальный ID:</label>
+                <input type="text" id="userIdentifier" placeholder="Введите идентификатор...">
                 <button onclick="loadUserInfo()" class="load-btn">
-                    <i class="fas fa-search"></i> Load User
+                    <i class="fas fa-search"></i> Загрузить пользователя
                 </button>
             </div>
 
             <div id="userInfo" class="user-info" style="display: none;">
                 <div class="info-grid">
                     <div class="info-item">
-                        <span class="label">Nickname:</span>
+                        <span class="label">Никнейм:</span>
                         <span id="infoNickname"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Current Miles:</span>
+                        <span class="label">Текущие мили:</span>
                         <span id="infoMiles">0</span>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="userAmount">Amount (positive for refund, negative for payment):</label>
-                <input type="number" id="userAmount" step="10" placeholder="Enter amount...">
+                <label for="userAmount">Сумма (положительная — возврат, отрицательная — списание):</label>
+                <input type="number" id="userAmount" step="10" placeholder="Введите сумму...">
             </div>
 
             <div class="form-group">
-                <label for="userDescription">Description:</label>
-                <input type="text" id="userDescription" placeholder="Transaction description...">
+                <label for="userDescription">Описание:</label>
+                <input type="text" id="userDescription" placeholder="Описание транзакции...">
             </div>
 
             <button onclick="processUserPayment()" class="process-btn">
-                <i class="fas fa-exchange-alt"></i> Process User Transaction
+                <i class="fas fa-exchange-alt"></i> Выполнить транзакцию
             </button>
         </div>
     </div>
 
     <div class="payment-section">
-        <h2>Flight Mass Payment</h2>
+        <h2>Массовый платёж по рейсу</h2>
         <div class="payment-form">
             <div class="form-group">
-                <label for="flightNumber">Flight Number:</label>
-                <input type="text" id="flightNumber" placeholder="Enter flight number...">
+                <label for="flightNumber">Номер рейса:</label>
+                <input type="text" id="flightNumber" placeholder="Введите номер рейса...">
             </div>
 
             <div class="form-group">
-                <label for="massAmount">Amount per Passenger ($):</label>
-                <input type="number" id="massAmount" step="0.01" placeholder="Enter amount...">
+                <label for="massAmount">Сумма на пассажира ($):</label>
+                <input type="number" id="massAmount" step="0.01" placeholder="Введите сумму...">
             </div>
 
             <div class="form-group">
-                <label for="massDescription">Description:</label>
-                <input type="text" id="massDescription" placeholder="Payment description...">
+                <label for="massDescription">Описание:</label>
+                <input type="text" id="massDescription" placeholder="Описание платежа...">
             </div>
 
             <button onclick="processMassPayment()" class="process-btn mass-btn">
-                <i class="fas fa-users"></i> Process Mass Payment
+                <i class="fas fa-users"></i> Массовый платёж
             </button>
         </div>
     </div>
 
     <div class="payment-section">
-        <h2>Transactions History</h2>
+        <h2>История транзакций</h2>
         <div class="transactions-controls">
             <div class="form-group">
-                <label for="searchUserId">Search by User ID:</label>
-                <input type="text" id="searchUserId" placeholder="Enter user ID...">
+                <label for="searchUserId">Поиск по ID пользователя:</label>
+                <input type="text" id="searchUserId" placeholder="Введите ID пользователя...">
                 <button onclick="loadUserTransactions()" class="load-btn">
-                    <i class="fas fa-search"></i> Load Transactions
+                    <i class="fas fa-search"></i> Загрузить транзакции
                 </button>
             </div>
         </div>

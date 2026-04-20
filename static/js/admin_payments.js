@@ -1,18 +1,17 @@
-
 let currentBooking = null;
 let currentUser = null;
 
 async function loadBookingInfo() {
     const bookingId = document.getElementById('bookingId').value;
     if (!bookingId) {
-        alert('Please enter booking ID');
+        alert('Пожалуйста, введите ID бронирования');
         return;
     }
 
     try {
         const response = await fetch(`/admin/api/bookings/${bookingId}`);
         if (!response.ok) {
-            throw new Error('Booking not found');
+            throw new Error('Бронирование не найдено');
         }
 
         currentBooking = await response.json();
@@ -20,10 +19,10 @@ async function loadBookingInfo() {
 
         const servicesTotal = currentBooking.pax_services.reduce((total, service) => total + (parseFloat(service.price) || 0), 0);
         document.getElementById('paymentAmount').value = servicesTotal.toFixed(2);
-        document.getElementById('paymentDescription').value = `Payment for booking ${bookingId} - Services`;
+        document.getElementById('paymentDescription').value = `Оплата бронирования ${bookingId} - Услуги`;
 
     } catch (error) {
-        alert('Error loading booking: ' + error.message);
+        alert('Ошибка загрузки бронирования: ' + error.message);
     }
 }
 
@@ -40,7 +39,7 @@ function displayBookingInfo(booking) {
 async function loadUserInfo() {
     const identifier = document.getElementById('userIdentifier').value;
     if (!identifier) {
-        alert('Please enter user identifier');
+        alert('Пожалуйста, введите идентификатор пользователя');
         return;
     }
 
@@ -49,7 +48,7 @@ async function loadUserInfo() {
         if (!response.ok) {
             response = await fetch(`/api/get/user/${identifier}`);
             if (!response.ok) {
-                throw new Error('User not found');
+                throw new Error('Пользователь не найден');
             }
         }
 
@@ -57,7 +56,7 @@ async function loadUserInfo() {
         displayUserInfo(currentUser);
 
     } catch (error) {
-        alert('Error loading user: ' + error.message);
+        alert('Ошибка загрузки пользователя: ' + error.message);
     }
 }
 
@@ -69,7 +68,7 @@ function displayUserInfo(user) {
 
 async function processBookingPayment() {
     if (!currentBooking) {
-        alert('Please load booking first');
+        alert('Пожалуйста, сначала загрузите бронирование');
         return;
     }
 
@@ -77,12 +76,12 @@ async function processBookingPayment() {
     const description = document.getElementById('paymentDescription').value;
 
     if (isNaN(amount) || amount <= 0) {
-        alert('Please enter valid positive amount');
+        alert('Пожалуйста, введите корректную положительную сумму');
         return;
     }
 
     if (!description) {
-        alert('Please enter description');
+        alert('Пожалуйста, введите описание');
         return;
     }
 
@@ -104,21 +103,21 @@ async function processBookingPayment() {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to process payment');
+            throw new Error(result.error || 'Не удалось обработать платеж');
         }
 
-        alert('Booking payment processed successfully!');
+        alert('Платеж по бронированию успешно обработан!');
         resetForms();
 
     } catch (error) {
-        console.error('Payment error:', error);
-        alert('Error processing payment: ' + error.message);
+        console.error('Ошибка платежа:', error);
+        alert('Ошибка обработки платежа: ' + error.message);
     }
 }
 
 async function processUserPayment() {
     if (!currentUser) {
-        alert('Please load user first');
+        alert('Пожалуйста, сначала загрузите пользователя');
         return;
     }
 
@@ -126,12 +125,12 @@ async function processUserPayment() {
     const description = document.getElementById('userDescription').value;
 
     if (isNaN(amount) || amount === 0) {
-        alert('Please enter valid non-zero amount');
+        alert('Пожалуйста, введите корректную ненулевую сумму');
         return;
     }
 
     if (!description) {
-        alert('Please enter description');
+        alert('Пожалуйста, введите описание');
         return;
     }
 
@@ -154,15 +153,15 @@ async function processUserPayment() {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to process transaction');
+            throw new Error(result.error || 'Не удалось обработать транзакцию');
         }
 
-        alert('Transaction processed successfully!');
+        alert('Транзакция успешно обработана!');
         resetForms();
 
     } catch (error) {
-        console.error('Transaction error:', error);
-        alert('Error processing transaction: ' + error.message);
+        console.error('Ошибка транзакции:', error);
+        alert('Ошибка обработки транзакции: ' + error.message);
     }
 }
 
@@ -172,36 +171,36 @@ async function processMassPayment() {
     const description = document.getElementById('massDescription').value.trim();
 
     if (!flightNumber) {
-        alert('Please enter flight number');
+        alert('Пожалуйста, введите номер рейса');
         return;
     }
 
     if (isNaN(amount) || amount === 0) {
-        alert('Please enter valid non-zero amount');
+        alert('Пожалуйста, введите корректную ненулевую сумму');
         return;
     }
 
     if (!description) {
-        alert('Please enter description');
+        alert('Пожалуйста, введите описание');
         return;
     }
 
     const transactionType = amount > 0 ? 'mass_payment' : 'mass_withdrawal';
-    const actionType = amount > 0 ? 'payment' : 'withdrawal';
+    const actionType = amount > 0 ? 'платеж' : 'списание';
 
-    if (!confirm(`Process $${Math.abs(amount).toFixed(2)} ${actionType} for all valid bookings on flight ${flightNumber}?\nThis action cannot be undone.`)) {
+    if (!confirm(`Обработать $${Math.abs(amount).toFixed(2)} ${actionType} для всех действительных бронирований на рейс ${flightNumber}?\nЭто действие необратимо.`)) {
         return;
     }
 
     try {
         const processBtn = document.querySelector('.mass-btn');
         const originalText = processBtn.innerHTML;
-        processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обработка...';
         processBtn.disabled = true;
 
         const response = await fetch(`/admin/api/bookings?flight_number=${flightNumber}`);
         if (!response.ok) {
-            throw new Error('Failed to load bookings');
+            throw new Error('Не удалось загрузить бронирования');
         }
 
         const bookings = await response.json();
@@ -210,10 +209,10 @@ async function processMassPayment() {
             booking.valid === true || booking.valid === 1
         );
 
-        console.log(`Found ${validBookings.length} valid bookings for flight ${flightNumber}`);
+        console.log(`Найдено ${validBookings.length} действительных бронирований на рейс ${flightNumber}`);
 
         if (validBookings.length === 0) {
-            alert('No valid bookings found for this flight');
+            alert('Для этого рейса не найдено действительных бронирований');
             processBtn.innerHTML = originalText;
             processBtn.disabled = false;
             return;
@@ -225,20 +224,20 @@ async function processMassPayment() {
 
         for (const booking of validBookings) {
             try {
-                console.log('Processing booking:', booking.id);
+                console.log('Обработка бронирования:', booking.id);
 
                 const bookingDetailResponse = await fetch(`/admin/api/bookings/${booking.id}`);
                 if (!bookingDetailResponse.ok) {
-                    throw new Error(`Failed to get booking details for ${booking.id}`);
+                    throw new Error(`Не удалось получить детали бронирования ${booking.id}`);
                 }
 
                 const bookingDetail = await bookingDetailResponse.json();
                 const userId = bookingDetail.user_id;
 
                 if (!userId) {
-                    console.warn(`No user_id found for booking ${booking.id}`);
+                    console.warn(`Нет user_id для бронирования ${booking.id}`);
                     errors++;
-                    errorDetails.push(`Booking ${booking.id}: No user ID`);
+                    errorDetails.push(`Бронирование ${booking.id}: Нет ID пользователя`);
                     continue;
                 }
 
@@ -251,7 +250,7 @@ async function processMassPayment() {
                         user_id: userId,
                         booking_id: booking.id,
                         amount: amount,
-                        description: `${description} - Flight ${flightNumber}`,
+                        description: `${description} - Рейс ${flightNumber}`,
                         type: transactionType
                     })
                 });
@@ -260,28 +259,28 @@ async function processMassPayment() {
 
                 if (transactionResponse.ok) {
                     processed++;
-                    console.log(`✅ Processed ${actionType} for user ${userId}, booking ${booking.id}`);
+                    console.log(`✅ ${actionType} обработан для пользователя ${userId}, бронирование ${booking.id}`);
                 } else {
                     errors++;
-                    errorDetails.push(`Booking ${booking.id}: ${transactionResult.error || 'Transaction failed'}`);
-                    console.warn(`❌ Failed ${actionType} for booking ${booking.id}:`, transactionResult.error);
+                    errorDetails.push(`Бронирование ${booking.id}: ${transactionResult.error || 'Транзакция не удалась'}`);
+                    console.warn(`❌ ${actionType} не удался для бронирования ${booking.id}:`, transactionResult.error);
                 }
 
             } catch (error) {
                 errors++;
-                errorDetails.push(`Booking ${booking.id}: ${error.message}`);
-                console.error(`❌ Error processing booking ${booking.id}:`, error);
+                errorDetails.push(`Бронирование ${booking.id}: ${error.message}`);
+                console.error(`❌ Ошибка обработки бронирования ${booking.id}:`, error);
             }
         }
 
-        let resultMessage = `Mass ${actionType} completed!\nProcessed: ${processed}\nErrors: ${errors}`;
+        let resultMessage = `Массовый ${actionType} завершен!\nОбработано: ${processed}\nОшибок: ${errors}`;
 
         if (errors > 0) {
-            resultMessage += `\n\nError details:\n${errorDetails.slice(0, 5).join('\n')}`;
+            resultMessage += `\n\nДетали ошибок:\n${errorDetails.slice(0, 5).join('\n')}`;
             if (errorDetails.length > 5) {
-                resultMessage += `\n... and ${errorDetails.length - 5} more errors`;
+                resultMessage += `\n... и еще ${errorDetails.length - 5} ошибок`;
             }
-            console.error('Mass payment errors:', errorDetails);
+            console.error('Ошибки массового платежа:', errorDetails);
         }
 
         alert(resultMessage);
@@ -291,11 +290,11 @@ async function processMassPayment() {
         }
 
     } catch (error) {
-        console.error('Mass payment error:', error);
-        alert('Error processing mass payment: ' + error.message);
+        console.error('Ошибка массового платежа:', error);
+        alert('Ошибка обработки массового платежа: ' + error.message);
     } finally {
         const processBtn = document.querySelector('.mass-btn');
-        processBtn.innerHTML = '<i class="fas fa-users"></i> Process Mass Payment';
+        processBtn.innerHTML = '<i class="fas fa-users"></i> Массовый платеж';
         processBtn.disabled = false;
     }
 }
@@ -303,28 +302,28 @@ async function processMassPayment() {
 async function loadUserTransactions() {
     const userId = document.getElementById('searchUserId').value.trim();
     if (!userId) {
-        alert('Please enter user ID');
+        alert('Пожалуйста, введите ID пользователя');
         return;
     }
 
     try {
         const container = document.getElementById('transactionsList');
-        container.innerHTML = '<div class="loading">Loading transactions...</div>';
+        container.innerHTML = '<div class="loading">Загрузка транзакций...</div>';
 
         const response = await fetch(`/api/get/transactions/user/${userId}`);
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to load transactions');
+            throw new Error(errorData.error || 'Не удалось загрузить транзакции');
         }
 
         const transactions = await response.json();
         displayTransactions(transactions);
 
     } catch (error) {
-        console.error('Load transactions error:', error);
+        console.error('Ошибка загрузки транзакций:', error);
         const container = document.getElementById('transactionsList');
-        container.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+        container.innerHTML = `<div class="error">Ошибка: ${error.message}</div>`;
     }
 }
 
@@ -332,7 +331,7 @@ function displayTransactions(transactions) {
     const container = document.getElementById('transactionsList');
 
     if (transactions.length === 0) {
-        container.innerHTML = '<div class="loading">No transactions found</div>';
+        container.innerHTML = '<div class="loading">Транзакции не найдены</div>';
         return;
     }
 
@@ -349,19 +348,19 @@ function displayTransactions(transactions) {
             </div>
             <div class="transaction-details">
                 <div class="transaction-detail">
-                    <span class="detail-label">Description:</span>
+                    <span class="detail-label">Описание:</span>
                     <span>${transaction.description}</span>
                 </div>
                 <div class="transaction-detail">
-                    <span class="detail-label">Type:</span>
+                    <span class="detail-label">Тип:</span>
                     <span>${transaction.type}</span>
                 </div>
                 <div class="transaction-detail">
-                    <span class="detail-label">Booking ID:</span>
-                    <span>${transaction.booking_id || 'N/A'}</span>
+                    <span class="detail-label">ID бронирования:</span>
+                    <span>${transaction.booking_id || 'Н/Д'}</span>
                 </div>
                 <div class="transaction-detail">
-                    <span class="detail-label">Admin:</span>
+                    <span class="detail-label">Администратор:</span>
                     <span>${transaction.admin_nickname}</span>
                 </div>
             </div>

@@ -10,7 +10,7 @@
 
 .bookings-header h1 {
     font-size: 2.5rem;
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -25,7 +25,7 @@
     padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .filter-controls {
@@ -37,9 +37,9 @@
 .filter-btn {
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 4px;
-    color: var(--green);
+    color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -49,9 +49,9 @@
 }
 
 .filter-btn.active {
-    background: var(--green);
-    color: var(--white);
-    border-color: var(--green);
+    background: #46a41a;
+    color: white;
+    border-color: #46a41a;
 }
 
 .search-box {
@@ -63,9 +63,9 @@
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 4px;
-    color: var(--dark);
+    color: white;
 }
 
 .search-box i {
@@ -73,7 +73,7 @@
     left: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--green);
+    color: #bfd730;
 }
 
 .bookings-alerts {
@@ -100,18 +100,18 @@
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .alert-error {
-    background: #ff4444;
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 .alert-info {
-    background: var(--green);
-    color: var(--white);
+    background: #33b5e5;
+    color: white;
 }
 
 .bookings-list {
@@ -121,10 +121,10 @@
 }
 
 .booking-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
@@ -132,7 +132,7 @@
 .booking-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-color: var(--green);
+    border-color: #46a41a;
 }
 
 .booking-header {
@@ -141,11 +141,11 @@
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .booking-id {
-    color: var(--green);
+    color: #bfd730;
     font-weight: bold;
     font-size: 0.9rem;
 }
@@ -158,8 +158,8 @@
 }
 
 .status-active {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .status-past {
@@ -168,8 +168,8 @@
 }
 
 .status-cancelled {
-    background: #ff4444;
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 .booking-flight {
@@ -191,17 +191,17 @@
 .airport-code {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--dark);
+    color: #fff;
 }
 
 .airport-name {
     font-size: 0.8rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .flight-arrow {
     margin: 0 1rem;
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.2rem;
 }
 
@@ -220,12 +220,12 @@
 
 .detail-label {
     font-size: 0.8rem;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 0.25rem;
 }
 
 .detail-value {
-    color: var(--dark);
+    color: #fff;
     font-weight: 500;
 }
 
@@ -234,7 +234,7 @@
     gap: 0.5rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .btn-small {
@@ -249,18 +249,18 @@
 }
 
 .btn-small-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-small-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-small-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #fff;
+    border: 1px solid #46a41a;
 }
 
 .btn-small-secondary:hover {
@@ -268,8 +268,8 @@
 }
 
 .btn-small-danger {
-    background: #ff4444;
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 .btn-small-danger:hover {
@@ -282,22 +282,22 @@
     padding: 3rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .no-bookings i {
     font-size: 3rem;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1rem;
 }
 
 .no-bookings h3 {
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 0.5rem;
 }
 
 .no-bookings p {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1.5rem;
 }
 
@@ -309,7 +309,7 @@
 
 .loading-spinner i {
     font-size: 3rem;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1rem;
     animation: spin 1s linear infinite;
 }
@@ -320,7 +320,7 @@
 }
 
 .loading-spinner p {
-    color: var(--green);
+    color: #bfd730;
 }
 
 /* Modal Styles */
@@ -337,13 +337,13 @@
 }
 
 .modal-content {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     margin: 5% auto;
     padding: 0;
     width: 90%;
     max-width: 700px;
     border-radius: 12px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     max-height: 85vh;
     overflow-y: auto;
 }
@@ -353,18 +353,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .modal-header h2 {
-    color: var(--dark);
+    color: #fff;
     margin: 0;
 }
 
 .close-modal {
     background: none;
     border: none;
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     cursor: pointer;
     line-height: 1;
@@ -377,7 +377,7 @@
 }
 
 .close-modal:hover {
-    color: #ff4444;
+    color: #ed1c24;
 }
 
 .modal-body {
@@ -391,7 +391,7 @@
 .modal-body label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #bfd730;
     font-weight: 500;
 }
 
@@ -401,9 +401,9 @@
     width: 100%;
     padding: 0.75rem;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: white;
     font-size: 1rem;
 }
 
@@ -411,8 +411,8 @@
 .modal-body textarea:focus,
 .modal-body select:focus {
     outline: none;
-    border-color: var(--green);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    border-color: #46a41a;
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .modal-body textarea {
@@ -425,8 +425,8 @@
     justify-content: flex-end;
     gap: 1rem;
     padding: 1.5rem;
-    border-top: 1px solid var(--green);
-    background: rgba(0, 100, 90, 0.1);
+    border-top: 1px solid #46a41a;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary,
@@ -442,24 +442,24 @@
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-primary:disabled {
-    background: var(--green);
+    background: #46a41a;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #bfd730;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover {
@@ -467,17 +467,18 @@
 }
 
 .btn-danger {
-    background: #ff4444;
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 .btn-danger:hover {
     background: #ff6b6b;
 }
 
+/* Edit mode styles */
 .edit-field {
     background: rgba(255, 255, 255, 0.15) !important;
-    border-color: var(--green) !important;
+    border-color: #46a41a !important;
 }
 
 /* Responsive Design */

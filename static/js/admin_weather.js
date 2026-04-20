@@ -1,4 +1,3 @@
-
 const WEATHER_API_BASE = '/admin/api/get/weather';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -24,12 +23,12 @@ async function fetchWeather() {
     const icaoCode = document.getElementById('icaoCode').value.trim().toUpperCase();
 
     if (!icaoCode) {
-        showAlert('Please enter an ICAO code', 'error');
+        showAlert('Пожалуйста, введите код ICAO', 'error');
         return;
     }
 
     if (icaoCode.length !== 4) {
-        showAlert('ICAO code must be 4 characters', 'error');
+        showAlert('Код ICAO должен состоять из 4 символов', 'error');
         return;
     }
 
@@ -40,23 +39,23 @@ async function fetchWeather() {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            throw new Error(errorData.error || `HTTP ошибка! статус: ${response.status}`);
         }
 
         const data = await response.json();
 
         if (data.results === 0) {
-            showAlert(`No weather data found for ${icaoCode}`, 'warning');
+            showAlert(`Погодные данные для ${icaoCode} не найдены`, 'warning');
             displayEmptyState();
             return;
         }
 
         displayWeatherData(data.data, data.cache_info);
-        showAlert(`Weather data loaded for ${icaoCode}${data.cache_info.from_cache ? ' (from cache)' : ''}`, 'success');
+        showAlert(`Погодные данные загружены для ${icaoCode}${data.cache_info.from_cache ? ' (из кэша)' : ''}`, 'success');
 
     } catch (error) {
-        console.error('Error fetching weather:', error);
-        showAlert(`Error loading weather data: ${error.message}`, 'error');
+        console.error('Ошибка получения погоды:', error);
+        showAlert(`Ошибка загрузки погодных данных: ${error.message}`, 'error');
         displayEmptyState();
     } finally {
         showLoading(false);
@@ -67,19 +66,19 @@ async function fetchMultipleStationsData() {
     const stationsInput = document.getElementById('multiStationsInput').value.trim().toUpperCase();
 
     if (!stationsInput) {
-        showAlert('Please enter ICAO codes', 'error');
+        showAlert('Пожалуйста, введите коды ICAO', 'error');
         return;
     }
 
     const stations = stationsInput.split(',').map(s => s.trim()).filter(s => s.length === 4);
 
     if (stations.length === 0) {
-        showAlert('No valid ICAO codes found', 'error');
+        showAlert('Действительные коды ICAO не найдены', 'error');
         return;
     }
 
     if (stations.length > 10) {
-        showAlert('Maximum 10 stations allowed', 'warning');
+        showAlert('Максимум 10 станций разрешено', 'warning');
         stations.splice(10);
     }
 
@@ -91,13 +90,13 @@ async function fetchMultipleStationsData() {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            throw new Error(errorData.error || `HTTP ошибка! статус: ${response.status}`);
         }
 
         const data = await response.json();
 
         if (data.results === 0) {
-            showAlert('No weather data found for the specified stations', 'warning');
+            showAlert('Погодные данные для указанных станций не найдены', 'warning');
             return;
         }
 
@@ -105,13 +104,13 @@ async function fetchMultipleStationsData() {
 
         const cacheInfo = data.cache_info;
         const cacheMessage = cacheInfo ?
-            ` (${cacheInfo.from_cache} from cache, ${cacheInfo.from_api} from API)` : '';
+            ` (${cacheInfo.from_cache} из кэша, ${cacheInfo.from_api} из API)` : '';
 
-        showAlert(`Loaded data for ${data.results} station(s)${cacheMessage}`, 'success');
+        showAlert(`Загружены данные для ${data.results} станции(й)${cacheMessage}`, 'success');
 
     } catch (error) {
-        console.error('Error fetching multiple stations:', error);
-        showAlert(`Error loading weather data: ${error.message}`, 'error');
+        console.error('Ошибка получения нескольких станций:', error);
+        showAlert(`Ошибка загрузки погодных данных: ${error.message}`, 'error');
     } finally {
         showLoading(false);
     }
@@ -142,23 +141,23 @@ function createWeatherCard(station, cacheInfo = null) {
     card.className = 'weather-card';
 
     const observationTime = new Date(station.observed).toLocaleString();
-    const temperature = station.temperature ? `${station.temperature.celsius}°C` : 'N/A';
-    const dewPoint = station.dewpoint ? `${station.dewpoint.celsius}°C` : 'N/A';
-    const wind = station.wind ? `${station.wind.degrees}° at ${station.wind.speed_kts} kt` : 'N/A';
-    const visibility = station.visibility ? `${station.visibility.meters_text} m` : 'N/A';
-    const altimeter = station.barometer ? `${station.barometer.hpa} hPa` : 'N/A';
-    const humidity = station.humidity ? `${station.humidity.percent}%` : 'N/A';
+    const temperature = station.temperature ? `${station.temperature.celsius}°C` : 'Н/Д';
+    const dewPoint = station.dewpoint ? `${station.dewpoint.celsius}°C` : 'Н/Д';
+    const wind = station.wind ? `${station.wind.degrees}° при ${station.wind.speed_kts} уз` : 'Н/Д';
+    const visibility = station.visibility ? `${station.visibility.meters_text} м` : 'Н/Д';
+    const altimeter = station.barometer ? `${station.barometer.hpa} гПа` : 'Н/Д';
+    const humidity = station.humidity ? `${station.humidity.percent}%` : 'Н/Д';
 
     card.innerHTML = `
         <div class="weather-header">
             <div class="station-info">
                 <h3>${station.icao}</h3>
-                <p class="station-location">${station.station?.name || 'Unknown Location'}</p>
-                <p class="station-location">Observed: ${observationTime}</p>
+                <p class="station-location">${station.station?.name || 'Неизвестное местоположение'}</p>
+                <p class="station-location">Наблюдение: ${observationTime}</p>
                 ${cacheInfo && cacheInfo.from_cache ? `
                     <div class="cache-indicator">
                         <i class="fas fa-database"></i>
-                        Cached (${Math.round(cacheInfo.cache_duration / 60)} min)
+                        В кэше (${Math.round(cacheInfo.cache_duration / 60)} мин)
                     </div>
                 ` : ''}
             </div>
@@ -169,34 +168,34 @@ function createWeatherCard(station, cacheInfo = null) {
         
         <div class="weather-details">
             <div class="weather-item">
-                <span class="weather-label">Temperature</span>
+                <span class="weather-label">Температура</span>
                 <span class="weather-value">${temperature}</span>
             </div>
             <div class="weather-item">
-                <span class="weather-label">Dew Point</span>
+                <span class="weather-label">Точка росы</span>
                 <span class="weather-value">${dewPoint}</span>
             </div>
             <div class="weather-item">
-                <span class="weather-label">Wind</span>
+                <span class="weather-label">Ветер</span>
                 <span class="weather-value">${wind}</span>
             </div>
             <div class="weather-item">
-                <span class="weather-label">Visibility</span>
+                <span class="weather-label">Видимость</span>
                 <span class="weather-value">${visibility}</span>
             </div>
             <div class="weather-item">
-                <span class="weather-label">Altimeter</span>
+                <span class="weather-label">Давление</span>
                 <span class="weather-value">${altimeter}</span>
             </div>
             <div class="weather-item">
-                <span class="weather-label">Humidity</span>
+                <span class="weather-label">Влажность</span>
                 <span class="weather-value">${humidity}</span>
             </div>
         </div>
         
         ${station.conditions && station.conditions.length > 0 ? `
         <div class="weather-item">
-            <span class="weather-label">Conditions</span>
+            <span class="weather-label">Условия</span>
             <span class="weather-value">
                 ${station.conditions.map(cond => cond.text).join(', ')}
             </span>
@@ -205,9 +204,9 @@ function createWeatherCard(station, cacheInfo = null) {
         
         ${station.clouds && station.clouds.length > 0 ? `
         <div class="weather-item">
-            <span class="weather-label">Clouds</span>
+            <span class="weather-label">Облака</span>
             <span class="weather-value">
-                ${station.clouds.map(cloud => `${cloud.text} at ${cloud.feet} ft`).join(', ')}
+                ${station.clouds.map(cloud => `${cloud.text} на ${cloud.feet} футов`).join(', ')}
             </span>
         </div>
         ` : ''}
@@ -276,32 +275,32 @@ async function getCacheStatus() {
 
         if (!response.ok) {
             if (response.status === 403) {
-                throw new Error('Access denied. Please check your admin permissions.');
+                throw new Error('Доступ запрещён. Пожалуйста, проверьте права администратора.');
             }
             const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            throw new Error(errorData.error || `HTTP ошибка! статус: ${response.status}`);
         }
 
         const data = await response.json();
         displayCacheStatus(data.cache_status);
 
     } catch (error) {
-        console.error('Error getting cache status:', error);
-        showAlert(`Error getting cache status: ${error.message}`, 'error');
+        console.error('Ошибка получения статуса кэша:', error);
+        showAlert(`Ошибка получения статуса кэша: ${error.message}`, 'error');
 
         const cacheStatusElement = document.getElementById('cacheStatus');
         cacheStatusElement.innerHTML = `
             <div class="cache-error">
                 <i class="fas fa-exclamation-triangle"></i>
                 <p>${error.message}</p>
-                <p class="error-detail">Status: ${error.message.includes('Access denied') ? 'Unauthorized' : 'API Error'}</p>
+                <p class="error-detail">Статус: ${error.message.includes('Доступ запрещён') ? 'Неавторизован' : 'Ошибка API'}</p>
             </div>
         `;
     }
 }
 
 async function clearWeatherCache() {
-    if (!confirm('Are you sure you want to clear the weather cache? This will remove all cached weather data.')) {
+    if (!confirm('Вы уверены, что хотите очистить кэш погоды? Это удалит все сохранённые погодные данные.')) {
         return;
     }
 
@@ -312,10 +311,10 @@ async function clearWeatherCache() {
 
         if (!response.ok) {
             if (response.status === 403) {
-                throw new Error('Access denied. Please check your admin permissions.');
+                throw new Error('Доступ запрещён. Пожалуйста, проверьте права администратора.');
             }
             const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            throw new Error(errorData.error || `HTTP ошибка! статус: ${response.status}`);
         }
 
         const data = await response.json();
@@ -324,8 +323,8 @@ async function clearWeatherCache() {
         getCacheStatus();
 
     } catch (error) {
-        console.error('Error clearing cache:', error);
-        showAlert(`Error clearing cache: ${error.message}`, 'error');
+        console.error('Ошибка очистки кэша:', error);
+        showAlert(`Ошибка очистки кэша: ${error.message}`, 'error');
     }
 }
 
@@ -336,7 +335,7 @@ function displayCacheStatus(cacheStatus) {
         cacheStatusElement.innerHTML = `
             <div class="cache-error">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Unable to load cache status</p>
+                <p>Не удалось загрузить статус кэша</p>
             </div>
         `;
         return;
@@ -349,40 +348,40 @@ function displayCacheStatus(cacheStatus) {
         <div class="cache-stats">
             <div class="cache-stat-row">
                 <div class="cache-stat">
-                    <span class="stat-label">Total Entries</span>
+                    <span class="stat-label">Всего записей</span>
                     <span class="stat-value">${cacheStatus.total_entries}</span>
                 </div>
                 <div class="cache-stat">
-                    <span class="stat-label">Active Entries</span>
+                    <span class="stat-label">Активных записей</span>
                     <span class="stat-value">${cacheStatus.active_entries}</span>
                 </div>
                 <div class="cache-stat">
-                    <span class="stat-label">Expired Entries</span>
+                    <span class="stat-label">Просроченных записей</span>
                     <span class="stat-value">${cacheStatus.expired_entries}</span>
                 </div>
             </div>
             
             <div class="cache-stat-row">
                 <div class="cache-stat">
-                    <span class="stat-label">Max Capacity</span>
+                    <span class="stat-label">Макс. ёмкость</span>
                     <span class="stat-value">${cacheStatus.max_entries}</span>
                 </div>
                 <div class="cache-stat">
-                    <span class="stat-label">Utilization</span>
+                    <span class="stat-label">Загрузка</span>
                     <span class="stat-value ${utilizationPercent > 80 ? 'stat-warning' : ''}">
                         ${utilizationPercent}%
                     </span>
                 </div>
                 <div class="cache-stat">
-                    <span class="stat-label">Cache Duration</span>
-                    <span class="stat-value">${cacheStatus.cache_duration_minutes} min</span>
+                    <span class="stat-label">Время кэширования</span>
+                    <span class="stat-value">${cacheStatus.cache_duration_minutes} мин</span>
                 </div>
             </div>
         </div>
         
         ${cacheStatus.oldest_entries.length > 0 ? `
         <div class="cache-entries-section">
-            <h4>Oldest Entries</h4>
+            <h4>Старейшие записи</h4>
             <div class="cache-entries-list">
                 ${cacheStatus.oldest_entries.map(entry => `
                     <div class="cache-entry">
@@ -396,7 +395,7 @@ function displayCacheStatus(cacheStatus) {
         
         ${cacheStatus.newest_entries.length > 0 ? `
         <div class="cache-entries-section">
-            <h4>Newest Entries</h4>
+            <h4>Новейшие записи</h4>
             <div class="cache-entries-list">
                 ${cacheStatus.newest_entries.map(entry => `
                     <div class="cache-entry">
@@ -410,10 +409,10 @@ function displayCacheStatus(cacheStatus) {
         
         <div class="cache-actions">
             <button class="btn btn-small btn-secondary" onclick="getCacheStatus()">
-                <i class="fas fa-sync-alt"></i> Refresh
+                <i class="fas fa-sync-alt"></i> Обновить
             </button>
             <button class="btn btn-small btn-danger" onclick="clearWeatherCache()">
-                <i class="fas fa-trash"></i> Clear Cache
+                <i class="fas fa-trash"></i> Очистить кэш
             </button>
         </div>
     `;

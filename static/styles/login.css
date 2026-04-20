@@ -8,13 +8,13 @@
 }
 
 .auth-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 2rem;
     width: 100%;
     max-width: 450px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .auth-tabs {
@@ -28,7 +28,7 @@
 .tab-btn {
     flex: 1;
     padding: 12px;
-    background: rgba(0, 100, 90, 0.3);
+    background: transparent;
     border: none;
     color: #fff;
     /*font-weight: 600;*/
@@ -38,8 +38,8 @@
 }
 
 .tab-btn.active {
-    background: var(--dark);
-    box-shadow: 0 2px 8px rgba(0, 100, 90, 0.3);
+    background: #bfd730;
+    box-shadow: 0 2px 8px rgba(15, 111, 229, 0.3);
 }
 
 .auth-form {
@@ -67,12 +67,12 @@
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.8rem;
-    color: var(--dark);
+    color: #fff;
 }
 
 .auth-subtitle {
     text-align: center;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 2rem;
     font-size: 0.9rem;
 }
@@ -85,7 +85,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
     font-size: 0.9rem;
 }
@@ -94,34 +94,34 @@
     width: 100%;
     padding: 12px 16px 12px 45px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .form-group input::placeholder {
-    color: var(--green);
+    color: #ccc;
 }
 
 .form-group i {
     position: absolute;
     left: 16px;
     top: 38px;
-    color: var(--green);
+    color: #ccc;
     transition: color 0.3s ease;
 }
 
 .form-group input:focus+i {
-    color: var(--green);
+    color: #bfd730;
 }
 
 .form-options {
@@ -136,7 +136,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: var(--dark);
+    color: #ccc;
 }
 
 .checkbox input {
@@ -146,7 +146,7 @@
 .checkmark {
     width: 18px;
     height: 18px;
-    border: 2px solid var(--green);
+    border: 2px solid #46a41a;
     border-radius: 3px;
     margin-right: 8px;
     position: relative;
@@ -154,14 +154,14 @@
 }
 
 .checkbox input:checked+.checkmark {
-    background: var(--green);
-    border-color: var(--green);
+    background: #bfd730;
+    border-color: #bfd730;
 }
 
 .checkbox input:checked+.checkmark::after {
     content: '✓';
     position: absolute;
-    color: var(--dark);
+    color: white;
     font-size: 12px;
     top: 50%;
     left: 50%;
@@ -169,23 +169,23 @@
 }
 
 .forgot-password {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .forgot-password:hover {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: underline;
 }
 
 .auth-btn {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, var(--green) 0%, var(--green) 100%);
+    background: linear-gradient(135deg, #bfd730 0%, #bfd730 100%);
     border: none;
     border-radius: 6px;
-    color: var(--dark);
+    color: white;
     font-size: 1rem;
     /*font-weight: 600;*/
     cursor: pointer;
@@ -198,7 +198,7 @@
 
 .auth-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 100, 90, 0.4);
+    box-shadow: 0 5px 15px rgba(15, 111, 229, 0.4);
 }
 
 .auth-btn:active {
@@ -245,15 +245,15 @@
 }
 
 .auth-message.success {
-    background-color: var(--lightgreen);
-    color: var(--dark);
-    border: 1px solid var(--lightgreen);
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
 .auth-message.error {
     background-color: #f8d7da;
-    color: #ed091f;
-    border: 1px solid #ed091f;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
 .auth-message i {

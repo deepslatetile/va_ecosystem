@@ -9,8 +9,8 @@ load_dotenv()
 from config import init_app
 from database import init_db, get_db, close_db
 from auth.routes import auth_bp
-from auth.discord_oauth import discord_bp
-from auth.roblox_oauth import roblox_bp
+from auth.SOCIALNWK_oauth import SOCIALNWK_bp
+from auth.VIRTUALNWK_oauth import VIRTUALNWK_bp
 from api.schedule import schedule_bp
 from api.bookings import bookings_bp
 from api.users import users_bp
@@ -34,8 +34,8 @@ with app.app_context():
     init_db()
 
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
-app.register_blueprint(discord_bp, url_prefix='/auth')
-app.register_blueprint(roblox_bp, url_prefix='/auth')
+app.register_blueprint(SOCIALNWK_bp, url_prefix='/auth')
+app.register_blueprint(VIRTUALNWK_bp, url_prefix='/auth')
 app.register_blueprint(schedule_bp, url_prefix='/api')
 app.register_blueprint(bookings_bp, url_prefix='/api')
 app.register_blueprint(users_bp, url_prefix='/api')
@@ -74,17 +74,17 @@ def serve_manifest():
 def serve_service_worker():
     return send_from_directory('', 'service-worker.js')
 
-@app.route('/auth/discord')
-def discord_auth_redirect():
+@app.route('/auth/SOCIALNWK')
+def SOCIALNWK_auth_redirect():
     if 'user_id' not in session:
-        return redirect('/login?redirect=/auth/discord')
-    return redirect('/auth/discord')
+        return redirect('/login?redirect=/auth/SOCIALNWK')
+    return redirect('/auth/SOCIALNWK')
 
-@app.route('/auth/roblox')
-def roblox_auth_redirect():
+@app.route('/auth/VIRTUALNWK')
+def VIRTUALNWK_auth_redirect():
     if 'user_id' not in session:
-        return redirect('/login?redirect=/auth/roblox')
-    return redirect('/auth/roblox')
+        return redirect('/login?redirect=/auth/VIRTUALNWK')
+    return redirect('/auth/VIRTUALNWK')
 
 @app.route('/', methods=['GET'])
 def index():

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notification Admin - Cathay Pacific</title>
+    <title>Управление уведомлениями - Авиакомпания «Вектор»</title>
     <style>
         .notification-admin {
             max-width: 800px;
@@ -29,8 +29,8 @@
         }
 
         button {
-            background: var(--green);
-            color: var(--dark);
+            background: #0D2064;
+            color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
@@ -55,8 +55,8 @@
         }
 
         .alert.success {
-            background: #A2AC72;
-            color: var(--lightgreen);
+            background: #d4edda;
+            color: #155724;
         }
 
         .alert.error {
@@ -124,7 +124,7 @@
             targetIdGroup.style.display = 'none';
         } else {
             targetIdGroup.style.display = 'block';
-            targetIdLabel.textContent = target === 'user' ? 'User ID:' : 'Topic:';
+            targetIdLabel.textContent = target === 'user' ? 'ID пользователя:' : 'Тема:';
         }
     }
 
@@ -174,7 +174,7 @@
                     `;
             }
         } catch (error) {
-            console.error('Error loading stats:', error);
+            console.error('Ошибка загрузки статистики:', error);
         }
     }
 
@@ -215,7 +215,6 @@
         }
     });
 
-    // Загружаем статистику при загрузке страницы
     loadStats();
 </script>
 </body>

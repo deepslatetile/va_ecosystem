@@ -5,11 +5,11 @@
 }
 
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .stats-section {
-    background: #d5e4e4;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
@@ -31,27 +31,27 @@
 }
 
 .stat-card {
-    background: var(--green);
+    background: #424045;
     padding: 1.5rem;
     border-radius: 8px;
     text-align: center;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid #bfd730;
 }
 
 .stat-value {
     font-size: 2rem;
     /*font-weight: bold;*/
-    color: var(--white);
+    color: #bfd730;
     margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    color: #f5fcf8;
+    color: #ccc;
     font-size: 0.9rem;
 }
 
 .filters-section {
-    background: var(--white);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
@@ -73,17 +73,17 @@
 }
 
 .filter-group label {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: 500;*/
 }
 
 .filter-group input,
 .filter-group select {
     padding: 0.7rem;
-    border: 1px solid var(--dark);
+    border: 1px solid #bfd730;
     border-radius: 4px;
-    background: var(--green);
-    color: var(--white);
+    background: #424045;
+    color: white;
     width: 100%;
 }
 
@@ -100,8 +100,8 @@
 }
 
 .apply-btn {
-    background: var(--lightgreen);
-    color: #ffffff;
+    background: #00C851;
+    color: white;
 }
 
 .apply-btn:hover {
@@ -109,25 +109,25 @@
 }
 
 .clear-btn {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .clear-btn:hover {
-    background: #cc0000;
+    background: #ba141a;
 }
 
 .create-btn {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .create-btn:hover {
-    background: var(--lightgreen);
+    background: #bfd730;
 }
 
 .users-list {
-    background: var(--white);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
 }
@@ -141,21 +141,21 @@
 
 .list-header h2 {
     margin: 0;
-    color: var(--dark);
+    color: white;
 }
 
 .user-item {
-    background: var(--green);
+    background: #424045;
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 4px;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid #bfd730;
     transition: background-color 0.3s;
     cursor: pointer;
 }
 
 .user-item:hover {
-    background: var(--lightgreen);
+    background: #252427;
 }
 
 .user-header {
@@ -168,11 +168,11 @@
 .user-name {
     /*font-weight: bold;*/
     font-size: 1.1rem;
-    color: var(--white);
+    color: #bfd730;
 }
 
 .user-id {
-    color: #f5fcf8;
+    color: #ccc;
     font-size: 0.9rem;
 }
 
@@ -189,32 +189,32 @@
 }
 
 .detail-label {
-    color: #f5fcf8;
+    color: #ccc;
     /*font-weight: 500;*/
 }
 
 .user-group-hq {
-    color: var(--dark);
+    color: #ff6b6b;
     /*font-weight: bold;*/
 }
 
 .user-group-stf {
-    color: var(--green);
+    color: #4ecdc4;
     /*font-weight: bold;*/
 }
 
 .user-group-pax {
-    color: #005063;
+    color: #45b7d1;
     /*font-weight: bold;*/
 }
 
 .status-active {
-    color: var(--white);
+    color: #00C851;
     /*font-weight: bold;*/
 }
 
 .status-inactive {
-    color: var(--green);
+    color: #ed1c24;
     /*font-weight: bold;*/
 }
 
@@ -229,26 +229,26 @@
 
 .pagination button {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--dark);
-    background: var(--green);
-    color: var(--white);
+    border: 1px solid #bfd730;
+    background: #424045;
+    color: white;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .pagination button:hover:not(:disabled) {
-    background: var(--green);
+    background: #252427;
 }
 
 .pagination button:disabled {
-    background: var(--dark);
-    color: var(--green);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
+    color: #666;
     cursor: not-allowed;
 }
 
 .pagination-info {
-    color: #f5fcf8;
+    color: #ccc;
     margin: 0 1rem;
 }
 
@@ -264,7 +264,7 @@
 }
 
 .modal-content {
-    background-color: var(--lightgreen);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     margin: 2% auto;
     padding: 0;
     border-radius: 8px;
@@ -272,10 +272,11 @@
     max-width: 700px;
     max-height: 90vh;
     overflow-y: auto;
+    border: 1px solid #bfd730;
 }
 
 .modal-header {
-    background: var(--lightgreen);
+    background: #424045;
     padding: 1.5rem;
     border-radius: 8px 8px 0 0;
     display: flex;
@@ -288,7 +289,7 @@
 
 .modal-header h2 {
     margin: 0;
-    color: var(--dark);
+    color: white;
     font-size: 1.3rem;
 }
 
@@ -301,7 +302,7 @@
 }
 
 .close:hover {
-    color: var(--dark);
+    color: white;
 }
 
 .modal-body {
@@ -315,7 +316,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--dark);
+    color: #fff;
     /*font-weight: 500;*/
 }
 
@@ -324,10 +325,10 @@
 .form-group textarea {
     width: 100%;
     padding: 0.7rem;
-    border: 1px solid var(--dark);
+    border: 1px solid #bfd730;
     border-radius: 4px;
-    background: var(--green);
-    color: var(--white);
+    background: #424045;
+    color: white;
     box-sizing: border-box;
 }
 
@@ -358,8 +359,8 @@
 }
 
 .save-btn {
-    background: var(--lightgreen);
-    color: #ffffff;
+    background: #00C851;
+    color: white;
 }
 
 .save-btn:hover {
@@ -367,27 +368,27 @@
 }
 
 .cancel-btn {
-    background: var(--green);
-    color: var(--white);
+    background: #6c757d;
+    color: white;
 }
 
 .cancel-btn:hover {
-    background: #E9BF0E;
+    background: #545b62;
 }
 
 .delete-btn {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .delete-btn:hover {
-    background: #cc0000;
+    background: #ba141a;
 }
 
 .loading {
     text-align: center;
     padding: 2rem;
-    color: #f5fcf8;
+    color: #ccc;
 }
 
 .alert {
@@ -398,13 +399,13 @@
 }
 
 .alert-error {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .user-actions {
@@ -412,7 +413,7 @@
     gap: 1rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--dark);
+    border-top: 1px solid #bfd730;
 }
 
 /* Mobile */

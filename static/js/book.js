@@ -44,7 +44,7 @@ async function getCurrentUser() {
         }
         return -1;
     } catch (error) {
-        console.error('Error getting user:', error);
+        console.error('Ошибка получения пользователя:', error);
         return -1;
     }
 }
@@ -75,22 +75,22 @@ function showStep(stepNumber) {
 
 function nextStep(stepNumber) {
     if (stepNumber === 2 && !bookingData.selectedFlight && !bookingData.isEditMode) {
-        alert('Please select a flight first');
+        alert('Пожалуйста, сначала выберите рейс');
         return;
     }
     if (stepNumber === 3) {
         const passengerName = document.getElementById('passengerName').value;
-        const discordId = document.getElementById('discordId').value;
+        const SOCIALNWKId = document.getElementById('SOCIALNWKId').value;
         const userId = document.getElementById('userId').value;
 
-        if (!passengerName || !discordId || !userId) {
-            alert('Please fill in all required passenger information');
+        if (!passengerName || !SOCIALNWKId || !userId) {
+            alert('Пожалуйста, заполните всю обязательную информацию о пассажире');
             return;
         }
 
         bookingData.passengerInfo = {
             name: passengerName,
-            discordId: discordId,
+            SOCIALNWKId: SOCIALNWKId,
             userId: userId,
             specialRequests: document.getElementById('specialRequests').value
         };
@@ -100,7 +100,7 @@ function nextStep(stepNumber) {
 
     }
     if (stepNumber === 5 && !bookingData.selectedSeat) {
-        alert('Please select a seat first');
+        alert('Пожалуйста, сначала выберите место');
         return;
     }
 
@@ -116,19 +116,19 @@ async function loadFlights() {
     const flightList = document.getElementById('flightList');
     if (!flightList) return;
 
-    flightList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading flights...</p></div>';
+    flightList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Загрузка рейсов...</p></div>';
 
     try {
         const response = await fetch('/api/get/schedule');
 
         if (!response.ok) {
-            throw new Error('Failed to load flights');
+            throw new Error('Не удалось загрузить рейсы');
         }
 
         const flights = await response.json();
 
         if (flights.length === 0) {
-            flightList.innerHTML = '<div class="no-flights">No flights available</div>';
+            flightList.innerHTML = '<div class="no-flights">Нет доступных рейсов</div>';
             return;
         }
 
@@ -139,34 +139,34 @@ async function loadFlights() {
             return `
             <div class="flight-card ${isSelected ? 'selected' : ''}" onclick="selectFlight('${safeFlightNumber}')" data-flight="${flight.flight_number}">
                 <div class="flight-header">
-                    <div class="flight-number">Flight ${flight.flight_number}</div>
+                    <div class="flight-number">Рейс ${flight.flight_number}</div>
                     <div class="flight-status status-${flight.status.toLowerCase()}">${flight.status}</div>
                 </div>
                 <div class="flight-details">
                     <div class="route-info">
                         <div class="airport">${flight.display_departure || flight.departure}</div>
-                        <div class="city">Departure</div>
+                        <div class="city">Вылет</div>
                     </div>
                     <div class="route-arrow">
                         <i class="fas fa-long-arrow-alt-right"></i>
                     </div>
                     <div class="route-info">
                         <div class="airport">${flight.display_arrival || flight.arrival}</div>
-                        <div class="city">Arrival</div>
+                        <div class="city">Прилёт</div>
                     </div>
                 </div>
                 <div class="time-info">
                     <div class="datetime">${formatDate(new Date(flight.datetime * 1000))}</div>
-                    <div class="duration">Arrival: ${formatTimeFromTimestamp(flight.arrival_time)}</div>
+                    <div class="duration">Прилёт: ${formatTimeFromTimestamp(flight.arrival_time)}</div>
                 </div>
                 <div class="flight-meta">
                     <div class="meta-item">
-                        <div class="meta-label">Aircraft</div>
+                        <div class="meta-label">Воздушное судно</div>
                         <div class="meta-value">${flight.aircraft}</div>
                     </div>
                     <div class="meta-item">
-                        <div class="meta-label">Flying</div>
-                        <div class="meta-value">${flight.flying_count || 0} passengers</div>
+                        <div class="meta-label">Летят</div>
+                        <div class="meta-value">${flight.flying_count || 0} пассажиров</div>
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@ async function loadFlights() {
         }
 
     } catch (error) {
-        console.error('Error loading flights:', error);
-        flightList.innerHTML = '<div class="error">Failed to load flights. Please try again.</div>';
+        console.error('Ошибка загрузки рейсов:', error);
+        flightList.innerHTML = '<div class="error">Не удалось загрузить рейсы. Пожалуйста, попробуйте снова.</div>';
     }
 }
 
@@ -222,13 +222,13 @@ async function loadFlightDetails(flightNumber) {
             if (flight) {
                 bookingData.flightDetails = flight;
                 bookingData.boardingPassStyle = flight.boarding_pass_default || 'default';
-                console.log('Flight details loaded:', flight);
-                console.log('Boarding pass style:', bookingData.boardingPassStyle);
+                console.log('Данные рейса загружены:', flight);
+                console.log('Стиль посадочного талона:', bookingData.boardingPassStyle);
                 await loadExistingBookings(flightNumber);
             }
         }
     } catch (error) {
-        console.error('Error loading flight details:', error);
+        console.error('Ошибка загрузки данных рейса:', error);
     }
 }
 
@@ -237,10 +237,10 @@ async function loadExistingBookings(flightNumber) {
         const response = await fetch('/api/get/bookings_data/' + flightNumber);
         if (response.ok) {
             bookingData.existingBookings = await response.json();
-            console.log('Existing bookings loaded:', bookingData.existingBookings);
+            console.log('Существующие бронирования загружены:', bookingData.existingBookings);
         }
     } catch (error) {
-        console.error('Error loading existing bookings:', error);
+        console.error('Ошибка загрузки существующих бронирований:', error);
     }
 }
 
@@ -262,13 +262,13 @@ async function loadProfileInfo() {
     const user = await getCurrentUser();
     if (user) {
         const passengerName = document.getElementById('passengerName');
-        const discordId = document.getElementById('discordId');
+        const SOCIALNWKId = document.getElementById('SOCIALNWKId');
         const userId = document.getElementById('userId');
-        
-        console.log('user data', user)
-        console.log('booking data', bookingData)
+
+        console.log('Данные пользователя', user)
+        console.log('Данные бронирования', bookingData)
         if (passengerName) passengerName.value = user.nickname || '';
-        if (discordId) discordId.value = user.social_id || '';
+        if (SOCIALNWKId) SOCIALNWKId.value = user.social_id || '';
         if (userId) userId.value = user.virtual_id || '';
 
         bookingData.userId = user.id;
@@ -280,16 +280,16 @@ async function loadServices() {
     const servicesList = document.getElementById('servicesList');
     if (!servicesList) return;
 
-    servicesList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading services...</p></div>';
+    servicesList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Загрузка услуг...</p></div>';
 
     try {
         if (!bookingData.flightDetails || !bookingData.flightDetails.pax_service) {
-            servicesList.innerHTML = '<div class="no-services">No additional services available for this flight</div>';
+            servicesList.innerHTML = '<div class="no-services">Для этого рейса нет дополнительных услуг</div>';
             return;
         }
 
         const servicesString = bookingData.flightDetails.pax_service;
-        console.log('Services string from flight:', servicesString);
+        console.log('Строка услуг из рейса:', servicesString);
 
         let availableServices = [];
 
@@ -300,7 +300,7 @@ async function loadServices() {
                     const servicesResponse = await fetch('/api/get/flight_configs/service');
                     if (servicesResponse.ok) {
                         const servicesData = await servicesResponse.json();
-                        console.log('All services from config:', servicesData);
+                        console.log('Все услуги из конфигурации:', servicesData);
 
                         availableServices = serviceNames.map(serviceName => {
                             const serviceConfig = servicesData.configs.find(config => config.name === serviceName);
@@ -340,10 +340,10 @@ async function loadServices() {
             }
         }
 
-        console.log('Available services with prices:', availableServices);
+        console.log('Доступные услуги с ценами:', availableServices);
 
         if (availableServices.length === 0) {
-            servicesList.innerHTML = '<div class="no-services">No additional services available for this flight</div>';
+            servicesList.innerHTML = '<div class="no-services">Для этого рейса нет дополнительных услуг</div>';
             return;
         }
 
@@ -355,7 +355,7 @@ async function loadServices() {
                 <div class="service-item ${isSelected ? 'selected' : ''}" onclick="toggleService('${safeServiceName}', ${service.price})" data-service="${safeServiceName}">
                     <div class="service-header">
                         <div class="service-name">${service.name}</div>
-                        <div class="service-price">‎ ${service.price}</div>
+                        <div class="service-price">λu ${service.price}</div>
                     </div>
                     ${service.description ? '<div class="service-description">' + service.description + '</div>' : ''}
                 </div>
@@ -366,8 +366,8 @@ async function loadServices() {
         updateSelectedServicesList();
 
     } catch (error) {
-        console.error('Error loading services:', error);
-        servicesList.innerHTML = '<div class="error">Failed to load services. Please try again.</div>';
+        console.error('Ошибка загрузки услуг:', error);
+        servicesList.innerHTML = '<div class="error">Не удалось загрузить услуги. Пожалуйста, попробуйте снова.</div>';
     }
 }
 
@@ -398,7 +398,7 @@ function updateSelectedServicesList() {
     if (!selectedList) return;
 
     if (bookingData.selectedServices.length === 0) {
-        selectedList.innerHTML = '<p class="no-services">No services selected</p>';
+        selectedList.innerHTML = '<p class="no-services">Услуги не выбраны</p>';
         return;
     }
 
@@ -408,7 +408,7 @@ function updateSelectedServicesList() {
         <div class="selected-service-item">
             <div class="service-info">
                 <span class="service-name">${service.name}</span>
-                <span class="service-price">‎ ${service.price}</span>
+                <span class="service-price">λu ${service.price}</span>
             </div>
             <button class="remove-service" onclick="removeService('${safeServiceName}')">
                 <i class="fas fa-times"></i>
@@ -433,13 +433,13 @@ function removeService(serviceName) {
 }
 
 async function loadSeatmap() {
-    console.log('Loading seatmap...');
+    console.log('Загрузка схемы мест...');
 
     if (!bookingData.selectedFlight || !bookingData.flightDetails) {
-        console.error('No flight selected or flight details missing');
+        console.error('Рейс не выбран или отсутствуют данные рейса');
         const seatmap = document.getElementById('seatmap');
         if (seatmap) {
-            seatmap.innerHTML = '<div class="error">Please select a flight first</div>';
+            seatmap.innerHTML = '<div class="error">Пожалуйста, сначала выберите рейс</div>';
         }
         return;
     }
@@ -447,53 +447,53 @@ async function loadSeatmap() {
     const seatmap = document.getElementById('seatmap');
     if (!seatmap) return;
 
-    seatmap.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading seatmap...</p></div>';
+    seatmap.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Загрузка схемы мест...</p></div>';
 
     try {
         const seatmapConfigName = bookingData.flightDetails.seatmap;
-        console.log('Loading seatmap config:', seatmapConfigName);
+        console.log('Загрузка конфигурации схемы мест:', seatmapConfigName);
 
         if (!seatmapConfigName) {
-            seatmap.innerHTML = '<div class="error">Seatmap configuration not available for this flight</div>';
+            seatmap.innerHTML = '<div class="error">Конфигурация схемы мест недоступна для этого рейса</div>';
             return;
         }
 
         const configResponse = await fetch('/api/get/flight_configs/cabin_layout');
         if (!configResponse.ok) {
-            throw new Error('Failed to load cabin layouts');
+            throw new Error('Не удалось загрузить схемы салонов');
         }
 
         const configData = await configResponse.json();
-        console.log('Found cabin layouts:', configData);
+        console.log('Найдены схемы салонов:', configData);
 
         const seatmapConfig = configData.configs.find(config => config.name === seatmapConfigName);
 
         if (!seatmapConfig) {
-            throw new Error('Seatmap config not found: ' + seatmapConfigName);
+            throw new Error('Конфигурация схемы мест не найдена: ' + seatmapConfigName);
         }
 
-        console.log('Found seatmap config:', seatmapConfig);
+        console.log('Найдена конфигурация схемы мест:', seatmapConfig);
 
         if (seatmapConfig.data) {
             bookingData.seatmapConfig = seatmapConfig.data;
-            console.log('Parsed seatmap config:', bookingData.seatmapConfig);
+            console.log('Распаршенная конфигурация схемы мест:', bookingData.seatmapConfig);
             renderSeatmap();
         } else {
-            seatmap.innerHTML = '<div class="error">Seatmap configuration data is empty</div>';
+            seatmap.innerHTML = '<div class="error">Данные конфигурации схемы мест пусты</div>';
         }
 
     } catch (error) {
-        console.error('Error loading seatmap:', error);
-        seatmap.innerHTML = '<div class="error">Failed to load seatmap: ' + error.message + '</div>';
+        console.error('Ошибка загрузки схемы мест:', error);
+        seatmap.innerHTML = '<div class="error">Не удалось загрузить схему мест: ' + error.message + '</div>';
     }
 }
 
 function renderSeatmap() {
     if (!bookingData.seatmapConfig) {
-        console.error('No seatmap config available');
+        console.error('Нет конфигурации схемы мест');
         const seatmap = document.getElementById('seatmap');
         if (seatmap) {
-            seatmap.innerHTML = '<div class="error">No seatmap configuration available</div>';
+            seatmap.innerHTML = '<div class="error">Конфигурация схемы мест недоступна</div>';
         }
         return;
     }
@@ -503,12 +503,12 @@ function renderSeatmap() {
 
     const config = bookingData.seatmapConfig;
 
-    console.log('Rendering seatmap with config:', config);
+    console.log('Отрисовка схемы мест с конфигурацией:', config);
 
     let seatmapHTML = '';
 
     if (!config.classes || !Array.isArray(config.classes) || config.classes.length === 0) {
-        seatmap.innerHTML = '<div class="error">No cabin classes defined in seatmap configuration</div>';
+        seatmap.innerHTML = '<div class="error">В конфигурации схемы мест не определены классы салона</div>';
         return;
     }
 
@@ -516,12 +516,12 @@ function renderSeatmap() {
         seatmapHTML += '<div class="cabin-class">';
 
         if (!cabinClass.rows || !Array.isArray(cabinClass.rows) || cabinClass.rows.length < 2) {
-            seatmapHTML += '<div class="error">Invalid row configuration</div></div>';
+            seatmapHTML += '<div class="error">Неверная конфигурация рядов</div></div>';
             return;
         }
 
         if (!cabinClass.seat_letters || !Array.isArray(cabinClass.seat_letters)) {
-            seatmapHTML += '<div class="error">Invalid seat letters configuration</div></div>';
+            seatmapHTML += '<div class="error">Неверная конфигурация букв мест</div></div>';
             return;
         }
 
@@ -543,7 +543,7 @@ function renderSeatmap() {
                 seatmapHTML += createSeatHTML(seatId, seatLetter, seatStatus, seatClass, seatPrice);
 
                 if (aisles.includes(i + 1)) {
-                    seatmapHTML += '<div class="aisle" title="Aisle"></div>';
+                    seatmapHTML += '<div class="aisle" title="Проход"></div>';
                 }
             }
 
@@ -554,7 +554,7 @@ function renderSeatmap() {
     });
 
     seatmap.innerHTML = seatmapHTML;
-    console.log('Seatmap rendered successfully');
+    console.log('Схема мест успешно отрисована');
 
     // If we're in edit mode and have a selected seat, highlight it
     if (bookingData.isEditMode && bookingData.selectedSeat) {
@@ -592,7 +592,7 @@ function getSeatStatus(seatId) {
 
     if (bookingData.existingBookings &&
         bookingData.existingBookings.some(booking => booking.seat === seatId)) {
-        console.log('booking data', bookingData)
+        console.log('Данные бронирования', bookingData)
         // If we're editing this booking, don't mark our own seat as occupied
         if (bookingData.isEditMode && bookingData.editingBookingData &&
             bookingData.editingBookingData.seat === seatId) {
@@ -605,10 +605,10 @@ function getSeatStatus(seatId) {
 }
 
 function createSeatHTML(seatId, seatLetter, status, seatClass, price) {
-    const priceDisplay = price > 0 ? '<div class="seat-price">‎ ' + price + '</div>' : '';
+    const priceDisplay = price > 0 ? '<div class="seat-price">λu ' + price + '</div>' : '';
     const isSelected = bookingData.isEditMode && bookingData.selectedSeat === seatId;
 
-    return '<div class="seat ' + seatClass + ' ' + status + (isSelected ? ' selected' : '') + '" onclick="selectSeat(\'' + seatId + '\', ' + price + ')" data-seat="' + seatId + '" title="Seat ' + seatId + ' - ‎ ' + price + '">' + seatLetter + priceDisplay + '</div>';
+    return '<div class="seat ' + seatClass + ' ' + status + (isSelected ? ' selected' : '') + '" onclick="selectSeat(\'' + seatId + '\', ' + price + ')" data-seat="' + seatId + '" title="Место ' + seatId + ' - λu ' + price + '">' + seatLetter + priceDisplay + '</div>';
 }
 
 function selectSeat(seatId, price) {
@@ -642,7 +642,7 @@ function updateSeatInfo(seatId, price) {
     const priceAmount = document.getElementById('priceAmount');
 
     if (seatDisplay) seatDisplay.textContent = seatId;
-    if (priceAmount) priceAmount.textContent = '‎ ' + price;
+    if (priceAmount) priceAmount.textContent = 'λu ' + price;
     if (priceInfo) priceInfo.style.display = 'block';
 
     let detailsHTML = '';
@@ -654,11 +654,11 @@ function updateSeatInfo(seatId, price) {
     );
 
     if (cabinClass) {
-        detailsHTML += '<p><strong>Class:</strong> ' + cabinClass.name + '</p>';
+        detailsHTML += '<p><strong>Класс:</strong> ' + cabinClass.name + '</p>';
     }
 
     if (seatDetails) {
-        seatDetails.innerHTML = detailsHTML || '<p>No additional information available</p>';
+        seatDetails.innerHTML = detailsHTML || '<p>Нет дополнительной информации</p>';
     }
 }
 
@@ -670,23 +670,23 @@ function updateConfirmationSummary() {
     if (flightSummary && bookingData.flightDetails) {
         flightSummary.innerHTML = `
             <div class="summary-item">
-                <span class="summary-label">Flight:</span>
+                <span class="summary-label">Рейс:</span>
                 <span class="summary-value">${bookingData.flightDetails.flight_number}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Route:</span>
+                <span class="summary-label">Маршрут:</span>
                 <span class="summary-value">${bookingData.flightDetails.display_departure || bookingData.flightDetails.departure} → ${bookingData.flightDetails.display_arrival || bookingData.flightDetails.arrival}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Departure:</span>
+                <span class="summary-label">Вылет:</span>
                 <span class="summary-value">${formatDate(new Date(bookingData.flightDetails.datetime * 1000))}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Arrival:</span>
+                <span class="summary-label">Прилёт:</span>
                 <span class="summary-value">${formatTimeFromTimestamp(bookingData.flightDetails.arrival_time)}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Aircraft:</span>
+                <span class="summary-label">Воздушное судно:</span>
                 <span class="summary-value">${bookingData.flightDetails.aircraft}</span>
             </div>
         `;
@@ -695,21 +695,21 @@ function updateConfirmationSummary() {
     const passengerSummary = document.getElementById('passengerSummary');
     if (passengerSummary) {
         const passengerName = document.getElementById('passengerName').value;
-        const discordId = document.getElementById('discordId').value;
+        const SOCIALNWKId = document.getElementById('SOCIALNWKId').value;
         const userId = document.getElementById('userId').value;
         const specialRequests = document.getElementById('specialRequests').value;
 
         let passengerHTML = `
             <div class="summary-item">
-                <span class="summary-label">Name:</span>
+                <span class="summary-label">Имя:</span>
                 <span class="summary-value">${passengerName}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Discord ID:</span>
-                <span class="summary-value">${discordId}</span>
+                <span class="summary-label">SOCIALNWK ID:</span>
+                <span class="summary-value">${SOCIALNWKId}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Roblox ID:</span>
+                <span class="summary-label">VIRTUALNWK ID:</span>
                 <span class="summary-value">${userId}</span>
             </div>
         `;
@@ -717,7 +717,7 @@ function updateConfirmationSummary() {
         if (specialRequests) {
             passengerHTML += `
                 <div class="summary-item">
-                    <span class="summary-label">Special Requests:</span>
+                    <span class="summary-label">Особые пожелания:</span>
                     <span class="summary-value">${specialRequests}</span>
                 </div>
             `;
@@ -732,11 +732,11 @@ function updateConfirmationSummary() {
             servicesSummary.innerHTML = bookingData.selectedServices.map(service => `
                 <div class="summary-item">
                     <span class="summary-label">${service.name}:</span>
-                    <span class="summary-value">‎ ${service.price}</span>
+                    <span class="summary-value">λu ${service.price}</span>
                 </div>
             `).join('');
         } else {
-            servicesSummary.innerHTML = '<p class="no-services">No additional services selected</p>';
+            servicesSummary.innerHTML = '<p class="no-services">Дополнительные услуги не выбраны</p>';
         }
     }
 
@@ -744,16 +744,16 @@ function updateConfirmationSummary() {
     if (seatSummary && bookingData.selectedSeat) {
         seatSummary.innerHTML = `
             <div class="summary-item">
-                <span class="summary-label">Seat:</span>
+                <span class="summary-label">Место:</span>
                 <span class="summary-value">${bookingData.selectedSeat}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Class:</span>
+                <span class="summary-label">Класс:</span>
                 <span class="summary-value">${getSeatClass(bookingData.selectedSeat)}</span>
             </div>
             <div class="summary-item">
-                <span class="summary-label">Seat Price:</span>
-                <span class="summary-value">‎ ${bookingData.selectedSeatPrice}</span>
+                <span class="summary-label">Цена места:</span>
+                <span class="summary-value">λu ${bookingData.selectedSeatPrice}</span>
             </div>
         `;
     }
@@ -762,24 +762,24 @@ function updateConfirmationSummary() {
     if (priceSummary) {
         let priceHTML = `
             <div class="summary-item">
-                <span class="summary-label">Seat Price:</span>
-                <span class="summary-value">‎ ${bookingData.selectedSeatPrice}</span>
+                <span class="summary-label">Цена места:</span>
+                <span class="summary-value">λu ${bookingData.selectedSeatPrice}</span>
             </div>
         `;
 
         if (servicesTotal > 0) {
             priceHTML += `
                 <div class="summary-item">
-                    <span class="summary-label">Services Total:</span>
-                    <span class="summary-value">‎ ${servicesTotal}</span>
+                    <span class="summary-label">Стоимость услуг:</span>
+                    <span class="summary-value">λu ${servicesTotal}</span>
                 </div>
             `;
         }
 
         priceHTML += `
             <div class="summary-item total-price">
-                <span class="summary-label">Total:</span>
-                <span class="summary-value">‎ ${totalPrice}</span>
+                <span class="summary-label">Итого:</span>
+                <span class="summary-value">λu ${totalPrice}</span>
             </div>
         `;
 
@@ -789,22 +789,22 @@ function updateConfirmationSummary() {
 
 function getSeatClass(seatId) {
     if (!bookingData.seatmapConfig || !bookingData.seatmapConfig.classes) {
-        return 'Economy';
+        return 'Эконом';
     }
 
     const row = parseInt(seatId.match(/\d+/)[0]);
 
     if (isNaN(row)) {
-        return 'Economy';
+        return 'Эконом';
     }
 
     for (const cabinClass of bookingData.seatmapConfig.classes) {
         if (cabinClass.rows && row >= cabinClass.rows[0] && row <= cabinClass.rows[1]) {
-            return cabinClass.name || 'Economy';
+            return cabinClass.name || 'Эконом';
         }
     }
 
-    return 'Economy';
+    return 'Эконом';
 }
 
 async function completeBooking() {
@@ -812,20 +812,20 @@ async function completeBooking() {
     if (!completeBtn) return;
 
     completeBtn.disabled = true;
-    completeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    completeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обработка...';
 
     try {
         const passengerName = document.getElementById('passengerName').value;
-        const discordId = document.getElementById('discordId').value;
+        const SOCIALNWKId = document.getElementById('SOCIALNWKId').value;
         const userId = document.getElementById('userId').value;
         const specialRequests = document.getElementById('specialRequests').value;
 
-        if (!passengerName || !discordId || !userId) {
-            throw new Error('Please fill in all required passenger information');
+        if (!passengerName || !SOCIALNWKId || !userId) {
+            throw new Error('Пожалуйста, заполните всю обязательную информацию о пассажире');
         }
 
         if (!bookingData.selectedSeat) {
-            throw new Error('Please select a seat first');
+            throw new Error('Пожалуйста, сначала выберите место');
         }
 
         if (bookingData.isEditMode && bookingData.editingBookingId) {
@@ -838,7 +838,7 @@ async function completeBooking() {
                 note: specialRequests
             };
 
-            console.log('Updating booking:', bookingData.editingBookingId, updateData);
+            console.log('Обновление бронирования:', bookingData.editingBookingId, updateData);
 
             const response = await fetch(`/api/update/booking/${bookingData.editingBookingId}`, {
                 method: 'PUT',
@@ -849,22 +849,22 @@ async function completeBooking() {
             });
 
             const responseText = await response.text();
-            console.log('Update response:', response.status, responseText);
+            console.log('Ответ обновления:', response.status, responseText);
 
             let result;
             try {
                 result = JSON.parse(responseText);
             } catch (e) {
-                console.error('Failed to parse JSON response:', e);
-                throw new Error('Invalid response from server');
+                console.error('Не удалось распарсить JSON ответ:', e);
+                throw new Error('Неверный ответ от сервера');
             }
 
             if (response.ok) {
-                console.log('Booking updated successfully:', result);
+                console.log('Бронирование успешно обновлено:', result);
                 showSuccessStep(bookingData.editingBookingId);
             } else {
-                console.error('Booking update failed:', result);
-                throw new Error(result.error || 'Booking update failed');
+                console.error('Не удалось обновить бронирование:', result);
+                throw new Error(result.error || 'Не удалось обновить бронирование');
             }
         } else {
             // Create new booking
@@ -885,11 +885,11 @@ async function completeBooking() {
                 boarding_pass: bookingData.boardingPassStyle,
                 note: specialRequests,
                 passenger_name: passengerName,
-                social_id: discordId,
+                social_id: SOCIALNWKId,
                 virtual_id: userId
             };
 
-            console.log('Sending booking data:', bookingDataToSend);
+            console.log('Отправка данных бронирования:', bookingDataToSend);
 
             const response = await fetch('/api/post/booking/', {
                 method: 'POST',
@@ -899,37 +899,37 @@ async function completeBooking() {
                 body: JSON.stringify(bookingDataToSend)
             });
 
-            console.log('Response status:', response.status);
+            console.log('Статус ответа:', response.status);
 
             const responseText = await response.text();
-            console.log('Response text:', responseText);
+            console.log('Текст ответа:', responseText);
 
             let result;
             try {
                 result = JSON.parse(responseText);
             } catch (e) {
-                console.error('Failed to parse JSON response:', e);
-                throw new Error('Invalid response from server');
+                console.error('Не удалось распарсить JSON ответ:', e);
+                throw new Error('Неверный ответ от сервера');
             }
 
             if (response.ok) {
-                console.log('Booking successful:', result);
+                console.log('Бронирование успешно:', result);
                 bookingData.bookingId = result.booking_id;
 
                 showSuccessStep(result.booking_id);
             } else {
-                console.error('Booking failed:', result);
-                throw new Error(result.error || 'Booking failed');
+                console.error('Не удалось создать бронирование:', result);
+                throw new Error(result.error || 'Не удалось создать бронирование');
             }
         }
 
     } catch (error) {
-        console.error('Booking error:', error);
-        alert('Booking failed: ' + error.message);
+        console.error('Ошибка бронирования:', error);
+        alert('Ошибка бронирования: ' + error.message);
 
         completeBtn.disabled = false;
         completeBtn.innerHTML = '<i class="fas fa-check"></i> ' +
-            (bookingData.isEditMode ? 'Update Booking' : 'Complete Booking');
+            (bookingData.isEditMode ? 'Обновить бронирование' : 'Завершить бронирование');
     }
 }
 
@@ -943,7 +943,7 @@ function showSuccessStep(bookingId) {
     const completeBtn = document.getElementById('completeBookingBtn');
     if (completeBtn) {
         completeBtn.innerHTML = '<i class="fas fa-check"></i> ' +
-            (bookingData.isEditMode ? 'Update Booking' : 'Complete Booking');
+            (bookingData.isEditMode ? 'Обновить бронирование' : 'Завершить бронирование');
         completeBtn.disabled = false;
     }
 
@@ -957,14 +957,14 @@ function showBoardingPassStep(bookingId) {
 
 async function generatePreview() {
     if (!bookingData.bookingId && !bookingData.editingBookingId) {
-        alert('No booking ID available');
+        alert('ID бронирования недоступен');
         return;
     }
 
     const preview = document.getElementById('boardingPassPreview');
     if (!preview) return;
 
-    preview.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Generating preview...</p></div>';
+    preview.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Генерация предпросмотра...</p></div>';
 
     try {
         const bookingId = bookingData.bookingId || bookingData.editingBookingId;
@@ -974,21 +974,21 @@ async function generatePreview() {
             const blob = await response.blob();
             const imageUrl = URL.createObjectURL(blob);
 
-            preview.innerHTML = '<div style="text-align: center;"><img src="' + imageUrl + '" alt="Boarding Pass Preview" style="max-width: 100%; max-height: 350px;" /></div>';
+            preview.innerHTML = '<div style="text-align: center;"><img src="' + imageUrl + '" alt="Предпросмотр посадочного талона" style="max-width: 100%; max-height: 350px;" /></div>';
         } else {
             const errorText = await response.text();
-            console.error('Preview error:', errorText);
-            preview.innerHTML = '<div class="error">Failed to generate preview: ' + response.status + '</div>';
+            console.error('Ошибка предпросмотра:', errorText);
+            preview.innerHTML = '<div class="error">Не удалось создать предпросмотр: ' + response.status + '</div>';
         }
     } catch (error) {
-        console.error('Error generating preview:', error);
-        preview.innerHTML = '<div class="error">Failed to generate preview: ' + error.message + '</div>';
+        console.error('Ошибка генерации предпросмотра:', error);
+        preview.innerHTML = '<div class="error">Не удалось создать предпросмотр: ' + error.message + '</div>';
     }
 }
 
 async function downloadBoardingPass(format) {
     if (!bookingData.bookingId && !bookingData.editingBookingId) {
-        alert('No booking ID available');
+        alert('ID бронирования недоступен');
         return;
     }
 
@@ -1003,7 +1003,7 @@ async function downloadBoardingPass(format) {
             url = '/api/get/boarding_pass_pdf/' + bookingId + '/' + bookingData.boardingPassStyle;
             filename = 'boarding-pass-' + bookingId + '.pdf';
         } else {
-            throw new Error('Invalid format');
+            throw new Error('Неверный формат');
         }
 
         const link = document.createElement('a');
@@ -1014,8 +1014,8 @@ async function downloadBoardingPass(format) {
         document.body.removeChild(link);
 
     } catch (error) {
-        console.error('Error downloading boarding pass:', error);
-        alert('Failed to download boarding pass');
+        console.error('Ошибка скачивания посадочного талона:', error);
+        alert('Не удалось скачать посадочный талон');
     }
 }
 
@@ -1031,7 +1031,7 @@ async function loadBookingForEdit(bookingId) {
     try {
         const response = await fetch(`/api/get/booking/${bookingId}`);
         if (!response.ok) {
-            throw new Error('Failed to load booking details');
+            throw new Error('Не удалось загрузить данные бронирования');
         }
 
         const booking = await response.json();
@@ -1050,7 +1050,7 @@ async function loadBookingForEdit(bookingId) {
 
         // Fill passenger information
         const passengerNameField = document.getElementById('passengerName');
-        const discordIdField = document.getElementById('discordId');
+        const SOCIALNWKIdField = document.getElementById('SOCIALNWKId');
         const userIdField = document.getElementById('userId');
         const specialRequestsField = document.getElementById('specialRequests');
 
@@ -1063,13 +1063,13 @@ async function loadBookingForEdit(bookingId) {
                 const userResponse = await fetch(`/api/get/user/${booking.user_id}`);
                 if (userResponse.ok) {
                     const user = await userResponse.json();
-                    console.log('user', user)
-                    if (discordIdField) discordIdField.value = user.social_id || '';
+                    console.log('Пользователь', user)
+                    if (SOCIALNWKIdField) SOCIALNWKIdField.value = user.social_id || '';
                     if (userIdField) userIdField.value = user.virtual_id || '';
                     if (passengerNameField) passengerNameField.value = user.nickname || '';
                 }
             } catch (userError) {
-                console.error('Error loading user info:', userError);
+                console.error('Ошибка загрузки информации о пользователе:', userError);
                 // If we can't load user info, we can still proceed with empty fields
             }
         }
@@ -1103,19 +1103,19 @@ async function loadBookingForEdit(bookingId) {
         const selectFlightBtn = document.getElementById('selectFlightBtn');
         if (selectFlightBtn) {
             selectFlightBtn.disabled = false;
-            selectFlightBtn.textContent = 'Flight Selected';
+            selectFlightBtn.textContent = 'Рейс выбран';
         }
 
         const completeBtn = document.getElementById('completeBookingBtn');
         if (completeBtn) {
-            completeBtn.innerHTML = '<i class="fas fa-save"></i> Update Booking';
+            completeBtn.innerHTML = '<i class="fas fa-save"></i> Обновить бронирование';
         }
 
-        console.log('Booking loaded for edit:', booking);
+        console.log('Бронирование загружено для редактирования:', booking);
 
     } catch (error) {
-        console.error('Error loading booking for edit:', error);
-        alert('Failed to load booking for editing. Please try again.');
+        console.error('Ошибка загрузки бронирования для редактирования:', error);
+        alert('Не удалось загрузить бронирование для редактирования. Пожалуйста, попробуйте снова.');
     }
 }
 

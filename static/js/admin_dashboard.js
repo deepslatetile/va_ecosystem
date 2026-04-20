@@ -1,8 +1,7 @@
-
 function goToEditFlight() {
     const flightNumber = document.getElementById('flightNumberInput').value.trim();
     if (!flightNumber) {
-        alert('Please enter a flight number');
+        alert('Пожалуйста, введите номер рейса');
         return;
     }
     window.location.href = `/admin/edit_flight?id=${encodeURIComponent(flightNumber)}`;

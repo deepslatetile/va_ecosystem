@@ -7,9 +7,9 @@
 {% block content %}
 <div class="admin-container">
     <div class="admin-header">
-        <h1><i class="fab fa-discord"></i> Discord Webhooks Manager</h1>
+        <h1><i class="fab fa-SOCIALNWK"></i> SOCIALNWK Webhooks Manager</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> / Discord Webhooks
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> / SOCIALNWK Webhooks
         </div>
     </div>
 
@@ -19,55 +19,54 @@
         <div class="admin-card">
             <div class="card-header-with-icon">
                 <i class="fas fa-link"></i>
-                <h2>Webhook Configuration</h2>
+                <h2>Конфигурация Webhook</h2>
             </div>
 
             <div class="form-group">
-                <label for="webhookUrl">Discord Webhook URL *</label>
+                <label for="webhookUrl">URL Webhook SOCIALNWK *</label>
                 <div class="input-with-help">
-                    <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..."
-                           pattern="https://discord\.com/api/webhooks/.*" required>
+                    <input type="url" id="webhookUrl" placeholder="https://SOCIALNWK.com/api/webhooks/..."
+                           pattern="https://SOCIALNWK\.com/api/webhooks/.*" required>
                     <div class="help-tooltip">
                         <i class="fas fa-question-circle"></i>
                         <span class="tooltip-text">
-                            Get this URL from Discord: Server Settings → Integrations → Webhooks → New Webhook
+                            Получите этот URL в SOCIALNWK: Настройки сервера → Интеграции → Webhooks → Новый Webhook
                         </span>
                     </div>
                 </div>
-                <small class="form-hint">Keep this secret! Anyone with this URL can send messages to your
-                    Discord.</small>
+                <small class="form-hint">Храните этот URL в секрете! Любой, кто его знает, может отправлять сообщения в ваш SOCIALNWK.</small>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="webhookName">Webhook Display Name</label>
-                    <input type="text" id="webhookName" placeholder="Flight System Notifications"
+                    <label for="webhookName">Отображаемое имя Webhook</label>
+                    <input type="text" id="webhookName" placeholder="Уведомления авиакомпании"
                            maxlength="80">
                 </div>
                 <div class="form-group">
-                    <label for="pingRole">Role to Ping (Optional)</label>
+                    <label for="pingRole">Роль для упоминания (опционально)</label>
                     <div class="input-with-help">
-                        <input type="text" id="pingRole" placeholder="@pilots or &lt;@&amp;1234567890&gt;"
+                        <input type="text" id="pingRole" placeholder="@пилоты или &lt;@&amp;1234567890&gt;"
                                maxlength="100">
                         <div class="help-tooltip">
                             <i class="fas fa-question-circle"></i>
                             <span class="tooltip-text">
-                                Enter role mention like @pilots<br>
-                                Or use role ID format: &lt;@&amp;ROLE_ID&gt;<br>
-                                Leave empty for no ping
+                                Введите упоминание роли, например @пилоты<br>
+                                Или используйте формат ID роли: &lt;@&amp;ID_РОЛИ&gt;<br>
+                                Оставьте пустым без упоминания
                             </span>
                         </div>
                     </div>
-                    <small class="form-hint">Use @mention or role ID format</small>
+                    <small class="form-hint">Используйте @упоминание или формат ID роли</small>
                 </div>
             </div>
 
             <div class="form-actions">
                 <button type="button" id="testWebhookBtn" class="btn-secondary">
-                    <i class="fas fa-vial"></i> Test Connection
+                    <i class="fas fa-vial"></i> Проверить соединение
                 </button>
                 <button type="button" id="saveWebhookBtn" class="btn-primary">
-                    <i class="fas fa-save"></i> Save Configuration
+                    <i class="fas fa-save"></i> Сохранить конфигурацию
                 </button>
             </div>
         </div>
@@ -75,42 +74,42 @@
         <div class="admin-card">
             <div class="card-header-with-icon">
                 <i class="fas fa-envelope"></i>
-                <h2>Message Builder</h2>
+                <h2>Конструктор сообщений</h2>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="messageTitle">Embed Title *</label>
-                    <input type="text" id="messageTitle" placeholder="New Flight Created"
+                    <label for="messageTitle">Заголовок Embed *</label>
+                    <input type="text" id="messageTitle" placeholder="Создан новый рейс"
                            maxlength="256" required>
                 </div>
                 <div class="form-group">
-                    <label for="messageColor">Embed Color</label>
+                    <label for="messageColor">Цвет Embed</label>
                     <div class="color-picker-container">
-                        <input type="color" id="messageColor" value="var(--dark)">
-                        <span id="colorValue">var(--dark)</span>
+                        <input type="color" id="messageColor" value="#5865F2">
+                        <span id="colorValue">#5865F2</span>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="messageDescription">Embed Description *</label>
+                <label for="messageDescription">Описание Embed *</label>
                 <textarea id="messageDescription" rows="4"
-                          placeholder="Enter the main message content here..."
+                          placeholder="Введите основной текст сообщения..."
                           maxlength="4096" required></textarea>
                 <div class="char-counter">
-                    <span id="descCharCount">0</span>/4096 characters
+                    <span id="descCharCount">0</span>/4096 символов
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="authorName">Author Name</label>
-                    <input type="text" id="authorName" placeholder="Flight System"
+                    <label for="authorName">Имя автора</label>
+                    <input type="text" id="authorName" placeholder="Авиакомпания «Вектор»"
                            maxlength="256">
                 </div>
                 <div class="form-group">
-                    <label for="authorIcon">Author Icon URL</label>
+                    <label for="authorIcon">URL иконки автора</label>
                     <input type="url" id="authorIcon"
                            placeholder="https://example.com/icon.png">
                 </div>
@@ -118,34 +117,34 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="footerText">Footer Text</label>
-                    <input type="text" id="footerText" placeholder="Flight System v1.0"
+                    <label for="footerText">Текст футера</label>
+                    <input type="text" id="footerText" placeholder="Авиакомпания «Вектор» v1.0"
                            maxlength="2048">
                 </div>
                 <div class="form-group">
-                    <label for="footerIcon">Footer Icon URL</label>
+                    <label for="footerIcon">URL иконки футера</label>
                     <input type="url" id="footerIcon"
                            placeholder="https://example.com/footer.png">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="thumbnailUrl">Thumbnail URL</label>
+                <label for="thumbnailUrl">URL миниатюры</label>
                 <input type="url" id="thumbnailUrl"
                        placeholder="https://example.com/thumbnail.jpg">
             </div>
 
             <div class="form-group">
-                <label for="imageUrl">Large Image URL</label>
+                <label for="imageUrl">URL большого изображения</label>
                 <input type="url" id="imageUrl"
                        placeholder="https://example.com/image.jpg">
             </div>
 
             <div class="form-group">
                 <div class="section-header">
-                    <h3>Embed Fields</h3>
+                    <h3>Поля Embed</h3>
                     <button type="button" id="addFieldBtn" class="btn-small">
-                        <i class="fas fa-plus"></i> Add Field
+                        <i class="fas fa-plus"></i> Добавить поле
                     </button>
                 </div>
                 <div id="embedFieldsContainer">
@@ -154,10 +153,10 @@
 
             <div class="form-actions">
                 <button type="button" id="previewMessageBtn" class="btn-secondary">
-                    <i class="fas fa-eye"></i> Preview
+                    <i class="fas fa-eye"></i> Предпросмотр
                 </button>
                 <button type="button" id="sendMessageBtn" class="btn-primary">
-                    <i class="fas fa-paper-plane"></i> Send Message
+                    <i class="fas fa-paper-plane"></i> Отправить сообщение
                 </button>
             </div>
         </div>
@@ -165,64 +164,64 @@
         <div class="admin-card" id="previewCard" style="display: none;">
             <div class="card-header-with-icon">
                 <i class="fas fa-desktop"></i>
-                <h2>Preview</h2>
+                <h2>Предпросмотр</h2>
             </div>
             <div id="embedPreview">
 
             </div>
             <div class="ping-preview" id="pingPreview" style="display: none;">
-                <strong>Role Ping:</strong> <span id="pingPreviewText"></span>
+                <strong>Упоминание роли:</strong> <span id="pingPreviewText"></span>
             </div>
             <div class="preview-note">
                 <i class="fas fa-info-circle"></i>
-                This is an approximation. Actual appearance in Discord may vary.
+                Это приблизительный вид. Фактическое отображение в SOCIALNWK может отличаться.
             </div>
         </div>
 
         <div class="admin-card">
             <div class="card-header-with-icon">
                 <i class="fas fa-bolt"></i>
-                <h2>Quick Templates</h2>
+                <h2>Быстрые шаблоны</h2>
             </div>
             <div class="templates-grid">
                 <div class="template-item" data-template="flight_created">
                     <div class="template-icon">
                         <i class="fas fa-plane"></i>
                     </div>
-                    <h4>Flight Created</h4>
-                    <p>New flight schedule notification</p>
+                    <h4>Рейс создан</h4>
+                    <p>Уведомление о новом рейсе</p>
                     <button type="button" class="btn-small btn-outline use-template-btn">
-                        Use Template
+                        Использовать
                     </button>
                 </div>
                 <div class="template-item" data-template="booking_confirmed">
                     <div class="template-icon">
                         <i class="fas fa-ticket-alt"></i>
                     </div>
-                    <h4>Booking Confirmed</h4>
-                    <p>New booking notification</p>
+                    <h4>Бронирование подтверждено</h4>
+                    <p>Уведомление о новом бронировании</p>
                     <button type="button" class="btn-small btn-outline use-template-btn">
-                        Use Template
+                        Использовать
                     </button>
                 </div>
                 <div class="template-item" data-template="payment_received">
                     <div class="template-icon">
                         <i class="fas fa-credit-card"></i>
                     </div>
-                    <h4>Payment Received</h4>
-                    <p>Successful payment notification</p>
+                    <h4>Платёж получен</h4>
+                    <p>Уведомление об успешном платеже</p>
                     <button type="button" class="btn-small btn-outline use-template-btn">
-                        Use Template
+                        Использовать
                     </button>
                 </div>
                 <div class="template-item" data-template="system_alert">
                     <div class="template-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h4>System Alert</h4>
-                    <p>Important system notification</p>
+                    <h4>Системное оповещение</h4>
+                    <p>Важное уведомление системы</p>
                     <button type="button" class="btn-small btn-outline use-template-btn">
-                        Use Template
+                        Использовать
                     </button>
                 </div>
             </div>
@@ -233,32 +232,32 @@
 <div id="fieldModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Edit Field</h3>
+            <h3>Редактировать поле</h3>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
             <form id="fieldForm">
                 <div class="form-group">
-                    <label for="fieldName">Field Name *</label>
+                    <label for="fieldName">Название поля *</label>
                     <input type="text" id="fieldName" required maxlength="256">
                 </div>
                 <div class="form-group">
-                    <label for="fieldValue">Field Value *</label>
+                    <label for="fieldValue">Значение поля *</label>
                     <textarea id="fieldValue" rows="3" required maxlength="1024"></textarea>
                     <div class="char-counter">
-                        <span id="fieldValueCharCount">0</span>/1024 characters
+                        <span id="fieldValueCharCount">0</span>/1024 символов
                     </div>
                 </div>
                 <div class="form-group checkbox-group">
                     <label class="checkbox-label">
                         <input type="checkbox" id="fieldInline">
                         <div class="checkbox-custom"></div>
-                        <span>Inline (display next to other fields)</span>
+                        <span>В строку (отображать рядом с другими полями)</span>
                     </label>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary close-modal-btn">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Field</button>
+                    <button type="button" class="btn-secondary close-modal-btn">Отмена</button>
+                    <button type="submit" class="btn-primary">Сохранить поле</button>
                 </div>
             </form>
         </div>

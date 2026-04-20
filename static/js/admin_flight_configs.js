@@ -1,4 +1,3 @@
-
 let currentConfigs = [];
 let configToDelete = null;
 let currentFilter = 'all';
@@ -42,7 +41,7 @@ function setupConfigTypeHandler() {
 
 async function loadAllConfigs() {
     const configsGrid = document.getElementById('configsGrid');
-    configsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading flight configs...</p></div>';
+    configsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Загрузка конфигураций рейсов...</p></div>';
 
     try {
         const types = ['cabin_layout', 'service', 'boarding_style'];
@@ -63,8 +62,8 @@ async function loadAllConfigs() {
         displayConfigs(currentConfigs);
 
     } catch (error) {
-        console.error('Error loading configs:', error);
-        configsGrid.innerHTML = '<div class="error">Failed to load flight configs. Please try again.</div>';
+        console.error('Ошибка загрузки конфигураций:', error);
+        configsGrid.innerHTML = '<div class="error">Не удалось загрузить конфигурации рейсов. Пожалуйста, попробуйте снова.</div>';
     }
 }
 
@@ -75,8 +74,8 @@ function displayConfigs(configs) {
         configsGrid.innerHTML = `
         <div class="no-configs">
             <i class="fas fa-cogs" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-            <h3>No flight configs found</h3>
-            <p>Create your first flight configuration to get started</p>
+            <h3>Конфигурации не найдены</h3>
+            <p>Создайте первую конфигурацию рейса</p>
         </div>
     `;
         return;
@@ -89,9 +88,9 @@ function displayConfigs(configs) {
         let dataDisplay = JSON.stringify(config.data, null, 2);
         if (config.type === 'boarding_style') {
             const styleInfo = [];
-            if (config.data.draw_function) styleInfo.push(`Function: ${config.data.draw_function}`);
-            if (config.data.background_image) styleInfo.push(`BG Image: ${config.data.background_image}`);
-            if (config.data.background_url) styleInfo.push(`BG URL: ${config.data.background_url}`);
+            if (config.data.draw_function) styleInfo.push(`Функция: ${config.data.draw_function}`);
+            if (config.data.background_image) styleInfo.push(`Фон: ${config.data.background_image}`);
+            if (config.data.background_url) styleInfo.push(`URL фона: ${config.data.background_url}`);
 
             if (styleInfo.length > 0) {
                 dataDisplay = styleInfo.join('\n') + '\n\n' + dataDisplay;
@@ -110,14 +109,14 @@ function displayConfigs(configs) {
         </div>
         <div class="config-footer">
             <div class="config-meta">
-                Updated: ${formatTimestamp(config.updated_at)}
+                Обновлено: ${formatTimestamp(config.updated_at)}
             </div>
             <div class="config-actions">
                 <button class="btn-edit" onclick="editConfig(${config.id})">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Редактировать
                 </button>
                 <button class="btn-delete" onclick="showDeleteModal(${config.id}, '${escapeString(config.name)}')">
-                    <i class="fas fa-trash"></i> Delete
+                    <i class="fas fa-trash"></i> Удалить
                 </button>
             </div>
         </div>
@@ -178,7 +177,7 @@ function filterConfigs() {
 }
 
 function showCreateModal() {
-    document.getElementById('modalTitle').textContent = 'Create Flight Config';
+    document.getElementById('modalTitle').textContent = 'Создать конфигурацию';
     document.getElementById('configForm').reset();
     document.getElementById('configId').value = '';
     document.getElementById('configType').disabled = false;
@@ -191,7 +190,7 @@ function editConfig(configId) {
     const config = currentConfigs.find(c => c.id === configId);
     if (!config) return;
 
-    document.getElementById('modalTitle').textContent = 'Edit Flight Config';
+    document.getElementById('modalTitle').textContent = 'Редактировать конфигурацию';
     document.getElementById('configId').value = config.id;
     document.getElementById('configName').value = config.name;
     document.getElementById('configType').value = config.type;
@@ -268,7 +267,7 @@ async function saveConfig() {
     const description = document.getElementById('configDescription').value.trim();
 
     if (!name || !type || !data) {
-        alert('Please fill in all required fields');
+        alert('Пожалуйста, заполните все обязательные поля');
         return;
     }
 
@@ -276,7 +275,7 @@ async function saveConfig() {
     try {
         parsedData = JSON.parse(data);
     } catch (e) {
-        alert('Invalid JSON data. Please check your JSON syntax.');
+        alert('Неверный JSON. Проверьте синтаксис JSON.');
         return;
     }
 
@@ -287,7 +286,7 @@ async function saveConfig() {
         const customFunction = document.getElementById('customFunction').value.trim();
 
         if (!drawFunction) {
-            alert('Please select a draw function for boarding style');
+            alert('Пожалуйста, выберите функцию отрисовки для стиля посадки');
             return;
         }
 
@@ -296,7 +295,7 @@ async function saveConfig() {
         if (backgroundUrl) parsedData.background_url = backgroundUrl;
 
         if (drawFunction === 'custom' && !customFunction) {
-            alert('Please enter custom function name');
+            alert('Пожалуйста, введите название пользовательской функции');
             return;
         }
     }
@@ -309,7 +308,7 @@ async function saveConfig() {
     };
 
     saveBtn.disabled = true;
-    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
 
     try {
         let url, method;
@@ -333,19 +332,19 @@ async function saveConfig() {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to save config');
+            throw new Error(result.error || 'Не удалось сохранить конфигурацию');
         }
 
         closeModal();
         await loadAllConfigs();
-        showNotification(`Config ${isEdit ? 'updated' : 'created'} successfully!`, 'success');
+        showNotification(`Конфигурация ${isEdit ? 'обновлена' : 'создана'} успешно!`, 'success');
 
     } catch (error) {
-        console.error('Error saving config:', error);
-        alert('Failed to save config: ' + error.message);
+        console.error('Ошибка сохранения конфигурации:', error);
+        alert('Не удалось сохранить конфигурацию: ' + error.message);
     } finally {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Config';
+        saveBtn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
     }
 }
 
@@ -354,7 +353,7 @@ async function confirmDelete() {
 
     const deleteBtn = document.querySelector('#deleteModal .btn-danger');
     deleteBtn.disabled = true;
-    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Удаление...';
 
     try {
         const response = await fetch(`/api/delete/flight_config/${configToDelete}`, {
@@ -364,19 +363,19 @@ async function confirmDelete() {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to delete config');
+            throw new Error(result.error || 'Не удалось удалить конфигурацию');
         }
 
         closeDeleteModal();
         await loadAllConfigs();
-        showNotification('Config deleted successfully!', 'success');
+        showNotification('Конфигурация успешно удалена!', 'success');
 
     } catch (error) {
-        console.error('Error deleting config:', error);
-        alert('Failed to delete config: ' + error.message);
+        console.error('Ошибка удаления конфигурации:', error);
+        alert('Не удалось удалить конфигурацию: ' + error.message);
     } finally {
         deleteBtn.disabled = false;
-        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Удалить';
     }
 }
 

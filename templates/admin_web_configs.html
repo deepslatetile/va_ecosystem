@@ -7,9 +7,9 @@
 {% block content %}
 <div class="admin-container">
     <div class="admin-header">
-        <h1><i class="fas fa-file-alt"></i> Pages Management</h1>
+        <h1><i class="fas fa-file-alt"></i> Управление страницами</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> / Pages
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> / Страницы
         </div>
     </div>
 
@@ -18,26 +18,26 @@
     <div class="admin-content">
         <div class="admin-card">
             <div class="controls-header">
-                <h2>Page Controls</h2>
+                <h2>Управление страницами</h2>
                 <button id="createPageBtn" class="btn-primary">
-                    <i class="fas fa-plus"></i> Add New Page
+                    <i class="fas fa-plus"></i> Добавить страницу
                 </button>
             </div>
             <div class="filters">
-                <label>Filter by status:</label>
+                <label>Фильтр по статусу:</label>
                 <select id="stateFilter">
-                    <option value="-1">All Pages</option>
-                    <option value="1">Active in Navigation</option>
-                    <option value="0">Hidden from Navigation</option>
+                    <option value="-1">Все страницы</option>
+                    <option value="1">Активные в навигации</option>
+                    <option value="0">Скрытые из навигации</option>
                 </select>
             </div>
         </div>
 
         <div class="admin-card">
-            <h2>Website Pages</h2>
+            <h2>Страницы сайта</h2>
             <div id="pagesList" class="pages-container">
                 <div class="loading-text">
-                    <i class="fas fa-spinner fa-spin"></i> Loading pages...
+                    <i class="fas fa-spinner fa-spin"></i> Загрузка страниц...
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
 <div id="pageModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 id="modalTitle">Add New Page</h3>
+            <h3 id="modalTitle">Добавить страницу</h3>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
@@ -55,33 +55,32 @@
                 <input type="hidden" id="pageId">
 
                 <div class="form-group">
-                    <label for="pageName">Page URL *</label>
+                    <label for="pageName">URL страницы *</label>
                     <input type="text" id="pageName" name="page_name" required
-                           placeholder="e.g., about, services, contact">
-                    <small>URL-friendly name (no spaces, special characters). This should match an existing route in
-                        app.py</small>
+                           placeholder="например, about, services, contact">
+                    <small>Дружественное к URL имя (без пробелов и спецсимволов). Должно соответствовать маршруту в app.py</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="pageDisplay">Display Name *</label>
+                    <label for="pageDisplay">Отображаемое имя *</label>
                     <input type="text" id="pageDisplay" name="page_display" required
-                           placeholder="e.g., About Us, Our Services, Contact">
-                    <small>Name that will appear in the navigation menu</small>
+                           placeholder="например, О нас, Наши услуги, Контакты">
+                    <small>Имя, которое будет отображаться в меню навигации</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="pageState">Navigation Status</label>
+                    <label for="pageState">Статус в навигации</label>
                     <select id="pageState" name="state">
-                        <option value="1">Visible in navigation</option>
-                        <option value="0">Hidden from navigation</option>
+                        <option value="1">Видимо в навигации</option>
+                        <option value="0">Скрыто из навигации</option>
                     </select>
-                    <small>Hidden pages are still accessible via direct URL</small>
+                    <small>Скрытые страницы остаются доступны по прямому URL</small>
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="button" class="btn-secondary" id="cancelBtn">Отмена</button>
                     <button type="submit" class="btn-primary" id="submitBtn">
-                        <i class="fas fa-save"></i> Save Page
+                        <i class="fas fa-save"></i> Сохранить
                     </button>
                 </div>
             </form>
@@ -92,16 +91,16 @@
 <div id="deleteModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Confirm Deletion</h3>
+            <h3>Подтверждение удаления</h3>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <p>Are you sure you want to delete the page "<span id="deletePageName"></span>"?</p>
-            <p class="warning-text">This will remove it from navigation management!</p>
+            <p>Вы уверены, что хотите удалить страницу "<span id="deletePageName"></span>"?</p>
+            <p class="warning-text">Это действие удалит её из управления навигацией!</p>
             <div class="form-actions">
-                <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancel</button>
+                <button type="button" class="btn-secondary" id="cancelDeleteBtn">Отмена</button>
                 <button type="button" class="btn-danger" id="confirmDeleteBtn">
-                    <i class="fas fa-trash"></i> Delete Page
+                    <i class="fas fa-trash"></i> Удалить страницу
                 </button>
             </div>
         </div>

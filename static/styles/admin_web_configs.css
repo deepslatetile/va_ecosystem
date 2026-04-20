@@ -9,23 +9,23 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
 .admin-subtitle {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.1rem;
     margin-top: 0.5rem;
 }
 
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -40,14 +40,14 @@
 }
 
 .admin-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .admin-card h2 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1.5rem;
     font-size: 1.3rem;
 }
@@ -68,16 +68,16 @@
 }
 
 .filters label {
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
 }
 
 .filters select {
     padding: 8px 12px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     min-width: 200px;
 }
 
@@ -89,7 +89,7 @@
 
 .page-item {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 8px;
     padding: 1.5rem;
     display: flex;
@@ -100,7 +100,7 @@
 
 .page-item:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: var(--green);
+    border-color: #bfd730;
     transform: translateY(-2px);
 }
 
@@ -109,7 +109,7 @@
 }
 
 .page-name {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: 600;*/
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
@@ -123,9 +123,9 @@
 }
 
 .page-url {
-    color: var(--green);
+    color: #ccc;
     font-family: monospace;
-    background: rgba(0, 100, 90, 0.3);
+    background: rgba(0, 0, 0, 0.3);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -143,14 +143,14 @@
 
 .state-active {
     background: rgba(0, 200, 81, 0.2);
-    color: var(--lightgreen);
-    border: 1px solid var(--lightgreen);
+    color: #00C851;
+    border: 1px solid #00C851;
 }
 
 .state-inactive {
     background: rgba(255, 68, 68, 0.2);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ed1c24;
+    border: 1px solid #ed1c24;
 }
 
 .page-actions {
@@ -172,18 +172,18 @@
 }
 
 .btn-toggle {
-    background: rgba(0, 100, 90, 0.2);
-    color: var(--dark);
-    border: 1px solid var(--green);
+    background: rgba(191, 215, 48, 0.2);
+    color: #bfd730;
+    border: 1px solid #46a41a;
 }
 
 .btn-toggle:hover {
-    background: rgba(0, 100, 90, 0.3);
+    background: rgba(15, 111, 229, 0.3);
 }
 
 .btn-edit {
     background: rgba(255, 193, 7, 0.2);
-    color: var(--dark);
+    color: #ffc107;
     border: 1px solid #ffc107;
 }
 
@@ -193,8 +193,8 @@
 
 .btn-delete {
     background: rgba(255, 68, 68, 0.2);
-    color: var(--dark);
-    border: 1px solid var(--green);
+    color: #ff6b6b;
+    border: 1px solid #ed1c24;
 }
 
 .btn-delete:hover {
@@ -208,7 +208,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
 }
 
@@ -217,9 +217,9 @@
     width: 100%;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -227,13 +227,13 @@
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .form-group small {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.8rem;
     margin-top: 0.25rem;
     display: block;
@@ -245,7 +245,7 @@
     justify-content: flex-end;
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .btn-primary,
@@ -264,19 +264,19 @@
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #bfd730;
+    color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
     transform: translateY(-1px);
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -284,8 +284,8 @@
 }
 
 .btn-danger {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -301,7 +301,7 @@
 }
 
 .loading-text {
-    color: var(--green);
+    color: #bfd730;
     text-align: center;
     padding: 1rem;
 }
@@ -309,13 +309,13 @@
 .empty-state {
     text-align: center;
     padding: 3rem;
-    color: var(--green);
+    color: #ccc;
 }
 
 .empty-state i {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .alert {
@@ -327,13 +327,13 @@
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .alert-error {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .warning-text {
@@ -358,11 +358,11 @@
 }
 
 .modal-content {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     border-radius: 12px;
     width: 95%;
     max-width: 500px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-height: 90vh;
     overflow-y: auto;
@@ -373,7 +373,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     position: sticky;
     top: 0;
     background: inherit;
@@ -381,20 +381,20 @@
 }
 
 .modal-header h3 {
-    color: var(--green);
+    color: #bfd730;
     margin: 0;
     font-size: 1.3rem;
 }
 
 .close {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.5rem;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .close:hover {
-    color: var(--dark);
+    color: #fff;
 }
 
 .modal-body {

@@ -17,8 +17,8 @@ async function loadConfigurations() {
             boardingStyles = boardingData.configs || [];
             populateBoardingStyles();
         } else {
-            console.error('Failed to load boarding styles:', boardingResponse.status);
-            document.getElementById('boarding_pass_default').innerHTML = '<option value="">Error loading boarding styles</option>';
+            console.error('Не удалось загрузить стили посадки:', boardingResponse.status);
+            document.getElementById('boarding_pass_default').innerHTML = '<option value="">Ошибка загрузки стилей посадки</option>';
         }
 
         const servicesResponse = await fetch('/api/get/flight_configs/service');
@@ -29,17 +29,17 @@ async function loadConfigurations() {
         }
 
     } catch (error) {
-        console.error('Error loading configurations:', error);
-        showAlert('Error loading configuration data', 'error');
+        console.error('Ошибка загрузки конфигураций:', error);
+        showAlert('Ошибка загрузки данных конфигурации', 'error');
     }
 }
 
 function populateSeatmaps() {
     const select = document.getElementById('seatmap');
-    select.innerHTML = '<option value="">Select or enter custom...</option>';
+    select.innerHTML = '<option value="">Выберите или введите свой вариант...</option>';
 
     if (seatmaps.length === 0) {
-        select.innerHTML += '<option value="custom">Enter custom seatmap...</option>';
+        select.innerHTML += '<option value="custom">Введите свою схему мест...</option>';
         return;
     }
 
@@ -48,19 +48,19 @@ function populateSeatmaps() {
         option.value = seatmap.name;
         const seats = seatmap.data?.seats || 'N/A';
         const layout = seatmap.data?.layout || 'N/A';
-        option.textContent = `${seatmap.name} (${seats} seats, ${layout})`;
+        option.textContent = `${seatmap.name} (${seats} мест, ${layout})`;
         select.appendChild(option);
     });
 
-    select.innerHTML += '<option value="custom">Enter custom seatmap...</option>';
+    select.innerHTML += '<option value="custom">Введите свою схему мест...</option>';
 }
 
 function populateBoardingStyles() {
     const select = document.getElementById('boarding_pass_default');
-    select.innerHTML = '<option value="">Select boarding pass style...</option>';
+    select.innerHTML = '<option value="">Выберите стиль посадочного талона...</option>';
 
     if (boardingStyles.length === 0) {
-        select.innerHTML = '<option value="">No boarding styles available</option>';
+        select.innerHTML = '<option value="">Нет доступных стилей посадки</option>';
         return;
     }
 
@@ -85,7 +85,7 @@ function populateServices() {
     container.innerHTML = '';
 
     if (availableServices.length === 0) {
-        container.innerHTML = '<div class="loading-text">No services available. Create your first service!</div>';
+        container.innerHTML = '<div class="loading-text">Нет доступных услуг. Создайте первую услугу!</div>';
         return;
     }
 
@@ -100,7 +100,7 @@ function populateServices() {
             <input type="checkbox" id="service_${service.id}" name="services" value="${service.name}" data-price="${price}">
             <label for="service_${service.id}">
                 ${service.name}
-                <br><small style="color: var(--green);">${service.description || ''}</small>
+                <br><small style="color: #8fa3d8;">${service.description || ''}</small>
             </label>
             <span class="service-price">$${price.toFixed(2)}</span>
         `;
@@ -179,7 +179,7 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     const routeType = document.getElementById('route_type').value;
 
     if (!formData.get('flight_number') || !formData.get('aircraft')) {
-        showAlert('Please fill in flight number and aircraft type first', 'error');
+        showAlert('Пожалуйста, заполните номер рейса и тип воздушного судна', 'error');
         return;
     }
 
@@ -192,11 +192,11 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     // Определяем отображение маршрута
     let departureDisplay = formData.get('departure') || 'N/A';
     let arrivalDisplay = formData.get('arrival') || 'N/A';
-    
+
     if (routeType === 'ptfs') {
         const ptfsDeparture = formData.get('ptfs_departure');
         const ptfsArrival = formData.get('ptfs_arrival');
-        
+
         if (ptfsDeparture) departureDisplay = `${departureDisplay} (${ptfsDeparture})`;
         if (ptfsArrival) arrivalDisplay = `${arrivalDisplay} (${ptfsArrival})`;
     }
@@ -204,57 +204,57 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     // Форматируем время
     const departureDateTime = new Date(formData.get('datetime'));
     const departureTimeFormatted = departureDateTime.toLocaleString();
-    
+
     const arrivalDateTime = new Date(formData.get('arrival_time'));
     const arrivalTimeFormatted = arrivalDateTime.toLocaleString();
 
     let previewHTML = `
         <div class="preview-item">
-            <span class="preview-label">Flight Number:</span>
+            <span class="preview-label">Номер рейса:</span>
             <span class="preview-value">${formData.get('flight_number') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Aircraft:</span>
+            <span class="preview-label">Воздушное судно:</span>
             <span class="preview-value">${formData.get('aircraft') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Route (${routeType}):</span>
+            <span class="preview-label">Маршрут (${routeType}):</span>
             <span class="preview-value">${departureDisplay} → ${arrivalDisplay}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Departure Time:</span>
+            <span class="preview-label">Время вылета:</span>
             <span class="preview-value">${departureTimeFormatted || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Arrival Time:</span>
+            <span class="preview-label">Время прилёта:</span>
             <span class="preview-value">${arrivalTimeFormatted || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Status:</span>
+            <span class="preview-label">Статус:</span>
             <span class="preview-value">${status || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Route Type:</span>
-            <span class="preview-value">${routeType === 'ptfs' ? 'PTFS (with codes)' : 'Real (airport names only)'}</span>
+            <span class="preview-label">Тип маршрута:</span>
+            <span class="preview-value">${routeType === 'ptfs' ? 'PTFS (с кодами)' : 'Реальный (только названия аэропортов)'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">PTFS Departure Code:</span>
+            <span class="preview-label">Код вылета PTFS:</span>
             <span class="preview-value">${formData.get('ptfs_departure') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">PTFS Arrival Code:</span>
+            <span class="preview-label">Код прилёта PTFS:</span>
             <span class="preview-value">${formData.get('ptfs_arrival') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Meal Service:</span>
+            <span class="preview-label">Питание на борту:</span>
             <span class="preview-value">${meal || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Seatmap:</span>
+            <span class="preview-label">Схема мест:</span>
             <span class="preview-value">${seatmap || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Boarding Pass Style:</span>
+            <span class="preview-label">Стиль посадочного талона:</span>
             <span class="preview-value">${boardingPass || 'N/A'}</span>
         </div>
     `;
@@ -262,7 +262,7 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     if (selectedServices.length > 0) {
         previewHTML += `
             <div class="preview-item">
-                <span class="preview-label">Services:</span>
+                <span class="preview-label">Услуги:</span>
                 <span class="preview-value">${selectedServices.join(', ')}</span>
             </div>
         `;
@@ -270,10 +270,10 @@ document.getElementById('previewBtn').addEventListener('click', function () {
 
     previewHTML += `
         <div class="preview-item">
-            <span class="preview-label">Quick Actions:</span>
+            <span class="preview-label">Быстрые действия:</span>
             <span class="preview-value">
-                <button type="button" class="btn-small" onclick="createDiscordWebhook()" style="margin-top: 5px;">
-                    <i class="fab fa-discord"></i> Create Discord Notification
+                <button type="button" class="btn-small" onclick="createSOCIALNWKWebhook()" style="margin-top: 5px;">
+                    <i class="fab fa-SOCIALNWK"></i> Создать уведомление SOCIALNWK
                 </button>
             </span>
         </div>
@@ -308,7 +308,7 @@ document.getElementById('createFlightForm').addEventListener('submit', async fun
 
     const departureDateTime = new Date(formData.get('datetime'));
     const datetime = Math.floor(departureDateTime.getTime() / 1000);
-    
+
     const arrivalDateTime = new Date(formData.get('arrival_time'));
     const arrival_time = Math.floor(arrivalDateTime.getTime() / 1000);
 
@@ -342,24 +342,24 @@ document.getElementById('createFlightForm').addEventListener('submit', async fun
     });
 
     if (missingFields.length > 0) {
-        showAlert(`Please fill all required fields: ${missingFields.join(', ')}`, 'error');
+        showAlert(`Пожалуйста, заполните все обязательные поля: ${missingFields.join(', ')}`, 'error');
         return;
     }
 
     if (departureDateTime <= new Date()) {
-        showAlert('Departure time must be in the future', 'error');
+        showAlert('Время вылета должно быть в будущем', 'error');
         return;
     }
 
     // Проверка времени прибытия
     if (arrival_time <= datetime) {
-        showAlert('Arrival time must be after departure time', 'error');
+        showAlert('Время прибытия должно быть позже времени вылета', 'error');
         return;
     }
 
     const createBtn = document.getElementById('createBtn');
     createBtn.disabled = true;
-    createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+    createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Создание...';
 
     try {
         const response = await fetch('/api/post/schedule', {
@@ -371,7 +371,7 @@ document.getElementById('createFlightForm').addEventListener('submit', async fun
         });
 
         if (response.ok) {
-            showAlert('Flight created successfully!', 'success');
+            showAlert('Рейс успешно создан!', 'success');
             document.getElementById('createFlightForm').reset();
             document.getElementById('previewSection').style.display = 'none';
 
@@ -392,14 +392,14 @@ document.getElementById('createFlightForm').addEventListener('submit', async fun
 
         } else {
             const error = await response.json();
-            showAlert('Failed to create flight: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось создать рейс: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error creating flight:', error);
-        showAlert('Error creating flight: ' + error.message, 'error');
+        console.error('Ошибка создания рейса:', error);
+        showAlert('Ошибка создания рейса: ' + error.message, 'error');
     } finally {
         createBtn.disabled = false;
-        createBtn.innerHTML = '<i class="fas fa-plus"></i> Create Flight';
+        createBtn.innerHTML = '<i class="fas fa-plus"></i> Создать рейс';
     }
 });
 
@@ -420,7 +420,7 @@ function showAlert(message, type) {
     alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function createDiscordWebhook() {
+function createSOCIALNWKWebhook() {
     const formData = new FormData(document.getElementById('createFlightForm'));
 
     const routeType = document.getElementById('route_type').value;
@@ -449,7 +449,7 @@ function createDiscordWebhook() {
     }
 
     if (!flightData.flight_number || !flightData.departure || !flightData.arrival) {
-        showAlert('Please fill in flight number, departure, and arrival before creating a webhook', 'error');
+        showAlert('Пожалуйста, заполните номер рейса, аэропорт вылета и прилёта перед созданием webhook', 'error');
         return;
     }
 
@@ -463,19 +463,19 @@ function setupServiceCreation() {
     const createServiceModal = document.getElementById('createServiceModal');
     const closeBtn = createServiceModal.querySelector('.close');
     const cancelBtn = document.getElementById('cancelServiceBtn');
-    
+
     if (closeBtn) {
         closeBtn.addEventListener('click', function() {
             createServiceModal.style.display = 'none';
         });
     }
-    
+
     if (cancelBtn) {
         cancelBtn.addEventListener('click', function() {
             createServiceModal.style.display = 'none';
         });
     }
-    
+
     // Закрытие модального окна при клике вне его
     window.addEventListener('click', function(event) {
         if (event.target === createServiceModal) {
@@ -485,7 +485,7 @@ function setupServiceCreation() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("Admin create flight page loaded, initializing...");
+    console.log("Страница создания рейса загружена, инициализация...");
 
     loadConfigurations();
     setupComboInputs();
@@ -501,16 +501,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('meal').value = 'Standard Meal Service';
     document.getElementById('route_type').value = 'ptfs';
 
-    console.log("Admin create flight page initialized successfully");
+    console.log("Страница создания рейса успешно инициализирована");
 
     const formActions = document.querySelector('.form-actions');
     const webhookBtn = document.createElement('button');
     webhookBtn.type = 'button';
     webhookBtn.id = 'webhookBtn';
     webhookBtn.className = 'btn-secondary';
-    webhookBtn.innerHTML = '<i class="fab fa-discord"></i> Discord Webhook';
+    webhookBtn.innerHTML = '<i class="fab fa-SOCIALNWK"></i> SOCIALNWK Webhook';
     webhookBtn.style.marginLeft = '10px';
-    webhookBtn.addEventListener('click', createDiscordWebhook);
+    webhookBtn.addEventListener('click', createSOCIALNWKWebhook);
 
     const previewBtn = document.getElementById('previewBtn');
     previewBtn.parentNode.insertBefore(webhookBtn, previewBtn.nextSibling);

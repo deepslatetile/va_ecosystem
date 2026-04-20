@@ -1,9 +1,9 @@
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -18,10 +18,11 @@
 }
 
 .filters-section {
-    background: #d5e4e4;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
+    border: 1px solid #bfd730;
 }
 
 .filter-controls {
@@ -41,20 +42,16 @@
 
 .filter-group label {
     /*font-weight: bold;*/
-    color: var(--dark);
+    color: #fff;
 }
 
 .filter-group input {
     padding: 0.7rem;
-    border: 1px solid var(--dark);
+    border: 1px solid #bfd730;
     border-radius: 4px;
-    background: var(--green);
-    color: #ffffff;
+    background: #424045;
+    color: white;
     width: 100%;
-}
-
-input::placeholder {
-    color: #eee5d4;
 }
 
 .apply-btn,
@@ -69,40 +66,41 @@ input::placeholder {
 }
 
 .apply-btn {
-    background: var(--lightgreen);
-    color: #ffffff;
+    background: #46a41a;
+    color: white;
 }
 
 .apply-btn:hover {
-    background: #007e33;
+    background: #bfd730;
 }
 
 .clear-btn {
-    background: var(--green);
-    color: #ffffff;
+    background: #ed1c24;
+    color: white;
 }
 
 .clear-btn:hover {
-    background: #cc0000;
+    background: #ba141a;
 }
 
 .bookings-list {
-    background: var(--dark);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
+    border: 1px solid #bfd730;
 }
 
 .booking-item {
-    background: #ffffff;
+    background: #424045;
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 4px;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid #ba141a;
     transition: background-color 0.3s;
 }
 
 .booking-item:hover {
-    background: var(--green);
+    background: #666;
 }
 
 .booking-header {
@@ -116,11 +114,11 @@ input::placeholder {
 .booking-flight {
     /*font-weight: bold;*/
     font-size: 1.1rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .booking-id {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.9rem;
 }
 
@@ -140,23 +138,23 @@ input::placeholder {
 
 .detail-label {
     /*font-weight: bold;*/
-    color: var(--green);
+    color: #ccc;
 }
 
 .valid-true {
-    color: var(--lightgreen);
+    color: #bfd730;
     /*font-weight: bold;*/
 }
 
 .valid-false {
-    color: var(--green);
+    color: #ed1c24;
     /*font-weight: bold;*/
 }
 
 .staff-controls {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
-    border-top: 1px solid var(--dark);
+    border-top: 1px solid #bfd730;
 }
 
 .status-buttons {
@@ -168,9 +166,9 @@ input::placeholder {
 
 .status-btn {
     padding: 8px 12px;
-    border: 2px solid var(--dark);
-    background: var(--dark);
-    color: #ffffff;
+    border: 2px solid #bfd730;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -181,19 +179,19 @@ input::placeholder {
 }
 
 .status-btn.active {
-    background: var(--green);
-    color: var(--dark);
-    border-color: var(--green);
+    background: #bfd730;
+    color: white;
+    border-color: #bfd730;
 }
 
 .status-btn.clear-btn {
-    background: var(--green);
-    border-color: var(--green);
+    background: #ed1c24;
+    border-color: #ed1c24;
 }
 
 .status-btn.clear-btn:hover {
-    background: #cc0000;
-    border-color: #cc0000;
+    background: #ba141a;
+    border-color: #ba141a;
 }
 
 .note-controls {
@@ -205,25 +203,25 @@ input::placeholder {
 .note-input {
     flex: 1;
     padding: 8px;
-    border: 2px solid var(--dark);
+    border: 2px solid #bfd730;
     border-radius: 5px;
     font-size: 0.8rem;
     box-sizing: border-box;
-    background: var(--dark);
-    color: var(--dark);
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
+    color: white;
     min-width: 0;
 }
 
 .note-input:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
 }
 
 .note-clear-btn {
     padding: 8px 12px;
-    border: 2px solid var(--green);
-    background: var(--green);
-    color: var(--dark);
+    border: 2px solid #ed1c24;
+    background: #ed1c24;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     /*font-weight: bold;*/
@@ -232,8 +230,8 @@ input::placeholder {
 }
 
 .note-clear-btn:hover {
-    background: #cc0000;
-    border-color: #cc0000;
+    background: #ba141a;
+    border-color: #ba141a;
 }
 
 .modal {
@@ -249,7 +247,7 @@ input::placeholder {
 }
 
 .modal-content {
-    background-color: var(--lightgreen);
+    background-color: #252427;
     margin: 5% auto;
     padding: 0;
     border-radius: 8px;
@@ -257,10 +255,11 @@ input::placeholder {
     max-width: 600px;
     max-height: 90vh;
     overflow-y: auto;
+    border: 1px solid #bfd730;
 }
 
 .modal-header {
-    background: var(--lightgreen);
+    background: #424045;
     padding: 1.5rem;
     border-radius: 8px 8px 0 0;
     display: flex;
@@ -273,7 +272,7 @@ input::placeholder {
 
 .modal-header h2 {
     margin: 0;
-    color: var(--dark);
+    color: white;
     font-size: 1.3rem;
 }
 
@@ -286,7 +285,7 @@ input::placeholder {
 }
 
 .close:hover {
-    color: var(--dark);
+    color: white;
 }
 
 .modal-body {
@@ -301,7 +300,7 @@ input::placeholder {
     display: block;
     margin-bottom: 0.5rem;
     /*font-weight: bold;*/
-    color: var(--dark);
+    color: #fff;
 }
 
 .form-group input,
@@ -309,10 +308,10 @@ input::placeholder {
 .form-group textarea {
     width: 100%;
     padding: 0.7rem;
-    border: 1px solid var(--dark);
+    border: 1px solid #bfd730;
     border-radius: 4px;
-    background: var(--green);
-    color: var(--dark);
+    background: #424045;
+    color: white;
     box-sizing: border-box;
 }
 
@@ -338,7 +337,7 @@ input::placeholder {
 .checkbox-custom {
     width: 20px;
     height: 20px;
-    border: 2px solid var(--green);
+    border: 2px solid #bfd730;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -348,12 +347,12 @@ input::placeholder {
 }
 
 .hidden-checkbox:checked+.checkbox-custom {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .hidden-checkbox:checked+.checkbox-custom::after {
     content: '✓';
-    color: var(--dark);
+    color: white;
     /*font-weight: bold;*/
 }
 
@@ -378,32 +377,32 @@ input::placeholder {
 }
 
 .save-btn {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #46a41a;
+    color: white;
 }
 
 .save-btn:hover {
-    background: #007e33;
+    background: #bfd730;
 }
 
 .cancel-btn {
-    background: var(--green);
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 .cancel-btn:hover {
-    background: #cc0000;
+    background: #ba141a;
 }
 
 .loading {
     text-align: center;
     padding: 2rem;
-    color: #f5fcf8;
+    color: #ccc;
 }
 
 .services-list {
-    background: var(--green);
-    border: 1px solid var(--dark);
+    background: #424045;
+    border: 1px solid #bfd730;
     border-radius: 4px;
     padding: 1rem;
 }
@@ -413,7 +412,7 @@ input::placeholder {
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px solid var(--dark);
+    border-bottom: 1px solid #bfd730;
 }
 
 .service-item:last-child {
@@ -421,12 +420,12 @@ input::placeholder {
 }
 
 .service-name {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: bold;*/
 }
 
 .service-price {
-    color: var(--lightgreen);
+    color: #46a41a;
     /*font-weight: bold;*/
 }
 
@@ -435,13 +434,13 @@ input::placeholder {
     font-style: italic;
     padding: 1rem;
     text-align: center;
-    background: var(--green);
-    border: 1px solid var(--dark);
+    background: #424045;
+    border: 1px solid #bfd730;
     border-radius: 4px;
 }
 
 .total-price {
-    background: var(--lightgreen) !important;
+    background: #46a41a !important;
     color: white !important;
     /*font-weight: bold !important;*/
     font-size: 1.1rem !important;
@@ -450,8 +449,8 @@ input::placeholder {
 }
 
 .status-section {
-    background: var(--green);
-    border: 1px solid var(--dark);
+    background: #424045;
+    border: 1px solid #bfd730;
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -466,9 +465,9 @@ input::placeholder {
 
 .status-btn-modal {
     padding: 10px 15px;
-    border: 2px solid var(--dark);
-    background: var(--dark);
-    color: var(--dark);
+    border: 2px solid #bfd730;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -478,19 +477,19 @@ input::placeholder {
 }
 
 .status-btn-modal.active {
-    background: var(--green);
-    color: var(--dark);
-    border-color: var(--green);
+    background: #bfd730;
+    color: white;
+    border-color: #bfd730;
 }
 
 .status-btn-modal.clear-btn {
-    background: var(--green);
-    border-color: var(--green);
+    background: #ed1c24;
+    border-color: #ed1c24;
 }
 
 .status-btn-modal.clear-btn:hover {
-    background: #cc0000;
-    border-color: #cc0000;
+    background: #ba141a;
+    border-color: #ba141a;
 }
 
 .note-section {
@@ -501,7 +500,7 @@ input::placeholder {
     display: block;
     margin-bottom: 5px;
     /*font-weight: bold;*/
-    color: var(--dark);
+    color: #fff;
 }
 
 .note-controls-modal {
@@ -512,9 +511,9 @@ input::placeholder {
 
 .note-clear-btn-modal {
     padding: 10px 15px;
-    border: 2px solid var(--green);
-    background: var(--green);
-    color: var(--dark);
+    border: 2px solid #ed1c24;
+    background: #ed1c24;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     /*font-weight: bold;*/
@@ -522,8 +521,8 @@ input::placeholder {
 }
 
 .note-clear-btn-modal:hover {
-    background: #cc0000;
-    border-color: #cc0000;
+    background: #ba141a;
+    border-color: #ba141a;
 }
 
 .alert {
@@ -534,8 +533,8 @@ input::placeholder {
 }
 
 .alert-error {
-    background: var(--green);
-    color: var(--dark);
+    background: #ed1c24;
+    color: white;
 }
 
 /* Mobile */

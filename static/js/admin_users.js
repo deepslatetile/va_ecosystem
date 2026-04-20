@@ -11,15 +11,15 @@ async function loadStats() {
     try {
         const response = await fetch('/admin/api/users/stats');
         if (!response.ok) {
-            throw new Error('Failed to load statistics');
+            throw new Error('Не удалось загрузить статистику');
         }
 
         const stats = await response.json();
         displayStats(stats);
 
     } catch (error) {
-        console.error('Error loading statistics:', error);
-        document.getElementById('statsGrid').innerHTML = '<div class="alert alert-error">Error loading statistics</div>';
+        console.error('Ошибка загрузки статистики:', error);
+        document.getElementById('statsGrid').innerHTML = '<div class="alert alert-error">Ошибка загрузки статистики</div>';
     }
 }
 
@@ -29,27 +29,27 @@ function displayStats(stats) {
     statsGrid.innerHTML = `
         <div class="stat-card">
             <div class="stat-value">${stats.total_users}</div>
-            <div class="stat-label">Total Users</div>
+            <div class="stat-label">Всего пользователей</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${stats.active_users}</div>
-            <div class="stat-label">Active Users</div>
+            <div class="stat-label">Активных пользователей</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${stats.hq_users}</div>
-            <div class="stat-label">HQ Users</div>
+            <div class="stat-label">Пользователей HQ</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${stats.staff_users}</div>
-            <div class="stat-label">Staff Users</div>
+            <div class="stat-label">Персонал</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${stats.passenger_users}</div>
-            <div class="stat-label">Passenger Users</div>
+            <div class="stat-label">Пассажиры</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${stats.total_miles}</div>
-            <div class="stat-label">Total Miles</div>
+            <div class="stat-label">Всего миль</div>
         </div>
     `;
 }
@@ -57,7 +57,7 @@ function displayStats(stats) {
 async function loadUsers(page = 1) {
     currentPage = page;
     const container = document.getElementById('usersContainer');
-    container.innerHTML = '<div class="loading">Loading users...</div>';
+    container.innerHTML = '<div class="loading">Загрузка пользователей...</div>';
 
     const search = document.getElementById('searchFilter').value;
     const group = document.getElementById('groupFilter').value;
@@ -74,15 +74,15 @@ async function loadUsers(page = 1) {
 
         const response = await fetch(`/admin/api/users?${params}`);
         if (!response.ok) {
-            throw new Error('Failed to load users');
+            throw new Error('Не удалось загрузить пользователей');
         }
 
         const data = await response.json();
         displayUsers(data);
 
     } catch (error) {
-        console.error('Error loading users:', error);
-        container.innerHTML = '<div class="alert alert-error">Error loading users: ' + error.message + '</div>';
+        console.error('Ошибка загрузки пользователей:', error);
+        container.innerHTML = '<div class="alert alert-error">Ошибка загрузки пользователей: ' + error.message + '</div>';
     }
 }
 
@@ -91,7 +91,7 @@ function displayUsers(data) {
     const pagination = document.getElementById('pagination');
 
     if (data.users.length === 0) {
-        container.innerHTML = '<div class="loading">No users found</div>';
+        container.innerHTML = '<div class="loading">Пользователи не найдены</div>';
         pagination.innerHTML = '';
         return;
     }
@@ -104,23 +104,23 @@ function displayUsers(data) {
             </div>
             <div class="user-details">
                 <div class="user-detail">
-                    <span class="detail-label">Virtual ID:</span>
-                    <span>${user.virtual_id || 'N/A'}</span>
+                    <span class="detail-label">Виртуальный ID:</span>
+                    <span>${user.virtual_id || 'Н/Д'}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="detail-label">Group:</span>
+                    <span class="detail-label">Группа:</span>
                     <span class="user-group-${user.user_group.toLowerCase()}">${user.user_group}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="detail-label">Miles:</span>
+                    <span class="detail-label">Мили:</span>
                     <span>${user.miles}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="detail-label">Status:</span>
-                    <span class="status-${user.status || 'active'}">${user.status || 'active'}</span>
+                    <span class="detail-label">Статус:</span>
+                    <span class="status-${user.status || 'active'}">${user.status === 'active' ? 'Активен' : 'Неактивен'}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="detail-label">Created:</span>
+                    <span class="detail-label">Создан:</span>
                     <span>${new Date(user.created_at * 1000).toLocaleDateString()}</span>
                 </div>
             </div>
@@ -129,13 +129,13 @@ function displayUsers(data) {
 
     pagination.innerHTML = `
         <button onclick="loadUsers(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''}>
-            <i class="fas fa-chevron-left"></i> Previous
+            <i class="fas fa-chevron-left"></i> Предыдущая
         </button>
         <span class="pagination-info">
-            Page ${currentPage} of ${data.total_pages}
+            Страница ${currentPage} из ${data.total_pages}
         </span>
         <button onclick="loadUsers(${currentPage + 1})" ${currentPage >= data.total_pages ? 'disabled' : ''}>
-            Next <i class="fas fa-chevron-right"></i>
+            Следующая <i class="fas fa-chevron-right"></i>
         </button>
     `;
 }
@@ -155,15 +155,15 @@ async function openUserModal(userId) {
     try {
         const response = await fetch(`/admin/api/users/${userId}`);
         if (!response.ok) {
-            throw new Error('Failed to load user details');
+            throw new Error('Не удалось загрузить данные пользователя');
         }
 
         const user = await response.json();
         displayUserModal(user);
 
     } catch (error) {
-        console.error('Error loading user details:', error);
-        alert('Error loading user details: ' + error.message);
+        console.error('Ошибка загрузки данных пользователя:', error);
+        alert('Ошибка загрузки данных пользователя: ' + error.message);
     }
 }
 
@@ -173,81 +173,81 @@ function displayUserModal(user) {
     modalBody.innerHTML = `
         <form id="userForm">
             <div class="form-group">
-                <label for="userId">User ID:</label>
+                <label for="userId">ID пользователя:</label>
                 <input type="text" id="userId" value="${user.id}" readonly>
             </div>
 
             <div class="form-group">
-                <label for="nickname">Nickname:</label>
+                <label for="nickname">Никнейм:</label>
                 <input type="text" id="nickname" name="nickname" value="${user.nickname}" required>
             </div>
 
             <div class="form-group">
-                <label for="virtualId">Virtual ID:</label>
+                <label for="virtualId">Виртуальный ID:</label>
                 <input type="number" id="virtualId" name="virtual_id" value="${user.virtual_id || ''}">
             </div>
 
             <div class="form-group">
-                <label for="socialId">Social ID:</label>
+                <label for="socialId">Социальный ID:</label>
                 <input type="number" id="socialId" name="social_id" value="${user.social_id || ''}">
             </div>
 
             <div class="form-group">
-                <label for="miles">Miles:</label>
+                <label for="miles">Мили:</label>
                 <input type="number" id="miles" name="miles" value="${user.miles}" required>
             </div>
 
             <div class="form-group">
-                <label for="userGroup">User Group:</label>
+                <label for="userGroup">Группа пользователя:</label>
                 <select id="userGroup" name="user_group" required>
-                    <option value="PAX" ${user.user_group === 'PAX' ? 'selected' : ''}>Passenger</option>
-                    <option value="STF" ${user.user_group === 'STF' ? 'selected' : ''}>Staff</option>
+                    <option value="PAX" ${user.user_group === 'PAX' ? 'selected' : ''}>Пассажир</option>
+                    <option value="STF" ${user.user_group === 'STF' ? 'selected' : ''}>Персонал</option>
                     <option value="HQ" ${user.user_group === 'HQ' ? 'selected' : ''}>HQ</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="subgroup">Subgroup:</label>
+                <label for="subgroup">Подгруппа:</label>
                 <input type="text" id="subgroup" name="subgroup" value="${user.subgroup}" required>
             </div>
 
             <div class="form-group">
-                <label for="link">Link:</label>
+                <label for="link">Ссылка:</label>
                 <input type="text" id="link" name="link" value="${user.link || ''}">
             </div>
 
             <div class="form-group">
-                <label for="status">Status:</label>
+                <label for="status">Статус:</label>
                 <select id="status" name="status">
-                    <option value="active" ${(user.status || 'active') === 'active' ? 'selected' : ''}>Active</option>
-                    <option value="inactive" ${user.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+                    <option value="active" ${(user.status || 'active') === 'active' ? 'selected' : ''}>Активен</option>
+                    <option value="inactive" ${user.status === 'inactive' ? 'selected' : ''}>Неактивен</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="metadata">Metadata:</label>
+                <label for="metadata">Метаданные:</label>
                 <textarea id="metadata" name="metadata">${user.metadata || ''}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="pending">Pending:</label>
+                <label for="pending">Ожидание:</label>
                 <input type="text" id="pending" name="pending" value="${user.pending || ''}">
             </div>
 
             <div class="form-group">
-                <label>Created:</label>
+                <label>Создан:</label>
                 <input type="text" value="${new Date(user.created_at * 1000).toLocaleString()}" readonly>
             </div>
 
             <div class="user-actions">
                 <button type="button" class="reset-password-btn" onclick="showResetPasswordModal(${user.id})">
-                    <i class="fas fa-key"></i> Reset Password
+                    <i class="fas fa-key"></i> Сбросить пароль
                 </button>
                 <button type="button" class="delete-btn" onclick="deleteUser(${user.id})">
-                    <i class="fas fa-trash"></i> Delete User
+                    <i class="fas fa-trash"></i> Удалить пользователя
                 </button>
-                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="save-btn">Save Changes</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">Отмена</button>
+                <button type="submit" class="save-btn">Сохранить изменения</button>
             </div>
         </form>
     `;
@@ -283,17 +283,17 @@ async function saveUserChanges(event) {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to update user');
+            throw new Error('Не удалось обновить пользователя');
         }
 
         closeModal();
         loadUsers(currentPage);
         loadStats();
-        alert('User updated successfully!');
+        alert('Пользователь успешно обновлён!');
 
     } catch (error) {
-        console.error('Error updating user:', error);
-        alert('Error updating user: ' + error.message);
+        console.error('Ошибка обновления пользователя:', error);
+        alert('Ошибка обновления пользователя: ' + error.message);
     }
 }
 
@@ -318,17 +318,17 @@ async function resetUserPassword(event) {
 
     // Валидация
     if (!newPassword || !confirmPassword) {
-        showResetPasswordMessage('Please fill in all fields', 'error');
+        showResetPasswordMessage('Пожалуйста, заполните все поля', 'error');
         return;
     }
 
     if (newPassword.length < 6) {
-        showResetPasswordMessage('New password must be at least 6 characters', 'error');
+        showResetPasswordMessage('Новый пароль должен содержать не менее 6 символов', 'error');
         return;
     }
 
     if (newPassword !== confirmPassword) {
-        showResetPasswordMessage('New passwords do not match', 'error');
+        showResetPasswordMessage('Новые пароли не совпадают', 'error');
         return;
     }
 
@@ -352,11 +352,11 @@ async function resetUserPassword(event) {
                 closeModal();
             }, 2000);
         } else {
-            showResetPasswordMessage(result.error || 'Failed to reset password', 'error');
+            showResetPasswordMessage(result.error || 'Не удалось сбросить пароль', 'error');
         }
     } catch (error) {
-        console.error('Error resetting password:', error);
-        showResetPasswordMessage('Error resetting password', 'error');
+        console.error('Ошибка сброса пароля:', error);
+        showResetPasswordMessage('Ошибка сброса пароля', 'error');
     }
 }
 
@@ -368,7 +368,7 @@ function showResetPasswordMessage(message, type) {
 }
 
 async function deleteUser(userId) {
-    if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+    if (!confirm('Вы уверены, что хотите удалить этого пользователя? Это действие необратимо.')) {
         return;
     }
 
@@ -378,17 +378,17 @@ async function deleteUser(userId) {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to delete user');
+            throw new Error('Не удалось удалить пользователя');
         }
 
         closeModal();
         loadUsers(currentPage);
         loadStats();
-        alert('User deleted successfully!');
+        alert('Пользователь успешно удалён!');
 
     } catch (error) {
-        console.error('Error deleting user:', error);
-        alert('Error deleting user: ' + error.message);
+        console.error('Ошибка удаления пользователя:', error);
+        alert('Ошибка удаления пользователя: ' + error.message);
     }
 }
 
@@ -426,17 +426,17 @@ async function createUser(event) {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error || 'Failed to create user');
+            throw new Error(error.error || 'Не удалось создать пользователя');
         }
 
         closeCreateUserModal();
         loadUsers(1);
         loadStats();
-        alert('User created successfully!');
+        alert('Пользователь успешно создан!');
 
     } catch (error) {
-        console.error('Error creating user:', error);
-        alert('Error creating user: ' + error.message);
+        console.error('Ошибка создания пользователя:', error);
+        alert('Ошибка создания пользователя: ' + error.message);
     }
 }
 

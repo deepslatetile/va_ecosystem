@@ -1,185 +1,156 @@
-/* ── DARK MODE ─────────────────────────────────────────────── */
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('cx-theme', theme);
-    const icon = document.getElementById('toggleIcon');
-    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
-}
-
-function toggleDarkMode() {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    applyTheme(current === 'dark' ? 'light' : 'dark');
-}
-
-// Apply saved theme immediately (before DOM loads) to avoid flash
-(function () {
-    const saved = localStorage.getItem('cx-theme');
-    if (saved) applyTheme(saved);
-})();
-
-
-/* ── NAVIGATION ────────────────────────────────────────────── */
 async function loadNavigation() {
     try {
         const response = await fetch('/api/get/web_config/state/1');
         const pages = await response.json();
-        renderNav(pages);
+
+        const navMenu = document.getElementById('navMenu');
+        const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
+
+        navMenu.innerHTML = '';
+        mobileDropdownMenu.innerHTML = '';
+
+        pages.forEach(page => {
+            const desktopItem = document.createElement('li');
+            desktopItem.className = 'nav-item';
+            const desktopLink = document.createElement('a');
+            desktopLink.href = `/${page.page_name}`;
+            desktopLink.textContent = page.page_display;
+            desktopItem.appendChild(desktopLink);
+            navMenu.appendChild(desktopItem);
+
+            const mobileItem = document.createElement('li');
+            mobileItem.className = 'mobile-dropdown-item';
+            const mobileLink = document.createElement('a');
+            mobileLink.href = `/${page.page_name}`;
+            mobileLink.textContent = page.page_display;
+            mobileItem.appendChild(mobileLink);
+            mobileDropdownMenu.appendChild(mobileItem);
+        });
+
     } catch (error) {
-        console.error('Error loading navigation:', error);
-        renderNav([
-            { page_name: '', page_display: 'Home' },
-            { page_name: 'schedule', page_display: 'Schedule' }
-        ]);
+        console.error('Ошибка загрузки навигации:', error);
+        const fallbackPages = [
+            { page_name: '', page_display: 'Главная' },
+            { page_name: 'schedule', page_display: 'Расписание' }
+        ];
+
+        const navMenu = document.getElementById('navMenu');
+        const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
+
+        navMenu.innerHTML = '';
+        mobileDropdownMenu.innerHTML = '';
+
+        fallbackPages.forEach(page => {
+            const desktopItem = document.createElement('li');
+            desktopItem.className = 'nav-item';
+            const desktopLink = document.createElement('a');
+            desktopLink.href = `/${page.page_name}`;
+            desktopLink.textContent = page.page_display;
+            desktopItem.appendChild(desktopLink);
+            navMenu.appendChild(desktopItem);
+
+            const mobileItem = document.createElement('li');
+            mobileItem.className = 'mobile-dropdown-item';
+            const mobileLink = document.createElement('a');
+            mobileLink.href = `/${page.page_name}`;
+            mobileLink.textContent = page.page_display;
+            mobileItem.appendChild(mobileLink);
+            mobileDropdownMenu.appendChild(mobileItem);
+        });
     }
 }
 
-function renderNav(pages) {
-    const navMenu = document.getElementById('navMenu');
-    const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
-    if (!navMenu || !mobileDropdownMenu) return;
-
-    navMenu.innerHTML = '';
-    mobileDropdownMenu.innerHTML = '';
-
-    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-
-    pages.forEach(page => {
-        const href = page.page_name === '' ? '/' : `/${page.page_name}`;
-        const normalizedHref = href.replace(/\/$/, '') || '/';
-        const isActive = currentPath === normalizedHref;
-
-        // ── Desktop item ──
-        const li = document.createElement('li');
-        li.className = 'nav-item';
-        const a = document.createElement('a');
-        a.href = href;
-        a.textContent = page.page_display;
-        if (isActive) a.classList.add('active');
-        li.appendChild(a);
-        navMenu.appendChild(li);
-
-        // ── Mobile item ──
-        const mLi = document.createElement('li');
-        mLi.className = 'mobile-dropdown-item';
-        const mA = document.createElement('a');
-        mA.href = href;
-        mA.textContent = page.page_display;
-        if (isActive) {
-            mA.style.color = 'var(--mobile-item-hover-color)';
-            mA.style.borderLeftColor = 'var(--normgreen)';
-        }
-        mLi.appendChild(mA);
-        mobileDropdownMenu.appendChild(mLi);
-    });
-
-    // Add "Join us Today" at the bottom of mobile dropdown
-    const joinLi = document.createElement('li');
-    joinLi.className = 'mobile-dropdown-item mobile-join-item';
-    const joinA = document.createElement('a');
-    joinA.href = '/register';
-    joinA.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:6px;"></i> Join us Today';
-    joinLi.appendChild(joinA);
-    mobileDropdownMenu.appendChild(joinLi);
-}
-
-
-/* ── AUTH BUTTONS ──────────────────────────────────────────── */
 async function loadAuthButtons() {
-    const isMobile = window.innerWidth < 480;
     try {
         const response = await fetch('/api/auth/me');
-
         if (response.ok) {
             const user = await response.json();
-            const displayName = isMobile
-                ? user.nickname.substring(0, 10) + (user.nickname.length > 10 ? '…' : '')
-                : user.nickname;
+            const displayName = window.innerWidth < 480 ?
+                user.nickname.substring(0, 10) + (user.nickname.length > 10 ? '...' : '') :
+                user.nickname;
 
             document.getElementById('authButtons').innerHTML = `
-                <div class="user-info">
-                    <div class="user-avatar">${user.nickname.charAt(0).toUpperCase()}</div>
-                    <span>${displayName}</span>
-                </div>
-                <button class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i>${isMobile ? '' : ' Logout'}
-                </button>
-            `;
-
+                    <div class="user-info">
+                        <div class="user-avatar">${user.nickname.charAt(0).toUpperCase()}</div>
+                        <span>${displayName}</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> ${window.innerWidth < 480 ? '' : 'Выйти'}
+                    </button>
+                `;
         } else {
             document.getElementById('authButtons').innerHTML = `
-                <a href="/login" class="login-btn">
-                    <i class="fas fa-user"></i>${isMobile ? '' : ' Sign in / up'}
-                </a>
-            `;
+                    <a href="/login" class="login-btn">
+                        <i class="fas fa-user"></i> ${window.innerWidth < 480 ? '' : 'Войти'}
+                    </a>
+                `;
         }
     } catch (error) {
-        console.error('Error checking auth:', error);
+        console.error('Ошибка проверки статуса авторизации:', error);
         document.getElementById('authButtons').innerHTML = `
-            <a href="/login" class="login-btn">
-                <i class="fas fa-user"></i> Sign in / up
-            </a>
-        `;
+                <a href="/login" class="login-btn">
+                    <i class="fas fa-user"></i> ${window.innerWidth < 480 ? '' : 'Войти'}
+                </a>
+            `;
     }
 }
 
-
-/* ── MOBILE MENU ───────────────────────────────────────────── */
 function toggleMobileMenu() {
     const mobileDropdown = document.getElementById('mobileDropdown');
-    const btn = document.querySelector('.mobile-menu-toggle');
-    if (!mobileDropdown) return;
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
 
     mobileDropdown.classList.toggle('active');
-    const icon = btn.querySelector('i');
-    icon.className = mobileDropdown.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+
+    const icon = toggleButton.querySelector('i');
+    if (mobileDropdown.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+    } else {
+        icon.className = 'fas fa-bars';
+    }
 }
 
 function closeMobileMenu() {
     const mobileDropdown = document.getElementById('mobileDropdown');
-    const btn = document.querySelector('.mobile-menu-toggle');
-    if (!mobileDropdown) return;
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+
     mobileDropdown.classList.remove('active');
-    if (btn) btn.querySelector('i').className = 'fas fa-bars';
+    toggleButton.querySelector('i').className = 'fas fa-bars';
 }
 
-// Close when clicking outside
-document.addEventListener('click', function (e) {
-    const dropdown = document.getElementById('mobileDropdown');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    if (!dropdown || !toggle) return;
-    if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
-        closeMobileMenu();
-    }
-});
-
-// Resize handler
-window.addEventListener('resize', function () {
-    if (window.innerWidth > 960) closeMobileMenu();
-    loadAuthButtons();
-});
-
-
-/* ── LOGOUT ────────────────────────────────────────────────── */
 async function logout() {
     try {
         const response = await fetch('/api/auth/logout', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
-        if (response.ok) window.location.href = '/';
+
+        if (response.ok) {
+            window.location.href = '/';
+        }
     } catch (error) {
-        console.error('Logout error:', error);
+        console.error('Ошибка выхода:', error);
     }
 }
 
+document.addEventListener('click', function (event) {
+    const mobileDropdown = document.getElementById('mobileDropdown');
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
 
-/* ── INIT ──────────────────────────────────────────────────── */
+    if (!mobileDropdown.contains(event.target) && !toggleButton.contains(event.target)) {
+        closeMobileMenu();
+    }
+});
+
+window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) {
+        closeMobileMenu();
+    }
+    loadAuthButtons();
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     loadNavigation();
     loadAuthButtons();
-
-    // Sync toggle icon with current theme
-    const saved = localStorage.getItem('cx-theme') || 'light';
-    const icon = document.getElementById('toggleIcon');
-    if (icon) icon.textContent = saved === 'dark' ? '🌙' : '☀️';
 });

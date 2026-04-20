@@ -1,68 +1,67 @@
-
 let embedFields = [];
 let editingFieldIndex = -1;
 
 const TEMPLATES = {
     flight_created: {
-        title: "✈️ New Flight Created",
-        description: "A new flight has been added to the schedule.",
-        color: "var(--dark)",
-        authorName: "Flight System",
-        footerText: "Flight System v1.0",
+        title: "✈️ Новый рейс создан",
+        description: "В расписание добавлен новый рейс.",
+        color: "#5865F2",
+        authorName: "Система рейсов",
+        footerText: "Авиакомпания «Вектор» v1.0",
         fields: [
-            { name: "Flight Number", value: "AU101", inline: true },
-            { name: "Route", value: "KJA → DME", inline: true },
-            { name: "Aircraft", value: "B737-800", inline: true },
-            { name: "Starts at", value: "<t:1700000000>\n<t:1700000000:R>", inline: false },
-            { name: "Status", value: "Scheduled", inline: true }
+            { name: "Номер рейса", value: "VK101", inline: true },
+            { name: "Маршрут", value: "KJA → DME", inline: true },
+            { name: "Воздушное судно", value: "B737-800", inline: true },
+            { name: "Начинается", value: "<t:1700000000>\n<t:1700000000:R>", inline: false },
+            { name: "Статус", value: "По расписанию", inline: true }
         ],
-        pingRole: "@pilots"
+        pingRole: "@пилоты"
     },
     booking_confirmed: {
-        title: "🎫 Booking Confirmed",
-        description: "A new booking has been confirmed.",
+        title: "🎫 Бронирование подтверждено",
+        description: "Подтверждено новое бронирование.",
         color: "#3ba55d",
-        authorName: "Booking System",
-        footerText: "Booking ID: #" + Math.floor(Math.random() * 10000),
+        authorName: "Система бронирования",
+        footerText: "ID бронирования: #" + Math.floor(Math.random() * 10000),
         fields: [
-            { name: "Passenger", value: "John Doe", inline: true },
-            { name: "Flight", value: "AU101", inline: true },
-            { name: "Seat", value: "12A", inline: true },
-            { name: "Class", value: "Economy", inline: true },
-            { name: "Services", value: "Extra Baggage, Meal", inline: false }
+            { name: "Пассажир", value: "Иван Петров", inline: true },
+            { name: "Рейс", value: "VK101", inline: true },
+            { name: "Место", value: "12A", inline: true },
+            { name: "Класс", value: "Эконом", inline: true },
+            { name: "Услуги", value: "Дополнительный багаж, Питание", inline: false }
         ]
     },
     payment_received: {
-        title: "💳 Payment Received",
-        description: "A payment has been successfully processed.",
+        title: "💳 Платёж получен",
+        description: "Платёж успешно обработан.",
         color: "#faa61a",
-        authorName: "Payment System",
-        footerText: "Transaction completed",
+        authorName: "Платёжная система",
+        footerText: "Транзакция завершена",
         fields: [
-            { name: "Amount", value: "$299.99", inline: true },
-            { name: "Currency", value: "USD", inline: true },
-            { name: "Method", value: "Credit Card", inline: true },
-            { name: "Status", value: "Completed ✅", inline: true }
+            { name: "Сумма", value: "$299.99", inline: true },
+            { name: "Валюта", value: "USD", inline: true },
+            { name: "Метод", value: "Кредитная карта", inline: true },
+            { name: "Статус", value: "Завершён ✅", inline: true }
         ]
     },
     system_alert: {
-        title: "⚠️ System Alert",
-        description: "Important system notification requires attention.",
+        title: "⚠️ Системное оповещение",
+        description: "Важное уведомление системы требует внимания.",
         color: "#ed4245",
-        authorName: "System Monitor",
-        footerText: "Alert generated at " + new Date().toLocaleTimeString(),
+        authorName: "Монитор системы",
+        footerText: "Оповещение создано в " + new Date().toLocaleTimeString(),
         fields: [
-            { name: "Severity", value: "HIGH", inline: true },
-            { name: "Component", value: "Database", inline: true },
-            { name: "Error Code", value: "ERR_DB_001", inline: true },
-            { name: "Description", value: "Connection pool exhausted. Immediate action required.", inline: false }
+            { name: "Серьёзность", value: "ВЫСОКАЯ", inline: true },
+            { name: "Компонент", value: "База данных", inline: true },
+            { name: "Код ошибки", value: "ERR_DB_001", inline: true },
+            { name: "Описание", value: "Пул соединений исчерпан. Требуется немедленное действие.", inline: false }
         ],
-        pingRole: "@admins"
+        pingRole: "@админы"
     }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("Discord Webhooks Manager loaded");
+    console.log("SOCIALNWK Webhooks Manager загружен");
     loadSavedConfiguration();
     setupEventListeners();
     setupCharacterCounters();
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const flightData = parseFlightDataFromURL();
     if (flightData) {
         applyFlightDataTemplate(flightData);
-        showAlert('Flight data loaded from URL!', 'success');
+        showAlert('Данные рейса загружены из URL!', 'success');
     }
 });
 
@@ -86,38 +85,38 @@ function parseFlightDataFromURL() {
         const flightData = JSON.parse(decodedData);
 
         if (flightData.timestamp && Date.now() - flightData.timestamp > 300000) {
-            console.warn('Flight data is older than 5 minutes');
+            console.warn('Данные рейса старше 5 минут');
         }
 
         return flightData;
     } catch (error) {
-        console.error('Error parsing flight data from URL:', error);
+        console.error('Ошибка парсинга данных рейса из URL:', error);
         return null;
     }
 }
 
 function applyFlightDataTemplate(flightData) {
-    let discordTimestamp = '';
-    let discordRelativeTimestamp = '';
+    let SOCIALNWKTimestamp = '';
+    let SOCIALNWKRelativeTimestamp = '';
 
     if (flightData.unix_timestamp) {
-        discordTimestamp = `<t:${flightData.unix_timestamp}>`;
-        discordRelativeTimestamp = `<t:${flightData.unix_timestamp}:R>`;
+        SOCIALNWKTimestamp = `<t:${flightData.unix_timestamp}>`;
+        SOCIALNWKRelativeTimestamp = `<t:${flightData.unix_timestamp}:R>`;
     } else if (flightData.datetime) {
         const departureDate = new Date(flightData.datetime);
         const unixTimestamp = Math.floor(departureDate.getTime() / 1000);
-        discordTimestamp = `<t:${unixTimestamp}>`;
-        discordRelativeTimestamp = `<t:${unixTimestamp}:R>`;
+        SOCIALNWKTimestamp = `<t:${unixTimestamp}>`;
+        SOCIALNWKRelativeTimestamp = `<t:${unixTimestamp}:R>`;
     }
 
-    let formattedDuration = flightData.enroute || 'N/A';
+    let formattedDuration = flightData.enroute || 'Н/Д';
 
-    document.getElementById('messageTitle').value = `✈️ ${flightData.flight_number || 'Unnamed Flight'}`;
-    document.getElementById('messageDescription').value = `A new flight has been scheduled.`;
-    document.getElementById('messageColor').value = 'var(--dark)';
-    document.getElementById('colorValue').textContent = 'var(--dark)';
-    document.getElementById('authorName').value = 'Flight Scheduling System';
-    document.getElementById('footerText').value = `Flight System • ${new Date().toLocaleDateString()}`;
+    document.getElementById('messageTitle').value = `✈️ ${flightData.flight_number || 'Рейс без номера'}`;
+    document.getElementById('messageDescription').value = `Запланирован новый рейс.`;
+    document.getElementById('messageColor').value = '#5865F2';
+    document.getElementById('colorValue').textContent = '#5865F2';
+    document.getElementById('authorName').value = 'Система планирования рейсов';
+    document.getElementById('footerText').value = `Система рейсов • ${new Date().toLocaleDateString()}`;
     document.getElementById('pingRole').value = '@here';
 
     embedFields = [];
@@ -126,7 +125,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.flight_number) {
         fields.push({
-            name: "Flight Number",
+            name: "Номер рейса",
             value: flightData.flight_number,
             inline: true
         });
@@ -134,7 +133,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.departure && flightData.arrival) {
         fields.push({
-            name: "Route",
+            name: "Маршрут",
             value: `${flightData.departure} → ${flightData.arrival}`,
             inline: true
         });
@@ -142,22 +141,22 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.aircraft) {
         fields.push({
-            name: "Aircraft",
+            name: "Воздушное судно",
             value: flightData.aircraft,
             inline: true
         });
     }
 
-    if (discordTimestamp && discordRelativeTimestamp) {
+    if (SOCIALNWKTimestamp && SOCIALNWKRelativeTimestamp) {
         fields.push({
-            name: "Starts at",
-            value: `${discordTimestamp}\n${discordRelativeTimestamp}`,
+            name: "Начинается",
+            value: `${SOCIALNWKTimestamp}\n${SOCIALNWKRelativeTimestamp}`,
             inline: false
         });
     } else if (flightData.datetime) {
         const departureDate = new Date(flightData.datetime);
         fields.push({
-            name: "Starts at",
+            name: "Начинается",
             value: departureDate.toLocaleString(),
             inline: false
         });
@@ -165,7 +164,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.enroute) {
         fields.push({
-            name: "Flight Duration",
+            name: "Длительность полёта",
             value: formattedDuration,
             inline: true
         });
@@ -173,7 +172,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.status) {
         fields.push({
-            name: "Status",
+            name: "Статус",
             value: flightData.status,
             inline: true
         });
@@ -181,7 +180,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.meal && flightData.meal !== 'custom') {
         fields.push({
-            name: "Meal Service",
+            name: "Питание на борту",
             value: flightData.meal,
             inline: true
         });
@@ -189,7 +188,7 @@ function applyFlightDataTemplate(flightData) {
 
     if (flightData.services && flightData.services.length > 0) {
         fields.push({
-            name: "Available Services",
+            name: "Доступные услуги",
             value: flightData.services.join(', '),
             inline: false
         });
@@ -203,7 +202,7 @@ function applyFlightDataTemplate(flightData) {
 
 function loadSavedConfiguration() {
     try {
-        const savedConfig = localStorage.getItem('discordWebhookConfig');
+        const savedConfig = localStorage.getItem('SOCIALNWKWebhookConfig');
         if (savedConfig) {
             const config = JSON.parse(savedConfig);
             document.getElementById('webhookUrl').value = config.webhookUrl || '';
@@ -211,13 +210,13 @@ function loadSavedConfiguration() {
             document.getElementById('pingRole').value = config.pingRole || '';
         }
 
-        const savedMessage = localStorage.getItem('discordMessageConfig');
+        const savedMessage = localStorage.getItem('SOCIALNWKMessageConfig');
         if (savedMessage) {
             const message = JSON.parse(savedMessage);
             document.getElementById('messageTitle').value = message.title || '';
             document.getElementById('messageDescription').value = message.description || '';
-            document.getElementById('messageColor').value = message.color || 'var(--dark)';
-            document.getElementById('colorValue').textContent = message.color || 'var(--dark)';
+            document.getElementById('messageColor').value = message.color || '#5865F2';
+            document.getElementById('colorValue').textContent = message.color || '#5865F2';
             document.getElementById('authorName').value = message.authorName || '';
             document.getElementById('authorIcon').value = message.authorIcon || '';
             document.getElementById('footerText').value = message.footerText || '';
@@ -231,7 +230,7 @@ function loadSavedConfiguration() {
             }
         }
     } catch (error) {
-        console.error('Error loading saved configuration:', error);
+        console.error('Ошибка загрузки сохранённой конфигурации:', error);
     }
 }
 
@@ -241,7 +240,7 @@ function saveConfiguration() {
         webhookName: document.getElementById('webhookName').value,
         pingRole: document.getElementById('pingRole').value
     };
-    localStorage.setItem('discordWebhookConfig', JSON.stringify(config));
+    localStorage.setItem('SOCIALNWKWebhookConfig', JSON.stringify(config));
 }
 
 function saveMessageConfig() {
@@ -257,7 +256,7 @@ function saveMessageConfig() {
         imageUrl: document.getElementById('imageUrl').value,
         fields: embedFields
     };
-    localStorage.setItem('discordMessageConfig', JSON.stringify(messageConfig));
+    localStorage.setItem('SOCIALNWKMessageConfig', JSON.stringify(messageConfig));
 }
 
 function setupEventListeners() {
@@ -268,7 +267,7 @@ function setupEventListeners() {
 
     document.getElementById('saveWebhookBtn').addEventListener('click', function () {
         saveConfiguration();
-        showAlert('Configuration saved successfully!', 'success');
+        showAlert('Конфигурация сохранена успешно!', 'success');
     });
 
     document.getElementById('testWebhookBtn').addEventListener('click', testWebhookConnection);
@@ -323,7 +322,7 @@ function setupEventListeners() {
             flightTemplateBtn.type = 'button';
             flightTemplateBtn.className = 'btn-small';
             flightTemplateBtn.style.marginLeft = 'auto';
-            flightTemplateBtn.innerHTML = '<i class="fas fa-plane"></i> Use Flight Data';
+            flightTemplateBtn.innerHTML = '<i class="fas fa-plane"></i> Использовать данные рейса';
             flightTemplateBtn.addEventListener('click', () => applyFlightDataTemplate(flightData));
 
             header.appendChild(flightTemplateBtn);
@@ -344,7 +343,7 @@ function updateCharCounter(elementId, currentLength, maxLength) {
     const counter = document.getElementById(elementId);
     if (counter) {
         counter.textContent = currentLength;
-        counter.style.color = currentLength > maxLength ? '#ed4245' : 'var(--lightgreen)';
+        counter.style.color = currentLength > maxLength ? '#ed4245' : '#8fa3d8';
     }
 }
 
@@ -376,7 +375,7 @@ function applyTemplate(templateName) {
     saveMessageConfig();
     saveConfiguration();
 
-    showAlert(`"${templateName.replace('_', ' ')}" template applied!`, 'success');
+    showAlert(`Шаблон "${templateName.replace('_', ' ')}" применён!`, 'success');
 }
 
 function openFieldModal(fieldIndex = -1, fieldData = null) {
@@ -410,7 +409,7 @@ function renderFields() {
     const container = document.getElementById('embedFieldsContainer');
 
     if (embedFields.length === 0) {
-        container.innerHTML = '<div class="no-fields">No fields added yet. Click "Add Field" to create one.</div>';
+        container.innerHTML = '<div class="no-fields">Поля не добавлены. Нажмите "Добавить поле", чтобы создать.</div>';
         return;
     }
 
@@ -418,21 +417,21 @@ function renderFields() {
         <div class="field-item" data-index="${index}">
             <div class="field-header">
                 <h4 class="field-title">${escapeHtml(field.name)}</h4>
-                <span class="field-inline-badge">${field.inline ? 'Inline' : 'Block'}</span>
+                <span class="field-inline-badge">${field.inline ? 'В строку' : 'Блок'}</span>
             </div>
             <div class="field-value">${escapeHtml(field.value)}</div>
             <div class="field-actions">
                 <button type="button" class="field-action-btn" onclick="editField(${index})">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Редактировать
                 </button>
                 <button type="button" class="field-action-btn" onclick="deleteField(${index})">
-                    <i class="fas fa-trash"></i> Delete
+                    <i class="fas fa-trash"></i> Удалить
                 </button>
                 <button type="button" class="field-action-btn" onclick="moveField(${index}, -1)" ${index === 0 ? 'disabled' : ''}>
-                    <i class="fas fa-arrow-up"></i> Up
+                    <i class="fas fa-arrow-up"></i> Вверх
                 </button>
                 <button type="button" class="field-action-btn" onclick="moveField(${index}, 1)" ${index === embedFields.length - 1 ? 'disabled' : ''}>
-                    <i class="fas fa-arrow-down"></i> Down
+                    <i class="fas fa-arrow-down"></i> Вниз
                 </button>
             </div>
         </div>
@@ -445,11 +444,11 @@ function editField(index) {
 }
 
 function deleteField(index) {
-    if (confirm('Are you sure you want to delete this field?')) {
+    if (confirm('Вы уверены, что хотите удалить это поле?')) {
         embedFields.splice(index, 1);
         renderFields();
         saveMessageConfig();
-        showAlert('Field deleted successfully!', 'success');
+        showAlert('Поле успешно удалено!', 'success');
     }
 }
 
@@ -477,7 +476,7 @@ document.getElementById('fieldForm').addEventListener('submit', function (e) {
     };
 
     if (!fieldData.name || !fieldData.value) {
-        showAlert('Field name and value are required!', 'error');
+        showAlert('Название и значение поля обязательны!', 'error');
         return;
     }
 
@@ -491,7 +490,7 @@ document.getElementById('fieldForm').addEventListener('submit', function (e) {
     saveMessageConfig();
     closeFieldModal();
 
-    const message = editingFieldIndex === -1 ? 'Field added successfully!' : 'Field updated successfully!';
+    const message = editingFieldIndex === -1 ? 'Поле успешно добавлено!' : 'Поле успешно обновлено!';
     showAlert(message, 'success');
 });
 
@@ -499,12 +498,12 @@ async function testWebhookConnection() {
     const webhookUrl = document.getElementById('webhookUrl').value;
 
     if (!webhookUrl) {
-        showAlert('Please enter a webhook URL first!', 'error');
+        showAlert('Пожалуйста, введите URL вебхука!', 'error');
         return;
     }
 
-    if (!webhookUrl.match(/^https:\/\/discord\.com\/api\/webhooks\/.+/)) {
-        showAlert('Invalid Discord webhook URL format!', 'error');
+    if (!webhookUrl.match(/^https:\/\/SOCIALNWK\.com\/api\/webhooks\/.+/)) {
+        showAlert('Неверный формат URL вебхука SOCIALNWK!', 'error');
         return;
     }
 
@@ -512,7 +511,7 @@ async function testWebhookConnection() {
     const originalText = testBtn.innerHTML;
 
     testBtn.disabled = true;
-    testBtn.innerHTML = '<span class="loading"></span> Testing...';
+    testBtn.innerHTML = '<span class="loading"></span> Тестирование...';
 
     try {
         const response = await fetch(webhookUrl, {
@@ -520,18 +519,18 @@ async function testWebhookConnection() {
         });
 
         if (response.status === 401 || response.status === 403) {
-            throw new Error('Invalid webhook URL or webhook deleted');
+            throw new Error('Неверный URL вебхука или вебхук удалён');
         }
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        showAlert('✅ Webhook connection successful!', 'success');
+        showAlert('✅ Подключение к вебхуку успешно!', 'success');
 
     } catch (error) {
-        console.error('Webhook test failed:', error);
-        showAlert(`❌ Webhook test failed: ${error.message}`, 'error');
+        console.error('Тест вебхука не удался:', error);
+        showAlert(`❌ Тест вебхука не удался: ${error.message}`, 'error');
     } finally {
         testBtn.disabled = false;
         testBtn.innerHTML = originalText;
@@ -547,7 +546,7 @@ function previewMessage() {
     const previewCard = document.getElementById('previewCard');
 
     if (!embedData.title || !embedData.description) {
-        showAlert('Please fill in title and description first!', 'error');
+        showAlert('Пожалуйста, сначала заполните заголовок и описание!', 'error');
         return;
     }
 
@@ -615,14 +614,14 @@ async function sendMessage() {
     const pingRole = document.getElementById('pingRole').value.trim();
 
     if (!webhookUrl) {
-        showAlert('Please enter a webhook URL first!', 'error');
+        showAlert('Пожалуйста, введите URL вебхука!', 'error');
         return;
     }
 
     const embedData = buildEmbedData();
 
     if (!embedData.title || !embedData.description) {
-        showAlert('Title and description are required!', 'error');
+        showAlert('Заголовок и описание обязательны!', 'error');
         return;
     }
 
@@ -630,7 +629,7 @@ async function sendMessage() {
     const originalText = sendBtn.innerHTML;
 
     sendBtn.disabled = true;
-    sendBtn.innerHTML = '<span class="loading"></span> Sending...';
+    sendBtn.innerHTML = '<span class="loading"></span> Отправка...';
 
     try {
         const payload = {
@@ -655,7 +654,7 @@ async function sendMessage() {
         });
 
         if (response.status === 204) {
-            showAlert('✅ Message sent successfully to Discord!', 'success');
+            showAlert('✅ Сообщение успешно отправлено в SOCIALNWK!', 'success');
 
             await logWebhookAction('sent', {
                 embed: embedData,
@@ -663,15 +662,15 @@ async function sendMessage() {
             });
 
         } else if (response.status === 404) {
-            throw new Error('Webhook not found (deleted or invalid URL)');
+            throw new Error('Вебхук не найден (удалён или неверный URL)');
         } else {
             const errorText = await response.text();
             throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
 
     } catch (error) {
-        console.error('Failed to send message:', error);
-        showAlert(`❌ Failed to send message: ${error.message}`, 'error');
+        console.error('Не удалось отправить сообщение:', error);
+        showAlert(`❌ Не удалось отправить сообщение: ${error.message}`, 'error');
 
         await logWebhookAction('error', {
             error: error.message,
@@ -746,7 +745,7 @@ async function logWebhookAction(action, data) {
             })
         });
     } catch (error) {
-        console.error('Failed to log webhook action:', error);
+        console.error('Не удалось записать действие вебхука:', error);
     }
 }
 

@@ -1,4 +1,3 @@
-
 let teamMembers = [];
 
 async function loadTeamData() {
@@ -7,25 +6,25 @@ async function loadTeamData() {
         container.innerHTML = `
             <div class="loading-container">
                 <i class="fas fa-spinner fa-spin"></i>
-                <p>Loading team information...</p>
+                <p>Загрузка информации о команде...</p>
             </div>
         `;
 
         const response = await fetch('/api/get/about_us?group=team&active=true');
         if (!response.ok) {
-            throw new Error('Failed to load team data');
+            throw new Error('Не удалось загрузить данные о команде');
         }
 
         teamMembers = await response.json();
         renderTeam();
 
     } catch (error) {
-        console.error('Error loading team:', error);
+        console.error('Ошибка загрузки команды:', error);
         const container = document.getElementById('teamContainer');
         container.innerHTML = `
             <div class="no-results">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Unable to load team information. Please try again later.</p>
+                <p>Не удалось загрузить информацию о команде. Пожалуйста, попробуйте позже.</p>
             </div>
         `;
     }
@@ -38,7 +37,7 @@ function renderTeam() {
         container.innerHTML = `
             <div class="no-results">
                 <i class="fas fa-user-slash"></i>
-                <p>No team members found.</p>
+                <p>Сотрудники не найдены.</p>
             </div>
         `;
         return;
@@ -70,9 +69,9 @@ function renderTeam() {
         container.innerHTML = `
             <div class="no-results">
                 <i class="fas fa-search"></i>
-                <p>No team members found matching your filters.</p>
+                <p>Сотрудники, соответствующие вашим фильтрам, не найдены.</p>
                 <button onclick="resetFilters()" class="btn-secondary" style="margin-top: 1rem;">
-                    <i class="fas fa-redo"></i> Reset Filters
+                    <i class="fas fa-redo"></i> Сбросить фильтры
                 </button>
             </div>
         `;
@@ -91,7 +90,7 @@ function renderTeam() {
                 <h3 class="team-title">${member.name}</h3>
                 <div class="team-position">
                     <i class="fas fa-briefcase"></i>
-                    <span>${member.position || 'Team Member'}</span>
+                    <span>${member.position || 'Сотрудник'}</span>
                 </div>
                 ${member.role ? `
                     <div class="team-position" style="margin-top: 0.5rem;">
@@ -101,13 +100,13 @@ function renderTeam() {
                 ` : ''}
                 <div class="team-details">
                     <div class="detail-item">
-                        <span class="label">Department:</span>
+                        <span class="label">Отдел:</span>
                         <span>${getDepartmentLabel(member.subgroup)}</span>
                     </div>
                     ${member.years_experience ? `
                         <div class="detail-item">
-                            <span class="label">Experience:</span>
-                            <span>${member.years_experience} years</span>
+                            <span class="label">Опыт:</span>
+                            <span>${member.years_experience} лет</span>
                         </div>
                     ` : ''}
                 </div>
@@ -118,7 +117,7 @@ function renderTeam() {
                 ` : ''}
                 ${member.link ? `
                     <a href="${member.link}" target="_blank" class="btn-secondary" style="margin-top: 1rem; width: 100%; text-align: center;">
-                        <i class="fas fa-external-link-alt"></i> View Profile
+                        <i class="fas fa-external-link-alt"></i> Просмотреть профиль
                     </a>
                 ` : ''}
             </div>
@@ -128,12 +127,12 @@ function renderTeam() {
 
 function getDepartmentLabel(department) {
     const departments = {
-        'pilots': 'Flight Crew',
-        'cabin': 'Cabin Crew',
-        'operations': 'Operations',
-        'maintenance': 'Maintenance',
-        'management': 'Management',
-        'support': 'Support Staff'
+        'pilots': 'Лётный состав',
+        'cabin': 'Бортпроводники',
+        'operations': 'Операции',
+        'maintenance': 'Техобслуживание',
+        'management': 'Руководство',
+        'support': 'Вспомогательный персонал'
     };
     return departments[department] || department;
 }

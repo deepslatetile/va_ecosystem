@@ -9,17 +9,17 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -28,17 +28,17 @@
 }
 
 .payment-section {
-    background: #d5e4e4;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
 }
 
 .payment-section h2 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1.5rem;
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--dark);
+    border-bottom: 1px solid #bfd730;
     padding-bottom: 0.5rem;
 }
 
@@ -56,15 +56,15 @@
 
 .form-group label {
     /*font-weight: bold;*/
-    color: var(--dark);
+    color: #fff;
 }
 
 .form-group input {
     padding: 12px 16px;
-    border: 1px solid var(--dark);
+    border: 1px solid #bfd730;
     border-radius: 4px;
-    background: var(--green);
-    color: var(--dark);
+    background: #424045;
+    color: white;
     font-size: 1rem;
     box-sizing: border-box;
     width: 100%;
@@ -88,41 +88,38 @@
 }
 
 .load-btn {
-    background: var(--green);
-    color: #ffffff;
+    background: #46a41a;
+    color: white;
     margin-top: 0.5rem;
 }
 
 .load-btn:hover {
-    background: var(--green);
-    color: #ffffff;
+    background: #bfd730;
 }
 
 .process-btn {
-    background: var(--lightgreen);
-    color: #ffffff;
+    background: #46a41a;
+    color: white;
 }
 
 .process-btn:hover {
-    background: #007e33;
+    background: #bfd730;
 }
 
 .mass-btn {
-    background: #ff8800;
-    color: #ffffff;
+    background: #ba141a;
 }
 
 .mass-btn:hover {
-    background: #cc6a00;
+    background: #ed1c24;
 }
 
 .booking-info,
 .user-info {
-    background: var(--green);
-    padding: 1rem;
+    background: #424045;
+    padding: 0.5rem;
     border-radius: 4px;
-    border-left: 4px solid var(--green);
-    margin-top: 1rem;
+    border-left: 4px solid #bfd730;
 }
 
 .info-grid {
@@ -141,7 +138,7 @@
 
 .label {
     /*font-weight: bold;*/
-    color: #f5fcf8;
+    color: #ccc;
     white-space: nowrap;
 }
 
@@ -154,16 +151,16 @@
 }
 
 .transaction-item {
-    background: var(--green);
+    background: #252427;
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 4px;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid #bfd730;
     transition: background-color 0.3s;
 }
 
 .transaction-item:hover {
-    background: var(--green);
+    background: #424045;
 }
 
 .transaction-header {
@@ -181,15 +178,15 @@
 }
 
 .amount-positive {
-    color: var(--lightgreen);
+    color: #00C851;
 }
 
 .amount-negative {
-    color: var(--green);
+    color: #ed1c24;
 }
 
 .transaction-date {
-    color: #f5fcf8;
+    color: #ccc;
     font-size: 0.9rem;
 }
 
@@ -208,24 +205,24 @@
 
 .detail-label {
     /*font-weight: bold;*/
-    color: #f5fcf8;
+    color: #ccc;
     white-space: nowrap;
 }
 
 .loading {
     text-align: center;
     padding: 2rem;
-    color: #f5fcf8;
+    color: #ccc;
     font-style: italic;
 }
 
 .error {
     text-align: center;
     padding: 2rem;
-    color: var(--green);
-    background: var(--dark);
+    color: #ed1c24;
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);
     border-radius: 4px;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid #ed1c24;
 }
 
 .mass-btn:disabled {

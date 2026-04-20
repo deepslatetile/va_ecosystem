@@ -13,22 +13,22 @@ async function loadBookings() {
                 window.location.href = '/login';
                 return;
             }
-            throw new Error('Failed to load bookings');
+            throw new Error('Не удалось загрузить бронирования');
         }
-        
+
         allBookings = await response.json();
         renderBookings();
-        
+
     } catch (error) {
-        console.error('Error loading bookings:', error);
-        showAlert('error', 'Failed to load bookings. Please try again.');
+        console.error('Ошибка загрузки бронирований:', error);
+        showAlert('error', 'Не удалось загрузить бронирования. Пожалуйста, попробуйте снова.');
         document.getElementById('bookingsList').innerHTML = `
             <div class="no-bookings">
                 <i class="fas fa-exclamation-triangle"></i>
-                <h3>Error Loading Bookings</h3>
+                <h3>Ошибка загрузки бронирований</h3>
                 <p>${error.message}</p>
                 <button class="btn-small btn-small-primary" onclick="loadBookings()">
-                    <i class="fas fa-redo"></i> Try Again
+                    <i class="fas fa-redo"></i> Попробовать снова
                 </button>
             </div>
         `;
@@ -37,15 +37,15 @@ async function loadBookings() {
 
 function renderBookings() {
     const bookingsList = document.getElementById('bookingsList');
-    
+
     if (!allBookings || allBookings.length === 0) {
         bookingsList.innerHTML = `
             <div class="no-bookings">
                 <i class="fas fa-plane-slash"></i>
-                <h3>No Bookings Found</h3>
-                <p>You haven't made any bookings yet.</p>
+                <h3>Бронирования не найдены</h3>
+                <p>У вас пока нет бронирований.</p>
                 <a href="/book" class="btn-small btn-small-primary">
-                    <i class="fas fa-plus"></i> Make Your First Booking
+                    <i class="fas fa-plus"></i> Сделать первое бронирование
                 </a>
             </div>
         `;
@@ -54,9 +54,9 @@ function renderBookings() {
 
     const filteredBookings = filterBookings(allBookings, currentFilter);
     const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
-    
-    const searchedBookings = searchTerm 
-        ? filteredBookings.filter(booking => 
+
+    const searchedBookings = searchTerm
+        ? filteredBookings.filter(booking =>
             (booking.flight_number && booking.flight_number.toLowerCase().includes(searchTerm)) ||
             (booking.passenger_name && booking.passenger_name.toLowerCase().includes(searchTerm)) ||
             (booking.seat && booking.seat.toLowerCase().includes(searchTerm)) ||
@@ -70,8 +70,8 @@ function renderBookings() {
         bookingsList.innerHTML = `
             <div class="no-bookings">
                 <i class="fas fa-search"></i>
-                <h3>No Matching Bookings</h3>
-                <p>Try changing your search or filter criteria.</p>
+                <h3>Бронирования не найдены</h3>
+                <p>Попробуйте изменить поиск или фильтры.</p>
             </div>
         `;
         return;
@@ -85,7 +85,7 @@ function renderBookings() {
                     ${getStatusText(booking)}
                 </div>
             </div>
-            
+
             <div class="booking-flight">
                 <div class="flight-route">
                     <div class="flight-airport">
@@ -100,39 +100,39 @@ function renderBookings() {
                         <div class="airport-name">${getAirportName(booking.flight_arrival)}</div>
                     </div>
                 </div>
-                
+
                 <div class="flight-details">
                     <div class="detail-item">
-                        <div class="detail-label">Flight</div>
+                        <div class="detail-label">Рейс</div>
                         <div class="detail-value">${booking.flight_number}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Date</div>
+                        <div class="detail-label">Дата</div>
                         <div class="detail-value">${formatDate(booking.flight_datetime)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Seat</div>
+                        <div class="detail-label">Место</div>
                         <div class="detail-value">${booking.seat}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Class</div>
+                        <div class="detail-label">Класс</div>
                         <div class="detail-value">${booking.serve_class}</div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="booking-actions">
                 ${booking.can_modify ? `
                 <button class="btn-small btn-small-primary" onclick="event.stopPropagation(); editBooking('${booking.id}')">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Редактировать
                 </button>
                 ` : ''}
                 <button class="btn-small btn-small-secondary" onclick="event.stopPropagation(); viewBoardingPass('${booking.id}')">
-                    <i class="fas fa-ticket-alt"></i> Pass
+                    <i class="fas fa-ticket-alt"></i> Талон
                 </button>
                 ${booking.can_modify ? `
                 <button class="btn-small btn-small-danger" onclick="event.stopPropagation(); cancelBooking('${booking.id}')">
-                    <i class="fas fa-times"></i> Cancel
+                    <i class="fas fa-times"></i> Отменить
                 </button>
                 ` : ''}
             </div>
@@ -142,7 +142,7 @@ function renderBookings() {
 
 function filterBookings(bookings, filter) {
     const now = Math.floor(Date.now() / 1000);
-    
+
     switch(filter) {
         case 'active':
             return bookings.filter(b => b.valid === 1 && b.flight_datetime > now);
@@ -157,20 +157,20 @@ function filterBookings(bookings, filter) {
 
 function getStatusClass(booking) {
     if (booking.valid === 0) return 'status-cancelled';
-    
+
     const now = Math.floor(Date.now() / 1000);
     if (booking.flight_datetime <= now) return 'status-past';
-    
+
     return 'status-active';
 }
 
 function getStatusText(booking) {
-    if (booking.valid === 0) return 'Cancelled';
-    
+    if (booking.valid === 0) return 'Отменено';
+
     const now = Math.floor(Date.now() / 1000);
-    if (booking.flight_datetime <= now) return 'Completed';
-    
-    return 'Active';
+    if (booking.flight_datetime <= now) return 'Завершено';
+
+    return 'Активно';
 }
 
 function getAirportCode(airportString) {
@@ -180,15 +180,15 @@ function getAirportCode(airportString) {
 }
 
 function getAirportName(airportString) {
-    if (!airportString) return 'Unknown';
+    if (!airportString) return 'Неизвестно';
     const parts = airportString.split(' ');
     return parts.slice(0, -1).join(' ') || airportString;
 }
 
 function formatDate(timestamp) {
-    if (!timestamp) return 'Unknown';
+    if (!timestamp) return 'Неизвестно';
     const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('ru-RU', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -201,22 +201,22 @@ function showLoading() {
     document.getElementById('bookingsList').innerHTML = `
         <div class="loading-spinner">
             <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading your bookings...</p>
+            <p>Загрузка ваших бронирований...</p>
         </div>
     `;
 }
 
 function showAlert(type, message) {
     const alertsDiv = document.getElementById('bookingsAlerts');
-    const alertClass = type === 'error' ? 'alert-error' : 
+    const alertClass = type === 'error' ? 'alert-error' :
                       type === 'success' ? 'alert-success' : 'alert-info';
-    
+
     const alert = document.createElement('div');
     alert.className = `alert ${alertClass}`;
     alert.innerHTML = message;
-    
+
     alertsDiv.appendChild(alert);
-    
+
     setTimeout(() => {
         alert.style.opacity = '0';
         setTimeout(() => alert.remove(), 500);
@@ -226,17 +226,17 @@ function showAlert(type, message) {
 async function showBookingDetails(bookingId) {
     try {
         currentBookingId = bookingId;
-        
+
         const booking = allBookings.find(b => b.id === bookingId);
         if (!booking) {
-            throw new Error('Booking not found');
+            throw new Error('Бронирование не найдено');
         }
-        
+
         await loadBookingModal(booking);
-        
+
     } catch (error) {
-        console.error('Error loading booking details:', error);
-        showAlert('error', 'Failed to load booking details.');
+        console.error('Ошибка загрузки данных бронирования:', error);
+        showAlert('error', 'Не удалось загрузить данные бронирования.');
     }
 }
 
@@ -245,16 +245,16 @@ async function loadBookingModal(booking) {
     const modalTitle = document.getElementById('modalTitle');
     const cancelBtn = document.getElementById('cancelBookingBtn');
     const viewPassBtn = document.getElementById('viewBoardingPassBtn');
-    
-    modalTitle.textContent = `Booking #${booking.id}`;
-    
+
+    modalTitle.textContent = `Бронирование #${booking.id}`;
+
     modalBody.innerHTML = createViewDetails(booking);
     cancelBtn.style.display = booking.can_modify ? 'block' : 'none';
     viewPassBtn.style.display = 'block';
-    
+
     cancelBtn.onclick = () => cancelBooking(booking.id);
     viewPassBtn.onclick = () => viewBoardingPass(booking.id);
-    
+
     document.getElementById('bookingModal').style.display = 'block';
 }
 
@@ -262,64 +262,64 @@ function createViewDetails(booking) {
     return `
         <div class="booking-details">
             <div class="detail-section">
-                <h3>Flight Information</h3>
+                <h3>Информация о рейсе</h3>
                 <div class="detail-grid">
                     <div class="detail-item">
-                        <label>Flight Number:</label>
+                        <label>Номер рейса:</label>
                         <span>${booking.flight_number}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Route:</label>
-                        <span>${booking.flight_departure || 'N/A'} → ${booking.flight_arrival || 'N/A'}</span>
+                        <label>Маршрут:</label>
+                        <span>${booking.flight_departure || 'Н/Д'} → ${booking.flight_arrival || 'Н/Д'}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Date & Time:</label>
+                        <label>Дата и время:</label>
                         <span>${formatDate(booking.flight_datetime)}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Status:</label>
+                        <label>Статус:</label>
                         <span class="status-badge ${getStatusClass(booking)}">${getStatusText(booking)}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Aircraft:</label>
-                        <span>${booking.aircraft || 'N/A'}</span>
+                        <label>Воздушное судно:</label>
+                        <span>${booking.aircraft || 'Н/Д'}</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="detail-section">
-                <h3>Passenger Information</h3>
+                <h3>Информация о пассажире</h3>
                 <div class="detail-grid">
                     <div class="detail-item">
-                        <label>Passenger Name:</label>
-                        <span>${booking.passenger_name || 'N/A'}</span>
+                        <label>Имя пассажира:</label>
+                        <span>${booking.passenger_name || 'Н/Д'}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Seat:</label>
+                        <label>Место:</label>
                         <span>${booking.seat}</span>
                     </div>
                     <div class="detail-item">
-                        <label>Class:</label>
+                        <label>Класс:</label>
                         <span>${booking.serve_class}</span>
                     </div>
                 </div>
             </div>
-            
+
             ${booking.pax_service ? `
             <div class="detail-section">
-                <h3>Additional Services</h3>
+                <h3>Дополнительные услуги</h3>
                 <div class="detail-grid">
                     <div class="detail-item">
-                        <label>Services:</label>
+                        <label>Услуги:</label>
                         <span>${booking.pax_service}</span>
                     </div>
                 </div>
             </div>
             ` : ''}
-            
+
             ${booking.note ? `
             <div class="detail-section">
-                <h3>Notes</h3>
+                <h3>Примечания</h3>
                 <div class="detail-grid">
                     <div class="detail-item">
                         <span>${booking.note}</span>
@@ -343,26 +343,26 @@ function editBooking(bookingId) {
 }
 
 async function cancelBooking(bookingId) {
-    if (!confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
+    if (!confirm('Вы уверены, что хотите отменить это бронирование? Это действие необратимо.')) {
         return;
     }
-    
+
     try {
         const response = await fetch(`/api/delete/booking/${bookingId}`, {
             method: 'DELETE'
         });
-        
+
         if (response.ok) {
-            showAlert('success', 'Booking cancelled successfully.');
+            showAlert('success', 'Бронирование успешно отменено.');
             closeModal();
             loadBookings();
         } else {
             const error = await response.json();
-            throw new Error(error.error || 'Failed to cancel booking');
+            throw new Error(error.error || 'Не удалось отменить бронирование');
         }
     } catch (error) {
-        console.error('Error cancelling booking:', error);
-        showAlert('error', `Failed to cancel booking: ${error.message}`);
+        console.error('Ошибка отмены бронирования:', error);
+        showAlert('error', `Не удалось отменить бронирование: ${error.message}`);
     }
 }
 

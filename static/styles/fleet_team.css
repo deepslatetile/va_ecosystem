@@ -9,17 +9,17 @@
     text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .page-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2.2rem;
     margin-bottom: 0.5rem;
 }
 
 .page-header .subtitle {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.1rem;
 }
 
@@ -32,7 +32,7 @@
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -46,7 +46,7 @@
 
 .filter-group label {
     display: block;
-    color: var(--green);
+    color: #ccc;
     margin-bottom: 0.5rem;
     /*font-weight: 500;*/
 }
@@ -55,16 +55,16 @@
     width: 100%;
     padding: 10px 14px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
 .filter-select:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
 }
 
@@ -78,10 +78,10 @@
 
 .fleet-card,
 .team-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -94,7 +94,7 @@
 .fleet-image,
 .team-image {
     height: 200px;
-    background: linear-gradient(135deg, var(--green) 0%, var(--green) 100%);
+    background: linear-gradient(135deg, #46a41a 0%, #46a41a 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,7 +110,7 @@
 
 .fleet-image .placeholder,
 .team-image .placeholder {
-    color: var(--green);
+    color: #ccc;
     font-size: 3rem;
 }
 
@@ -121,7 +121,7 @@
 
 .fleet-title,
 .team-title {
-    color: var(--dark);
+    color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
     /*font-weight: 600;*/
@@ -129,7 +129,7 @@
 
 .fleet-registration,
 .team-position {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
     margin-bottom: 1rem;
     display: flex;
@@ -139,7 +139,7 @@
 
 .fleet-details,
 .team-details {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.9rem;
     margin-bottom: 1rem;
     line-height: 1.5;
@@ -151,17 +151,17 @@
     justify-content: space-between;
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .fleet-details .label,
 .team-details .label {
-    color: var(--green);
+    color: #ccc;
 }
 
 .fleet-description,
 .team-description {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
     line-height: 1.5;
     margin-top: 1rem;
@@ -181,8 +181,8 @@
 
 .status-active {
     background: rgba(0, 200, 81, 0.2);
-    color: var(--lightgreen);
-    border: 1px solid var(--lightgreen);
+    color: #00C851;
+    border: 1px solid #00C851;
 }
 
 .status-maintenance {
@@ -193,8 +193,8 @@
 
 .status-future {
     background: rgba(33, 150, 243, 0.2);
-    color: #E9BF0E;
-    border: 1px solid #E9BF0E;
+    color: #2196f3;
+    border: 1px solid #2196f3;
 }
 
 .status-inactive {
@@ -207,7 +207,7 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .loading-container i {
@@ -217,8 +217,8 @@
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
     padding: 10px 20px;
     border-radius: 6px;
     cursor: pointer;
@@ -238,21 +238,19 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem;
-    color: var(--green);
+    color: #bfd730;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    border: 1px dashed var(--green);
+    border: 1px dashed #46a41a;
 }
 
 .no-results i {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
-option {
-    background-color: var(--green);
-}
+
 
 /* Mobile */
 @media (max-width: 768px) {

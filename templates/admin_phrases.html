@@ -7,30 +7,30 @@
 {% block content %}
 <div class="admin-phrases-container">
     <div class="admin-header">
-        <h1>Phrases Management</h1>
+        <h1>Управление фразами</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> /
-            Phrases Management
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> /
+            Управление фразами
         </div>
     </div>
 
     <div class="add-phrase-form">
-        <input type="text" id="newPhrase" placeholder="Create new..." maxlength="500">
+        <input type="text" id="newPhrase" placeholder="Создать новую..." maxlength="500">
         <button class="add-btn" onclick="addPhrase()">
-            <i class="fas fa-plus"></i> Add
+            <i class="fas fa-plus"></i> Добавить
         </button>
     </div>
 
     <div class="import-export-actions">
         <button class="btn btn-secondary" onclick="exportPhrases()">
-            <i class="fas fa-download"></i> Export Phrases
+            <i class="fas fa-download"></i> Экспорт фраз
         </button>
         <label class="btn btn-secondary file-input-wrapper">
-            <i class="fas fa-upload"></i> Import Phrases
+            <i class="fas fa-upload"></i> Импорт фраз
             <input type="file" id="importFile" accept=".json" onchange="importPhrases(event)">
         </label>
         <button class="btn btn-danger" onclick="clearAllPhrases()">
-            <i class="fas fa-trash"></i> Clear All
+            <i class="fas fa-trash"></i> Очистить всё
         </button>
     </div>
 
@@ -39,8 +39,8 @@
     <div id="phrasesContainer">
         <div class="empty-state" id="emptyState">
             <i class="fas fa-comment-slash"></i>
-            <h3>Nothing here</h3>
-            <p>Add first with input above</p>
+            <h3>Здесь ничего нет</h3>
+            <p>Добавьте первую фразу с помощью поля выше</p>
         </div>
         <div class="phrases-grid" id="phrasesGrid"></div>
     </div>

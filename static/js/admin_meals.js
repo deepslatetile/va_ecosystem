@@ -1,4 +1,3 @@
-
 let currentMeals = [];
 let mealToDelete = null;
 
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function loadAllMeals() {
     const mealsGrid = document.getElementById('mealsGrid');
-    mealsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading meals...</p></div>';
+    mealsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Загрузка меню...</p></div>';
 
     try {
         const response = await fetch('/api/get/all_meals');
@@ -19,12 +18,12 @@ async function loadAllMeals() {
             displayMeals(currentMeals);
             updateFilters();
         } else {
-            throw new Error('Failed to load meals');
+            throw new Error('Не удалось загрузить меню');
         }
 
     } catch (error) {
-        console.error('Error loading meals:', error);
-        mealsGrid.innerHTML = '<div class="error">Failed to load meals. Please try again.</div>';
+        console.error('Ошибка загрузки меню:', error);
+        mealsGrid.innerHTML = '<div class="error">Не удалось загрузить меню. Пожалуйста, попробуйте снова.</div>';
     }
 }
 
@@ -32,7 +31,7 @@ function displayMeals(meals) {
     const mealsGrid = document.getElementById('mealsGrid');
 
     if (meals.length === 0) {
-        mealsGrid.innerHTML = '<div class="no-meals"><i class="fas fa-utensils"></i><h3>No meals found</h3><p>Create your first meal to get started</p></div>';
+        mealsGrid.innerHTML = '<div class="no-meals"><i class="fas fa-utensils"></i><h3>Блюда не найдены</h3><p>Создайте первое блюдо</p></div>';
         return;
     }
 
@@ -51,8 +50,8 @@ function displayMeals(meals) {
         }
         html += '<div class="meal-image">' + imageHtml + '</div>';
         html += '<div class="meal-actions">';
-        html += '<button class="btn-edit" onclick="editMeal(' + meal.id + ')"><i class="fas fa-edit"></i> Edit</button>';
-        html += '<button class="btn-delete" onclick="showDeleteModal(' + meal.id + ', \'' + escapeString(meal.name) + '\')"><i class="fas fa-trash"></i> Delete</button>';
+        html += '<button class="btn-edit" onclick="editMeal(' + meal.id + ')"><i class="fas fa-edit"></i> Редактировать</button>';
+        html += '<button class="btn-delete" onclick="showDeleteModal(' + meal.id + ', \'' + escapeString(meal.name) + '\')"><i class="fas fa-trash"></i> Удалить</button>';
         html += '</div>';
         html += '</div>';
     });
@@ -67,12 +66,12 @@ function updateFilters() {
     const classes = [...new Set(currentMeals.map(meal => meal.serve_class))];
     const times = [...new Set(currentMeals.map(meal => meal.serve_time))];
 
-    classFilter.innerHTML = '<option value="">All Classes</option>';
+    classFilter.innerHTML = '<option value="">Все классы</option>';
     classes.forEach(className => {
         classFilter.innerHTML += '<option value="' + className + '">' + className + '</option>';
     });
 
-    timeFilter.innerHTML = '<option value="">All Times</option>';
+    timeFilter.innerHTML = '<option value="">Все время</option>';
     times.forEach(time => {
         timeFilter.innerHTML += '<option value="' + time + '">' + time + '</option>';
     });
@@ -122,7 +121,7 @@ function setupMealForm() {
 }
 
 function showAddMealForm() {
-    document.getElementById('formTitle').textContent = 'Add New Meal';
+    document.getElementById('formTitle').textContent = 'Добавить блюдо';
     document.getElementById('mealFormElement').reset();
     document.getElementById('mealId').value = '';
     document.getElementById('mealForm').style.display = 'block';
@@ -137,7 +136,7 @@ async function editMeal(mealId) {
     const meal = currentMeals.find(m => m.id === mealId);
     if (!meal) return;
 
-    document.getElementById('formTitle').textContent = 'Edit Meal';
+    document.getElementById('formTitle').textContent = 'Редактировать блюдо';
     document.getElementById('mealId').value = meal.id;
     document.getElementById('serve_class').value = meal.serve_class;
     document.getElementById('serve_time').value = meal.serve_time;
@@ -163,13 +162,13 @@ async function saveMeal(event) {
     };
 
     if (!mealData.serve_class || !mealData.serve_time || !mealData.name) {
-        alert('Please fill in all required fields');
+        alert('Пожалуйста, заполните все обязательные поля');
         return;
     }
 
     const submitBtn = event.target.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
     submitBtn.disabled = true;
 
     try {
@@ -184,16 +183,16 @@ async function saveMeal(event) {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to save meal');
+            throw new Error(result.error || 'Не удалось сохранить блюдо');
         }
 
         hideMealForm();
         await loadAllMeals();
-        showNotification('Meal ' + (isEdit ? 'updated' : 'created') + ' successfully!', 'success');
+        showNotification('Блюдо ' + (isEdit ? 'обновлено' : 'создано') + ' успешно!', 'success');
 
     } catch (error) {
-        console.error('Error saving meal:', error);
-        alert('Failed to save meal: ' + error.message);
+        console.error('Ошибка сохранения блюда:', error);
+        alert('Не удалось сохранить блюдо: ' + error.message);
     } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
@@ -216,7 +215,7 @@ async function confirmDelete() {
 
     const deleteBtn = document.querySelector('#deleteModal .btn-danger');
     deleteBtn.disabled = true;
-    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Удаление...';
 
     try {
         const response = await fetch('/api/delete/meal/' + mealToDelete, {
@@ -226,19 +225,19 @@ async function confirmDelete() {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to delete meal');
+            throw new Error(result.error || 'Не удалось удалить блюдо');
         }
 
         closeDeleteModal();
         await loadAllMeals();
-        showNotification('Meal deleted successfully!', 'success');
+        showNotification('Блюдо успешно удалено!', 'success');
 
     } catch (error) {
-        console.error('Error deleting meal:', error);
-        alert('Failed to delete meal: ' + error.message);
+        console.error('Ошибка удаления блюда:', error);
+        alert('Не удалось удалить блюдо: ' + error.message);
     } finally {
         deleteBtn.disabled = false;
-        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Удалить';
     }
 }
 

@@ -7,40 +7,40 @@
 {% block content %}
 <div class="team-page">
     <div class="page-header">
-        <h1><i class="fas fa-users"></i> Our Team</h1>
-        <p class="subtitle">Meet the dedicated professionals behind Cathay Pacific Airlines</p>
+        <h1><i class="fas fa-users"></i> Наша команда</h1>
+        <p class="subtitle">Познакомьтесь с профессионалами, стоящими за Авиакомпанией «Вектор»</p>
     </div>
 
     <div class="page-content">
         <div class="filters-container">
             <div class="filter-group">
-                <label for="departmentFilter">Filter by Department:</label>
+                <label for="departmentFilter">Фильтр по отделу:</label>
                 <select id="departmentFilter" class="filter-select">
-                    <option value="all">All Departments</option>
-                    <option value="pilots">Flight Crew</option>
-                    <option value="cabin">Cabin Crew</option>
-                    <option value="operations">Operations</option>
-                    <option value="maintenance">Maintenance</option>
-                    <option value="management">Management</option>
+                    <option value="all">Все отделы</option>
+                    <option value="pilots">Лётный состав</option>
+                    <option value="cabin">Бортпроводники</option>
+                    <option value="operations">Операции</option>
+                    <option value="maintenance">Техобслуживание</option>
+                    <option value="management">Руководство</option>
                 </select>
             </div>
             <div class="filter-group">
-                <label for="sortFilter">Sort by:</label>
+                <label for="sortFilter">Сортировка:</label>
                 <select id="sortFilter" class="filter-select">
-                    <option value="name">Name</option>
-                    <option value="experience">Experience</option>
-                    <option value="position">Position</option>
+                    <option value="name">По имени</option>
+                    <option value="experience">По опыту</option>
+                    <option value="position">По должности</option>
                 </select>
             </div>
             <button id="resetFilters" class="btn-secondary">
-                <i class="fas fa-redo"></i> Reset Filters
+                <i class="fas fa-redo"></i> Сбросить фильтры
             </button>
         </div>
 
         <div id="teamContainer" class="team-grid">
             <div class="loading-container">
                 <i class="fas fa-spinner fa-spin"></i>
-                <p>Loading team information...</p>
+                <p>Загрузка информации о команде...</p>
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
 {
-  "name": "Cathay Pacific",
-  "short_name": "Cathay Pacific",
-  "description": "Cathay Pacific - now in your pocket",
+  "name": "Авиакомпания «Вектор»",
+  "short_name": "Вектор",
+  "description": "Авиакомпания «Вектор» — задаём направление",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#24322b",
-  "theme_color": "#008f81",
+  "background_color": "#252427",
+  "theme_color": "#bfd730",
   "icons": [
     {
       "src": "/static/images/icon-192x192.png",

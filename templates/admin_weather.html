@@ -7,35 +7,35 @@
 {% block content %}
 <div class="admin-weather-container">
     <div class="admin-header">
-        <h1>Weather Management</h1>
+        <h1>Управление погодой</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> /
-            Weather Management
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> /
+            Управление погодой
         </div>
     </div>
 
     <div class="weather-controls">
         <div class="airport-search">
-            <input type="text" id="icaoCode" placeholder="Enter ICAO code (e.g., UNKL)" maxlength="4" value="UNKL">
+            <input type="text" id="icaoCode" placeholder="Введите код ICAO (например, UNKL)" maxlength="4" value="UNKL">
             <button class="btn btn-primary" onclick="fetchWeather()">
-                <i class="fas fa-search"></i> Get Weather
+                <i class="fas fa-search"></i> Получить погоду
             </button>
             <button class="btn btn-secondary" onclick="fetchMultipleStations()">
-                <i class="fas fa-layer-group"></i> Multiple Stations
+                <i class="fas fa-layer-group"></i> Несколько станций
             </button>
             <button class="btn btn-secondary" onclick="showCacheManagement()">
-                <i class="fas fa-database"></i> Cache
+                <i class="fas fa-database"></i> Кэш
             </button>
         </div>
 
         <div class="favorite-stations">
-            <h3>Quick Access</h3>
+            <h3>Быстрый доступ</h3>
             <div class="station-buttons">
-                <button class="btn btn-small" onclick="setICAO('UNKL')">UNKL (Krasnoyarsk)</button>
-                <button class="btn btn-small" onclick="setICAO('UUEE')">UUEE (Moscow)</button>
-                <button class="btn btn-small" onclick="setICAO('UUDD')">UUDD (Domodedovo)</button>
-                <button class="btn btn-small" onclick="setICAO('URSS')">URSS (Sochi)</button>
-                <button class="btn btn-small" onclick="setICAO('UHWW')">UHWW (Vladivostok)</button>
+                <button class="btn btn-small" onclick="setICAO('UNKL')">UNKL (Красноярск)</button>
+                <button class="btn btn-small" onclick="setICAO('UUEE')">UUEE (Москва)</button>
+                <button class="btn btn-small" onclick="setICAO('UUDD')">UUDD (Домодедово)</button>
+                <button class="btn btn-small" onclick="setICAO('URSS')">URSS (Сочи)</button>
+                <button class="btn btn-small" onclick="setICAO('UHWW')">UHWW (Владивосток)</button>
             </div>
         </div>
     </div>
@@ -45,22 +45,22 @@
     <div class="weather-display">
         <div class="loading-spinner" id="loadingSpinner">
             <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading weather data...</p>
+            <p>Загрузка погодных данных...</p>
         </div>
 
         <div class="weather-cards" id="weatherCards"></div>
 
         <div class="empty-state" id="emptyState">
             <i class="fas fa-cloud"></i>
-            <h3>No Weather Data</h3>
-            <p>Enter an ICAO code and click "Get Weather" to load METAR data</p>
+            <h3>Нет данных о погоде</h3>
+            <p>Введите код ICAO и нажмите «Получить погоду» для загрузки METAR-данных</p>
         </div>
     </div>
 
     <div class="modal" id="multiStationModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Multiple Weather Stations</h3>
+                <h3>Несколько метеостанций</h3>
                 <button class="modal-close" onclick="closeMultiStationModal()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -68,10 +68,10 @@
             <div class="modal-body">
                 <div class="station-input-group">
                     <input type="text" id="multiStationsInput"
-                           placeholder="Enter ICAO codes separated by commas (e.g., UNKL,UUEE,UUDD)"
+                           placeholder="Введите коды ICAO через запятую (например, UNKL,UUEE,UUDD)"
                            value="UNKL,UUEE,UUDD,URSS,UHWW">
                     <button class="btn btn-primary" onclick="fetchMultipleStationsData()">
-                        <i class="fas fa-download"></i> Fetch All
+                        <i class="fas fa-download"></i> Загрузить все
                     </button>
                 </div>
                 <div class="stations-results" id="multiStationsResults"></div>
@@ -82,7 +82,7 @@
     <div class="modal" id="cacheModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Weather Cache Management</h3>
+                <h3>Управление кэшем погоды</h3>
                 <button class="modal-close" onclick="closeCacheModal()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -90,16 +90,16 @@
             <div class="modal-body">
                 <div class="cache-controls">
                     <button class="btn btn-primary" onclick="getCacheStatus()">
-                        <i class="fas fa-info-circle"></i> Get Cache Status
+                        <i class="fas fa-info-circle"></i> Получить статус кэша
                     </button>
                     <button class="btn btn-danger" onclick="clearWeatherCache()">
-                        <i class="fas fa-trash"></i> Clear Cache
+                        <i class="fas fa-trash"></i> Очистить кэш
                     </button>
                 </div>
                 <div class="cache-status" id="cacheStatus">
                     <div class="cache-info-placeholder">
                         <i class="fas fa-database"></i>
-                        <p>Click "Get Cache Status" to view cache information</p>
+                        <p>Нажмите «Получить статус кэша» для просмотра информации</p>
                     </div>
                 </div>
             </div>

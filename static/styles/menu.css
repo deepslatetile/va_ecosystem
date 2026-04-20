@@ -10,13 +10,13 @@
 }
 
 .menu-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
 .menu-header p {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.2rem;
 }
 
@@ -35,17 +35,17 @@
 }
 
 .filter-group label {
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
     text-align: center;
 }
 
 .filter-group select {
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid var(--green);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     min-width: 200px;
 }
@@ -64,21 +64,21 @@
     text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid #46a41a;
 }
 
 .category-title {
-    color: var(--green);
+    color: #bfd730;
     font-size: 2rem;
     margin: 0;
     text-transform: capitalize;
 }
 
 .meal-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     transition: all 0.3s ease;
     height: 100%;
     display: flex;
@@ -87,8 +87,8 @@
 
 .meal-card:hover {
     transform: translateY(-5px);
-    border-color: var(--green);
-    box-shadow: 0 8px 25px rgba(0, 100, 90, 0.3);
+    border-color: #bfd730;
+    box-shadow: 0 8px 25px rgb(191 215 48 / 30%);
 }
 
 .meal-image {
@@ -110,7 +110,7 @@
 }
 
 .meal-image-placeholder {
-    color: var(--green);
+    color: #ccc;
     font-size: 3rem;
 }
 
@@ -121,15 +121,15 @@
 }
 
 .meal-name {
-    color: var(--dark);
+    color: #fff;
     font-size: 1.5rem;
     /*font-weight: bold;*/
     margin-bottom: 0.5rem;
 }
 
 .meal-class {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -139,14 +139,14 @@
 }
 
 .meal-description {
-    color: var(--green);
+    color: #ccc;
     line-height: 1.6;
     margin-bottom: 1.5rem;
     flex: 1;
 }
 
 .meal-time {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
     /*font-weight: 500;*/
     text-transform: capitalize;
@@ -155,13 +155,13 @@
 .loading {
     text-align: center;
     padding: 4rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .no-meals {
     text-align: center;
     padding: 4rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .no-meals i {
@@ -170,13 +170,11 @@
 }
 
 .no-meals h3 {
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 1rem;
 }
 
-option {
-    background-color: var(--green);
-}
+
 
 /* Mobile */
 @media (max-width: 768px) {

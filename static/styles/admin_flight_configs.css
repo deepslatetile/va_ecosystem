@@ -9,17 +9,17 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
 .admin-breadcrumb {
-    color: var(--green);
+    color: #fff;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -45,9 +45,9 @@
     width: 100%;
     padding: 12px 16px 12px 45px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
 }
@@ -57,7 +57,7 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--green);
+    color: #ccc;
 }
 
 .config-types {
@@ -69,8 +69,8 @@
 
 .type-btn {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
-    color: var(--green);
+    border: 1px solid #46a41a;
+    color: #fff;
     padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
@@ -81,9 +81,9 @@
 
 .type-btn.active,
 .type-btn:hover {
-    background: var(--green);
-    color: var(--white);
-    border-color: var(--green);
+    background: #bfd730;
+    color: white;
+    border-color: #bfd730;
 }
 
 .configs-grid {
@@ -94,17 +94,17 @@
 }
 
 .config-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 8px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     transition: all 0.3s ease;
 }
 
 .config-card:hover {
     transform: translateY(-2px);
-    border-color: var(--green);
-    box-shadow: 0 4px 12px rgba(0, 100, 90, 0.2);
+    border-color: #bfd730;
+    box-shadow: 0 4px 12px rgba(191, 215, 48, 0.2);
 }
 
 .config-header {
@@ -118,15 +118,15 @@
 .config-name {
     font-size: 1.2rem;
     /*font-weight: bold;*/
-    color: var(--green);
+    color: #bfd730;
     margin: 0;
     word-break: break-word;
     flex: 1;
 }
 
 .config-type {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -136,14 +136,14 @@
 }
 
 .config-description {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1rem;
     line-height: 1.4;
     font-size: 0.9rem;
 }
 
 .config-data {
-    background: rgba(0, 100, 90, 0.3);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -151,8 +151,8 @@
     overflow-y: auto;
     font-family: 'Courier New', monospace;
     font-size: 0.8rem;
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .config-footer {
@@ -160,14 +160,14 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .config-meta {
     font-size: 0.8rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .config-actions {
@@ -191,21 +191,21 @@
 }
 
 .btn-edit {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-edit:hover {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-delete {
-    background: var(--green);
-    color: var(--white);
+    background: #cc3333;
+    color: white;
 }
 
 .btn-delete:hover {
-    background: #ff6b6b;
+    background: #ed1c24;
 }
 
 .modal {
@@ -222,13 +222,13 @@
 }
 
 .modal-content {
-    background: var(--lightgreen);
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     margin: 5% auto;
     padding: 0;
     border-radius: 8px;
     width: 95%;
     max-width: 600px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     animation: modalFadeIn 0.3s;
     max-height: 90vh;
     overflow-y: auto;
@@ -251,7 +251,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     position: sticky;
     top: 0;
     background: inherit;
@@ -260,12 +260,12 @@
 
 .modal-header h3 {
     margin: 0;
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.3rem;
 }
 
 .close {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.5rem;
     /*font-weight: bold;*/
     cursor: pointer;
@@ -273,7 +273,7 @@
 }
 
 .close:hover {
-    color: var(--dark);
+    color: #fff;
 }
 
 .modal-body {
@@ -287,7 +287,7 @@
     justify-content: flex-end;
     gap: 1rem;
     padding: 1.5rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
     flex-wrap: wrap;
 }
 
@@ -298,7 +298,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
     /*font-weight: 500;*/
 }
 
@@ -308,9 +308,9 @@
     width: 100%;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
     resize: none;
@@ -321,21 +321,21 @@
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .form-hint {
     font-size: 0.8rem;
-    color: var(--green);
+    color: #bfd730;
     margin-top: 0.25rem;
     line-height: 1.3;
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -351,20 +351,20 @@
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-primary:disabled {
-    background: var(--green);
+    background: #46a41a;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
+    color: #ccc;
     padding: 12px 24px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
@@ -382,8 +382,8 @@
 }
 
 .btn-danger {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -414,14 +414,14 @@
 .loading {
     text-align: center;
     padding: 3rem;
-    color: var(--green);
+    color: #bfd730;
     grid-column: 1 / -1;
 }
 
 .no-configs {
     text-align: center;
     padding: 3rem;
-    color: var(--green);
+    color: #bfd730;
     grid-column: 1 / -1;
 }
 
@@ -445,18 +445,16 @@
 }
 
 .notification-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .notification-error {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
-option {
-    background-color: var(--green);
-}
+
 
 @keyframes slideIn {
     from {

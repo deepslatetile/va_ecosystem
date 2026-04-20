@@ -7,25 +7,25 @@
     text-align: center;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid #46a41a;
 }
 
 .page-header h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--dark);
+    color: #fff;
 }
 
 .page-meta {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
 }
 
 .page-content {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     border-radius: 12px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     min-height: 400px;
 }
 
@@ -38,7 +38,7 @@
 
 .loading-spinner {
     text-align: center;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .loading-spinner i {
@@ -47,15 +47,15 @@
 }
 
 .page-content h2 {
-    color: var(--green);
+    color: #bfd730;
     margin: 2rem 0 1rem 0;
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     padding-bottom: 0.5rem;
 }
 
 .page-content h3 {
-    color: var(--dark);
+    color: #fff;
     margin: 1.5rem 0 0.5rem 0;
     font-size: 1.2rem;
 }
@@ -63,14 +63,14 @@
 .page-content p {
     line-height: 1.6;
     margin-bottom: 1rem;
-    color: var(--green);
+    color: #ccc;
 }
 
 .page-content ul,
 .page-content ol {
     margin: 1rem 0;
     padding-left: 2rem;
-    color: var(--green);
+    color: #ccc;
 }
 
 .page-content li {
@@ -79,12 +79,12 @@
 }
 
 .page-content strong {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: 600;*/
 }
 
 .page-content a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -101,7 +101,7 @@
 .back-link {
     display: inline-block;
     margin-top: 2rem;
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -110,8 +110,8 @@
 }
 
 .privacy-highlight {
-    background: rgba(0, 100, 90, 0.2);
-    border-left: 4px solid var(--green);
+    background: rgba(191, 215, 48, 0.2);
+    border-left: 4px solid #bfd730;
     padding: 1rem;
     margin: 1rem 0;
     border-radius: 4px;

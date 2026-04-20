@@ -9,7 +9,7 @@
 
 .profile-header h1 {
     font-size: 2.5rem;
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -21,17 +21,17 @@
 }
 
 .profile-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #bfd730;
 }
 
 .profile-card h2 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     padding-bottom: 0.5rem;
 }
 
@@ -50,12 +50,12 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: var(--green);
+    background: #46a41a;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    color: var(--dark);
+    color: white;
     margin-bottom: 1rem;
     overflow: hidden;
 }
@@ -75,7 +75,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .info-item:last-child {
@@ -84,11 +84,11 @@
 
 .info-item label {
     /*font-weight: 600;*/
-    color: var(--green);
+    color: #ccc;
 }
 
 .info-item span {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: 500;*/
 }
 
@@ -105,7 +105,7 @@
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .service-info {
@@ -123,29 +123,25 @@
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    color: var(--dark);
+    color: white;
 }
 
-i {
-    color: #ffffff;
+.service-icon.SOCIALNWK {
+    background: #5865f2;
 }
 
-.service-icon.discord {
-    background: #7289da;
-}
-
-.service-icon.roblox {
-    background: var(--green);
+.service-icon.VIRTUALNWK {
+    background: #00a2ff;
 }
 
 .service-details h3 {
     margin: 0 0 0.25rem 0;
-    color: var(--dark);
+    color: #fff;
 }
 
 .service-details p {
     margin: 0;
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
 }
 
@@ -171,19 +167,19 @@ i {
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-primary:hover {
-    background: var(--green);
+    background: #bfd730;
     transform: translateY(-1px);
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:disabled {
@@ -196,8 +192,8 @@ i {
 }
 
 .btn-danger {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 .btn-danger:hover {
@@ -219,13 +215,13 @@ i {
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #00C851;
+    color: white;
 }
 
 .alert-error {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
 }
 
 /* Password form styles */
@@ -241,7 +237,7 @@ i {
 .password-form label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
     font-weight: 500;
 }
 
@@ -249,22 +245,22 @@ i {
     width: 100%;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
 .password-form input:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgba(191, 215, 48, 0.2);
 }
 
 .password-form input::placeholder {
-    color: var(--green);
+    color: #bfd730;
 }
 
 .form-actions {

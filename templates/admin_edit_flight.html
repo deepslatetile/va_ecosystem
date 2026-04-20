@@ -7,10 +7,10 @@
 {% block content %}
 <div class="admin-container">
     <div class="admin-header">
-        <h1>Edit Flight</h1>
+        <h1>Редактирование рейса</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> /
-            Edit Flight
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> /
+            Редактировать рейс
         </div>
     </div>
 
@@ -18,156 +18,156 @@
 
     <div class="admin-content">
         <div class="admin-card">
-            <h2>Flight Details</h2>
+            <h2>Детали рейса</h2>
             <form id="editFlightForm">
                 <input type="hidden" id="flightId">
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="flightNumber">Flight Number *</label>
+                        <label for="flightNumber">Номер рейса *</label>
                         <input type="text" id="flightNumber" name="flight_number" required
-                               placeholder="e.g., AU101">
+                               placeholder="например, VK101">
                     </div>
                     <div class="form-group">
-                        <label for="aircraft">Aircraft Type *</label>
+                        <label for="aircraft">Тип воздушного судна *</label>
                         <input type="text" id="aircraft" name="aircraft" required
-                               placeholder="e.g., B737-800">
+                               placeholder="например, B737-800">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="departure">Departure Airport *</label>
+                        <label for="departure">Аэропорт вылета *</label>
                         <input type="text" id="departure" name="departure" required
-                               placeholder="e.g., Moscow DME">
+                               placeholder="например, Москва DME">
                     </div>
                     <div class="form-group">
-                        <label for="arrival">Arrival Airport *</label>
+                        <label for="arrival">Аэропорт прилёта *</label>
                         <input type="text" id="arrival" name="arrival" required
-                               placeholder="e.g., Krasnoyarsk KJA">
+                               placeholder="например, Красноярск KJA">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="ptfs_departure">PTFS Departure Code</label>
+                        <label for="ptfs_departure">Код вылета PTFS</label>
                         <input type="text" id="ptfs_departure" name="ptfs_departure"
-                               placeholder="e.g., IZOL">
+                               placeholder="например, IZOL">
                     </div>
                     <div class="form-group">
-                        <label for="ptfs_arrival">PTFS Arrival Code</label>
+                        <label for="ptfs_arrival">Код прилёта PTFS</label>
                         <input type="text" id="ptfs_arrival" name="ptfs_arrival"
-                               placeholder="e.g., ENLK">
+                               placeholder="например, ENLK">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="route_type">Route Display Type *</label>
+                        <label for="route_type">Тип отображения маршрута *</label>
                         <select id="route_type" name="route_type" required>
-                            <option value="ptfs">PTFS (Show airport name with PTFS code)</option>
-                            <option value="real">Real (Show only airport name)</option>
+                            <option value="ptfs">PTFS (показывать название аэропорта с кодом PTFS)</option>
+                            <option value="real">Реальный (показывать только название аэропорта)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="datetime">Departure Time *</label>
+                        <label for="datetime">Время вылета *</label>
                         <input type="datetime-local" id="datetime" name="datetime" required>
                     </div>
                     <div class="form-group">
-                        <label for="arrival_time">Arrival Time *</label>
+                        <label for="arrival_time">Время прилёта *</label>
                         <input type="datetime-local" id="arrival_time" name="arrival_time" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="status">Flight Status *</label>
+                        <label for="status">Статус рейса *</label>
                         <div class="combo-input-container">
                             <select id="status" name="status" required>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="On time">On time</option>
-                                <option value="Check-In">Check-In</option>
-                                <option value="Boarding">Boarding</option>
-                                <option value="Enroute">Enroute</option>
-                                <option value="Arrived">Arrived</option>
-                                <option value="Delayed">Delayed</option>
-                                <option value="Cancelled">Cancelled</option>
-                                <option value="custom">Custom...</option>
+                                <option value="Scheduled">По расписанию</option>
+                                <option value="On time">Вовремя</option>
+                                <option value="Check-In">Регистрация</option>
+                                <option value="Boarding">Посадка</option>
+                                <option value="Enroute">В пути</option>
+                                <option value="Arrived">Прибыл</option>
+                                <option value="Delayed">Задержан</option>
+                                <option value="Cancelled">Отменён</option>
+                                <option value="custom">Свой вариант...</option>
                             </select>
                             <input type="text" id="status_custom" name="status_custom"
-                                   placeholder="Enter custom status" style="display: none;">
+                                   placeholder="Введите свой статус" style="display: none;">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="meal">Meal Service</label>
+                        <label for="meal">Питание на борту</label>
                         <div class="combo-input-container">
                             <select id="meal" name="meal">
-                                <option value="Standard Meal Service">Standard Meal Service</option>
-                                <option value="Premium Meal Service">Premium Meal Service</option>
-                                <option value="No Meal Service">No Meal Service</option>
-                                <option value="Vegetarian Meal">Vegetarian Meal</option>
-                                <option value="custom">Custom...</option>
+                                <option value="Standard Meal Service">Стандартное питание</option>
+                                <option value="Premium Meal Service">Премиум питание</option>
+                                <option value="No Meal Service">Без питания</option>
+                                <option value="Vegetarian Meal">Вегетарианское питание</option>
+                                <option value="custom">Свой вариант...</option>
                             </select>
                             <input type="text" id="meal_custom" name="meal_custom"
-                                   placeholder="Enter custom meal service" style="display: none;">
+                                   placeholder="Введите свой вариант" style="display: none;">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="seatmap">Seatmap Configuration *</label>
+                        <label for="seatmap">Конфигурация мест *</label>
                         <div class="combo-input-container">
                             <select id="seatmap" name="seatmap" required>
-                                <option value="">Select or enter custom...</option>
+                                <option value="">Выберите или введите свой вариант...</option>
                             </select>
                             <input type="text" id="seatmap_custom" name="seatmap_custom"
-                                   placeholder="Enter custom seatmap" style="display: none;">
+                                   placeholder="Введите свою конфигурацию" style="display: none;">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="boarding_pass_default">Boarding Pass Style *</label>
+                        <label for="boarding_pass_default">Стиль посадочного талона *</label>
                         <div class="combo-input-container">
                             <select id="boarding_pass_default" name="boarding_pass_default" required>
-                                <option value="">Select boarding pass style...</option>
+                                <option value="">Выберите стиль...</option>
                             </select>
                             <input type="text" id="boarding_pass_custom" name="boarding_pass_custom"
-                                   placeholder="Enter custom boarding pass style" style="display: none;">
+                                   placeholder="Введите свой стиль" style="display: none;">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="services-header">
-                        <label for="services">Available Services</label>
+                        <label for="services">Доступные услуги</label>
                     </div>
                     <div id="servicesCheckboxes" class="checkboxes-container">
-                        <div class="loading-text">Loading services...</div>
+                        <div class="loading-text">Загрузка услуг...</div>
                     </div>
                 </div>
 
                 <div class="form-actions">
                     <button type="button" id="previewBtn" class="btn-secondary">
-                        <i class="fas fa-eye"></i> Preview
+                        <i class="fas fa-eye"></i> Предпросмотр
                     </button>
                     <button type="button" id="deleteBtn" class="btn-danger">
-                        <i class="fas fa-trash"></i> Delete Flight
+                        <i class="fas fa-trash"></i> Удалить рейс
                     </button>
                     <button type="submit" id="updateBtn" class="btn-primary">
-                        <i class="fas fa-save"></i> Update Flight
+                        <i class="fas fa-save"></i> Обновить рейс
                     </button>
                 </div>
             </form>
         </div>
 
         <div class="admin-card" id="previewSection" style="display: none;">
-            <h2>Flight Preview</h2>
+            <h2>Предпросмотр рейса</h2>
             <div id="flightPreview"></div>
         </div>
     </div>
@@ -176,17 +176,17 @@
 <div id="deleteModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Confirm Delete</h3>
+            <h3>Подтверждение удаления</h3>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <p>Are you sure you want to delete flight "<span id="deleteFlightNumber"></span>"?</p>
-            <p class="text-warning">This action cannot be undone. All bookings for this flight will be lost.</p>
+            <p>Вы уверены, что хотите удалить рейс "<span id="deleteFlightNumber"></span>"?</p>
+            <p class="text-warning">Это действие необратимо. Все бронирования на этот рейс будут потеряны.</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancel</button>
+            <button type="button" class="btn-secondary" id="cancelDeleteBtn">Отмена</button>
             <button type="button" class="btn-danger" id="confirmDeleteBtn">
-                <i class="fas fa-trash"></i> Delete Flight
+                <i class="fas fa-trash"></i> Удалить рейс
             </button>
         </div>
     </div>

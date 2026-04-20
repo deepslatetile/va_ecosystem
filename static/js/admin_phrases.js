@@ -1,4 +1,3 @@
-
 const PHRASES_KEY = 'admin_phrases';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -33,9 +32,9 @@ function loadPhrases() {
         phraseCard.innerHTML = `
             <div class="phrase-text">${escapeHtml(phrase)}</div>
             <div class="phrase-actions">
-                <span class="copy-hint">Click to copy</span>
+                <span class="copy-hint">Нажмите, чтобы скопировать</span>
                 <button class="delete-btn" onclick="deletePhrase(${index}, event)">
-                    <i class="fas fa-trash"></i> Delete
+                    <i class="fas fa-trash"></i> Удалить
                 </button>
             </div>
         `;
@@ -64,19 +63,19 @@ function addPhrase() {
     const newPhrase = input.value.trim();
 
     if (!newPhrase) {
-        showAlert('Please enter a phrase', 'error');
+        showAlert('Пожалуйста, введите фразу', 'error');
         return;
     }
 
     if (newPhrase.length > 500) {
-        showAlert('Phrase is too long (max 500 characters)', 'error');
+        showAlert('Фраза слишком длинная (макс. 500 символов)', 'error');
         return;
     }
 
     const phrases = getPhrases();
 
     if (phrases.includes(newPhrase)) {
-        showAlert('This phrase already exists', 'error');
+        showAlert('Эта фраза уже существует', 'error');
         return;
     }
 
@@ -84,13 +83,13 @@ function addPhrase() {
     savePhrases(phrases);
     input.value = '';
     loadPhrases();
-    showAlert('Phrase added successfully', 'success');
+    showAlert('Фраза успешно добавлена', 'success');
 }
 
 function deletePhrase(index, event) {
     event.stopPropagation();
 
-    if (!confirm('Are you sure you want to delete this phrase?')) {
+    if (!confirm('Вы уверены, что хотите удалить эту фразу?')) {
         return;
     }
 
@@ -99,14 +98,14 @@ function deletePhrase(index, event) {
     phrases.splice(index, 1);
     savePhrases(phrases);
     loadPhrases();
-    showAlert(`Phrase "${truncateText(deletedPhrase, 30)}" deleted`, 'success');
+    showAlert(`Фраза "${truncateText(deletedPhrase, 30)}" удалена`, 'success');
 }
 
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        showAlert('Copied to clipboard: ' + truncateText(text, 50), 'success');
+        showAlert('Скопировано в буфер обмена: ' + truncateText(text, 50), 'success');
     }).catch(err => {
-        console.error('Copy error: ', err);
+        console.error('Ошибка копирования: ', err);
         fallbackCopyToClipboard(text);
     });
 }
@@ -121,10 +120,10 @@ function fallbackCopyToClipboard(text) {
 
     try {
         document.execCommand('copy');
-        showAlert('Copied to clipboard: ' + truncateText(text, 50), 'success');
+        showAlert('Скопировано в буфер обмена: ' + truncateText(text, 50), 'success');
     } catch (err) {
-        console.error('Fallback copy error: ', err);
-        showAlert('Copy failed', 'error');
+        console.error('Ошибка копирования: ', err);
+        showAlert('Не удалось скопировать', 'error');
     }
 
     document.body.removeChild(textArea);
@@ -134,7 +133,7 @@ function exportPhrases() {
     const phrases = getPhrases();
 
     if (phrases.length === 0) {
-        showAlert('No phrases to export', 'error');
+        showAlert('Нет фраз для экспорта', 'error');
         return;
     }
 
@@ -148,7 +147,7 @@ function exportPhrases() {
     link.click();
     document.body.removeChild(link);
 
-    showAlert(`Exported ${phrases.length} phrases`, 'success');
+    showAlert(`Экспортировано ${phrases.length} фраз`, 'success');
 }
 
 function importPhrases(event) {
@@ -163,7 +162,7 @@ function importPhrases(event) {
             const importedPhrases = JSON.parse(e.target.result);
 
             if (!Array.isArray(importedPhrases)) {
-                showAlert('Invalid file format. Expected array of phrases.', 'error');
+                showAlert('Неверный формат файла. Ожидается массив фраз.', 'error');
                 return;
             }
 
@@ -172,7 +171,7 @@ function importPhrases(event) {
             );
 
             if (validPhrases.length === 0) {
-                showAlert('No valid phrases in file', 'error');
+                showAlert('В файле нет действительных фраз', 'error');
                 return;
             }
 
@@ -180,7 +179,7 @@ function importPhrases(event) {
             const mergedPhrases = [...new Set([...currentPhrases, ...validPhrases])];
 
             if (mergedPhrases.length > 1000) {
-                showAlert(`Too many phrases. Only first 1000 will be saved.`, 'warning');
+                showAlert(`Слишком много фраз. Будет сохранено только 1000.`, 'warning');
                 mergedPhrases.splice(1000);
             }
 
@@ -190,36 +189,36 @@ function importPhrases(event) {
             const newPhrasesCount = mergedPhrases.length - currentPhrases.length;
             showAlert(
                 newPhrasesCount > 0
-                    ? `Imported ${newPhrasesCount} new phrases. Total: ${mergedPhrases.length}`
-                    : 'All imported phrases already exist',
+                    ? `Импортировано ${newPhrasesCount} новых фраз. Всего: ${mergedPhrases.length}`
+                    : 'Все импортированные фразы уже существуют',
                 'success'
             );
 
         } catch (error) {
-            console.error('Import error:', error);
-            showAlert('Error reading file. Make sure it is valid JSON.', 'error');
+            console.error('Ошибка импорта:', error);
+            showAlert('Ошибка чтения файла. Убедитесь, что это корректный JSON.', 'error');
         }
     };
 
     reader.onerror = function () {
-        showAlert('Error reading file', 'error');
+        showAlert('Ошибка чтения файла', 'error');
     };
 
     reader.readAsText(file);
 }
 
 function clearAllPhrases() {
-    if (!confirm('Are you sure you want to delete ALL phrases? This cannot be undone.')) {
+    if (!confirm('Вы уверены, что хотите удалить ВСЕ фразы? Это действие необратимо.')) {
         return;
     }
 
-    if (!confirm('Really delete all phrases?')) {
+    if (!confirm('Действительно удалить все фразы?')) {
         return;
     }
 
     localStorage.removeItem(PHRASES_KEY);
     loadPhrases();
-    showAlert('All phrases deleted', 'success');
+    showAlert('Все фразы удалены', 'success');
 }
 
 function showAlert(message, type) {

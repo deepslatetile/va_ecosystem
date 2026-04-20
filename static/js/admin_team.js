@@ -27,14 +27,14 @@ function showAlert(message, type) {
 async function loadTeamData() {
     try {
         const response = await fetch('/api/get/about_us?group=team');
-        if (!response.ok) throw new Error('Failed to load team data');
+        if (!response.ok) throw new Error('Не удалось загрузить данные о команде');
 
         teamData = await response.json();
         renderTeamTable();
 
     } catch (error) {
-        console.error('Error loading team:', error);
-        showAlert('Failed to load team data: ' + error.message, 'error');
+        console.error('Ошибка загрузки команды:', error);
+        showAlert('Не удалось загрузить данные о команде: ' + error.message, 'error');
     }
 }
 
@@ -46,7 +46,7 @@ function renderTeamTable() {
             <tr>
                 <td colspan="6" class="loading-cell">
                     <i class="fas fa-user-slash"></i>
-                    <p>No team members found. Add your first team member!</p>
+                    <p>Сотрудники не найдены. Добавьте первого сотрудника!</p>
                 </td>
             </tr>
         `;
@@ -61,54 +61,54 @@ function renderTeamTable() {
                 <div style="display: flex; align-items: center; gap: 10px;">
                     ${member.image ?
             `<img src="${member.image}" alt="${member.name}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">` :
-            `<div style="width: 40px; height: 40px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-user" style="color: var(--green);"></i>
+            `<div style="width: 40px; height: 40px; border-radius: 50%; background: #46a41a; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user" style="color: #fff;"></i>
                         </div>`
         }
                     <span>${member.name}</span>
                 </div>
-            </td>
-            <td>${member.position || 'N/A'}</td>
-            <td>${getDepartmentLabel(member.subgroup)}</td>
-            <td>${member.years_experience ? member.years_experience + ' years' : 'N/A'}</td>
+            </div>
+            <td>${member.position || 'Н/Д'}</td>
+            <td>${getDepartmentLabel(member.subgroup)}</div>
+            <td>${member.years_experience ? member.years_experience + ' лет' : 'Н/Д'}</div>
             <td>
                 <span class="status-badge ${member.is_active ? 'badge-active' : 'badge-inactive'}">
-                    ${member.is_active ? 'Active' : 'Inactive'}
+                    ${member.is_active ? 'Активен' : 'Неактивен'}
                 </span>
-            </td>
+            </div>
             <td>
                 <div class="action-buttons">
                     <button onclick="editMember(${member.id})" class="btn-small btn-edit">
-                        <i class="fas fa-edit"></i> Edit
+                        <i class="fas fa-edit"></i> Редактировать
                     </button>
-                    <button onclick="toggleMemberStatus(${member.id}, ${member.is_active})" 
+                    <button onclick="toggleMemberStatus(${member.id}, ${member.is_active})"
                             class="btn-small btn-toggle ${member.is_active ? '' : 'inactive'}">
-                        <i class="fas fa-power-off"></i> ${member.is_active ? 'Deactivate' : 'Activate'}
+                        <i class="fas fa-power-off"></i> ${member.is_active ? 'Деактивировать' : 'Активировать'}
                     </button>
                     <button onclick="deleteMember(${member.id})" class="btn-small btn-delete">
-                        <i class="fas fa-trash"></i> Delete
+                        <i class="fas fa-trash"></i> Удалить
                     </button>
                 </div>
-            </td>
+            </div>
         </tr>
     `).join('');
 }
 
 function getDepartmentLabel(department) {
     const departments = {
-        'pilots': 'Flight Crew',
-        'cabin': 'Cabin Crew',
-        'operations': 'Operations',
-        'maintenance': 'Maintenance',
-        'management': 'Management',
-        'support': 'Support Staff'
+        'pilots': 'Лётный состав',
+        'cabin': 'Бортпроводники',
+        'operations': 'Операции',
+        'maintenance': 'Техобслуживание',
+        'management': 'Руководство',
+        'support': 'Вспомогательный персонал'
     };
     return departments[department] || department;
 }
 
 function openModal(isEdit = false) {
     modal.style.display = 'flex';
-    modalTitle.textContent = isEdit ? 'Edit Team Member' : 'Add New Team Member';
+    modalTitle.textContent = isEdit ? 'Редактировать сотрудника' : 'Добавить сотрудника';
     document.body.style.overflow = 'hidden';
 }
 
@@ -141,7 +141,7 @@ function editMember(id) {
 }
 
 async function toggleMemberStatus(id, currentStatus) {
-    if (!confirm(`Are you sure you want to ${currentStatus ? 'deactivate' : 'activate'} this team member?`)) {
+    if (!confirm(`Вы уверены, что хотите ${currentStatus ? 'деактивировать' : 'активировать'} этого сотрудника?`)) {
         return;
     }
 
@@ -153,20 +153,20 @@ async function toggleMemberStatus(id, currentStatus) {
         });
 
         if (response.ok) {
-            showAlert(`Team member ${currentStatus ? 'deactivated' : 'activated'} successfully!`, 'success');
+            showAlert(`Сотрудник ${currentStatus ? 'деактивирован' : 'активирован'} успешно!`, 'success');
             loadTeamData();
         } else {
             const error = await response.json();
-            showAlert('Failed to update team member: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось обновить сотрудника: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error updating team member:', error);
-        showAlert('Error updating team member: ' + error.message, 'error');
+        console.error('Ошибка обновления сотрудника:', error);
+        showAlert('Ошибка обновления сотрудника: ' + error.message, 'error');
     }
 }
 
 async function deleteMember(id) {
-    if (!confirm('Are you sure you want to delete this team member? This action cannot be undone.')) {
+    if (!confirm('Вы уверены, что хотите удалить этого сотрудника? Это действие необратимо.')) {
         return;
     }
 
@@ -176,15 +176,15 @@ async function deleteMember(id) {
         });
 
         if (response.ok) {
-            showAlert('Team member deleted successfully!', 'success');
+            showAlert('Сотрудник успешно удалён!', 'success');
             loadTeamData();
         } else {
             const error = await response.json();
-            showAlert('Failed to delete team member: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось удалить сотрудника: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error deleting team member:', error);
-        showAlert('Error deleting team member: ' + error.message, 'error');
+        console.error('Ошибка удаления сотрудника:', error);
+        showAlert('Ошибка удаления сотрудника: ' + error.message, 'error');
     }
 }
 
@@ -200,7 +200,7 @@ memberForm.addEventListener('submit', async function (e) {
 
     const submitBtn = this.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
 
     try {
         let response;
@@ -219,19 +219,19 @@ memberForm.addEventListener('submit', async function (e) {
         }
 
         if (response.ok) {
-            showAlert(`Team member ${currentMemberId ? 'updated' : 'created'} successfully!`, 'success');
+            showAlert(`Сотрудник ${currentMemberId ? 'обновлён' : 'создан'} успешно!`, 'success');
             closeModal();
             loadTeamData();
         } else {
             const error = await response.json();
-            showAlert('Failed to save team member: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось сохранить сотрудника: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error saving team member:', error);
-        showAlert('Error saving team member: ' + error.message, 'error');
+        console.error('Ошибка сохранения сотрудника:', error);
+        showAlert('Ошибка сохранения сотрудника: ' + error.message, 'error');
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Save Member';
+        submitBtn.innerHTML = 'Сохранить';
     }
 });
 

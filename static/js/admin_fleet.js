@@ -1,4 +1,3 @@
-
 let fleetData = [];
 let currentAircraftId = null;
 
@@ -28,14 +27,14 @@ function showAlert(message, type) {
 async function loadFleetData() {
     try {
         const response = await fetch('/api/get/about_us?group=fleet');
-        if (!response.ok) throw new Error('Failed to load fleet data');
+        if (!response.ok) throw new Error('Не удалось загрузить данные о флоте');
 
         fleetData = await response.json();
         renderFleetTable();
 
     } catch (error) {
-        console.error('Error loading fleet:', error);
-        showAlert('Failed to load fleet data: ' + error.message, 'error');
+        console.error('Ошибка загрузки флота:', error);
+        showAlert('Не удалось загрузить данные о флоте: ' + error.message, 'error');
     }
 }
 
@@ -47,7 +46,7 @@ function renderFleetTable() {
             <tr>
                 <td colspan="7" class="loading-cell">
                     <i class="fas fa-plane-slash"></i>
-                    <p>No aircraft found. Add your first aircraft!</p>
+                    <p>Воздушные суда не найдены. Добавьте первое судно!</p>
                 </td>
             </tr>
         `;
@@ -65,40 +64,40 @@ function renderFleetTable() {
             <td>${aircraft.first_flight || 'N/A'}</td>
             <td>
                 <span class="status-badge ${aircraft.is_active ? 'badge-active' : 'badge-inactive'}">
-                    ${aircraft.is_active ? 'Active' : 'Inactive'}
+                    ${aircraft.is_active ? 'Активен' : 'Неактивен'}
                 </span>
-            </td>
+             </td>
             <td>
                 <div class="action-buttons">
                     <button onclick="editAircraft(${aircraft.id})" class="btn-small btn-edit">
-                        <i class="fas fa-edit"></i> Edit
+                        <i class="fas fa-edit"></i> Редактировать
                     </button>
                     <button onclick="toggleAircraftStatus(${aircraft.id}, ${aircraft.is_active})" 
                             class="btn-small btn-toggle ${aircraft.is_active ? '' : 'inactive'}">
-                        <i class="fas fa-power-off"></i> ${aircraft.is_active ? 'Deactivate' : 'Activate'}
+                        <i class="fas fa-power-off"></i> ${aircraft.is_active ? 'Деактивировать' : 'Активировать'}
                     </button>
                     <button onclick="deleteAircraft(${aircraft.id})" class="btn-small btn-delete">
-                        <i class="fas fa-trash"></i> Delete
+                        <i class="fas fa-trash"></i> Удалить
                     </button>
                 </div>
-            </td>
-        </tr>
+             </td>
+         </tr>
     `).join('');
 }
 
 function getAircraftTypeLabel(type) {
     const types = {
-        'narrow-body': 'Narrow-Body',
-        'wide-body': 'Wide-Body',
-        'regional': 'Regional',
-        'cargo': 'Cargo'
+        'narrow-body': 'Узкофюзеляжный',
+        'wide-body': 'Широкофюзеляжный',
+        'regional': 'Региональный',
+        'cargo': 'Грузовой'
     };
     return types[type] || type;
 }
 
 function openModal(isEdit = false) {
     modal.style.display = 'flex';
-    modalTitle.textContent = isEdit ? 'Edit Aircraft' : 'Add New Aircraft';
+    modalTitle.textContent = isEdit ? 'Редактировать воздушное судно' : 'Добавить воздушное судно';
     document.body.style.overflow = 'hidden';
 }
 
@@ -130,7 +129,7 @@ function editAircraft(id) {
 }
 
 async function toggleAircraftStatus(id, currentStatus) {
-    if (!confirm(`Are you sure you want to ${currentStatus ? 'deactivate' : 'activate'} this aircraft?`)) {
+    if (!confirm(`Вы уверены, что хотите ${currentStatus ? 'деактивировать' : 'активировать'} это воздушное судно?`)) {
         return;
     }
 
@@ -142,20 +141,20 @@ async function toggleAircraftStatus(id, currentStatus) {
         });
 
         if (response.ok) {
-            showAlert(`Aircraft ${currentStatus ? 'deactivated' : 'activated'} successfully!`, 'success');
+            showAlert(`Воздушное судно ${currentStatus ? 'деактивировано' : 'активировано'} успешно!`, 'success');
             loadFleetData();
         } else {
             const error = await response.json();
-            showAlert('Failed to update aircraft: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось обновить воздушное судно: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error updating aircraft:', error);
-        showAlert('Error updating aircraft: ' + error.message, 'error');
+        console.error('Ошибка обновления воздушного судна:', error);
+        showAlert('Ошибка обновления воздушного судна: ' + error.message, 'error');
     }
 }
 
 async function deleteAircraft(id) {
-    if (!confirm('Are you sure you want to delete this aircraft? This action cannot be undone.')) {
+    if (!confirm('Вы уверены, что хотите удалить это воздушное судно? Это действие необратимо.')) {
         return;
     }
 
@@ -165,15 +164,15 @@ async function deleteAircraft(id) {
         });
 
         if (response.ok) {
-            showAlert('Aircraft deleted successfully!', 'success');
+            showAlert('Воздушное судно успешно удалено!', 'success');
             loadFleetData();
         } else {
             const error = await response.json();
-            showAlert('Failed to delete aircraft: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось удалить воздушное судно: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error deleting aircraft:', error);
-        showAlert('Error deleting aircraft: ' + error.message, 'error');
+        console.error('Ошибка удаления воздушного судна:', error);
+        showAlert('Ошибка удаления воздушного судна: ' + error.message, 'error');
     }
 }
 
@@ -190,7 +189,7 @@ aircraftForm.addEventListener('submit', async function (e) {
 
     const submitBtn = this.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
 
     try {
         let response;
@@ -209,19 +208,19 @@ aircraftForm.addEventListener('submit', async function (e) {
         }
 
         if (response.ok) {
-            showAlert(`Aircraft ${currentAircraftId ? 'updated' : 'created'} successfully!`, 'success');
+            showAlert(`Воздушное судно ${currentAircraftId ? 'обновлено' : 'создано'} успешно!`, 'success');
             closeModal();
             loadFleetData();
         } else {
             const error = await response.json();
-            showAlert('Failed to save aircraft: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось сохранить воздушное судно: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error saving aircraft:', error);
-        showAlert('Error saving aircraft: ' + error.message, 'error');
+        console.error('Ошибка сохранения воздушного судна:', error);
+        showAlert('Ошибка сохранения воздушного судна: ' + error.message, 'error');
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Save Aircraft';
+        submitBtn.innerHTML = 'Сохранить';
     }
 });
 

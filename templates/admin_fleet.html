@@ -7,9 +7,9 @@
 {% block content %}
 <div class="admin-container">
     <div class="admin-header">
-        <h1><i class="fas fa-plane"></i> Fleet Management</h1>
+        <h1><i class="fas fa-plane"></i> Управление флотом</h1>
         <div class="admin-breadcrumb">
-            <a href="/">Home</a> / <a href="/admin">Admin Panel</a> / Fleet Management
+            <a href="/">Главная</a> / <a href="/admin">Панель администратора</a> / Управление флотом
         </div>
     </div>
 
@@ -18,32 +18,32 @@
     <div class="admin-content">
         <div class="admin-actions">
             <button id="addAircraftBtn" class="btn-primary">
-                <i class="fas fa-plus"></i> Add New Aircraft
+                <i class="fas fa-plus"></i> Добавить воздушное судно
             </button>
             <button id="refreshBtn" class="btn-secondary">
-                <i class="fas fa-sync-alt"></i> Refresh
+                <i class="fas fa-sync-alt"></i> Обновить
             </button>
         </div>
 
         <div class="admin-card">
-            <h2>Aircraft List</h2>
+            <h2>Список воздушных судов</h2>
             <div class="table-container">
                 <table id="fleetTable">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Registration</th>
-                        <th>Capacity</th>
-                        <th>First Flight</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Название</th>
+                        <th>Тип</th>
+                        <th>Регистрация</th>
+                        <th>Вместимость</th>
+                        <th>Первый полёт</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
                     </tr>
                     </thead>
                     <tbody id="fleetTableBody">
                     <tr>
                         <td colspan="7" class="loading-cell">
-                            <i class="fas fa-spinner fa-spin"></i> Loading aircraft data...
+                            <i class="fas fa-spinner fa-spin"></i> Загрузка данных о воздушных судах...
                         </td>
                     </tr>
                     </tbody>
@@ -56,7 +56,7 @@
 <div id="aircraftModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 id="modalTitle">Add New Aircraft</h3>
+            <h3 id="modalTitle">Добавить воздушное судно</h3>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
@@ -65,64 +65,64 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="aircraftName">Aircraft Name *</label>
-                        <input type="text" id="aircraftName" name="name" required placeholder="e.g., Boeing 737-800">
+                        <label for="aircraftName">Название воздушного судна *</label>
+                        <input type="text" id="aircraftName" name="name" required placeholder="например, Boeing 737-800">
                     </div>
                     <div class="form-group">
-                        <label for="fleetType">Aircraft Type *</label>
+                        <label for="fleetType">Тип воздушного судна *</label>
                         <select id="fleetType" name="fleet_type" required>
-                            <option value="">Select type</option>
-                            <option value="narrow-body">Narrow-Body</option>
-                            <option value="wide-body">Wide-Body</option>
-                            <option value="regional">Regional</option>
-                            <option value="cargo">Cargo</option>
+                            <option value="">Выберите тип</option>
+                            <option value="narrow-body">Узкофюзеляжный</option>
+                            <option value="wide-body">Широкофюзеляжный</option>
+                            <option value="regional">Региональный</option>
+                            <option value="cargo">Грузовой</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="registrationNumber">Registration Number *</label>
+                        <label for="registrationNumber">Регистрационный номер *</label>
                         <input type="text" id="registrationNumber" name="registration_number" required
-                               placeholder="e.g., VP-BIA">
+                               placeholder="например, VP-BIA">
                     </div>
                     <div class="form-group">
-                        <label for="capacity">Passenger Capacity *</label>
+                        <label for="capacity">Пассажировместимость *</label>
                         <input type="number" id="capacity" name="capacity" required
-                               placeholder="e.g., 189" min="1" max="1000">
+                               placeholder="например, 189" min="1" max="1000">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="firstFlight">First Flight Year</label>
+                        <label for="firstFlight">Год первого полёта</label>
                         <input type="number" id="firstFlight" name="first_flight"
-                               placeholder="e.g., 2018" min="1900" max="2030">
+                               placeholder="например, 2018" min="1900" max="2030">
                     </div>
                     <div class="form-group">
-                        <label for="displayOrder">Display Order</label>
+                        <label for="displayOrder">Порядок отображения</label>
                         <input type="number" id="displayOrder" name="display_order"
-                               placeholder="Order in list" value="0">
+                               placeholder="Порядок в списке" value="0">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="aircraftDescription">Description</label>
+                    <label for="aircraftDescription">Описание</label>
                     <textarea id="aircraftDescription" name="description" rows="4"
-                              placeholder="Describe the aircraft features, configuration, etc."></textarea>
+                              placeholder="Опишите особенности воздушного судна, конфигурацию и т.д."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="aircraftImage">Image URL</label>
+                    <label for="aircraftImage">URL изображения</label>
                     <input type="text" id="aircraftImage" name="image"
-                           placeholder="URL to aircraft image">
+                           placeholder="URL изображения воздушного судна">
                 </div>
 
                 <div class="form-group">
-                    <label for="aircraftStatus">Status</label>
+                    <label for="aircraftStatus">Статус</label>
                     <select id="aircraftStatus" name="is_active">
-                        <option value="true">Active</option>
-                        <option value="false">Inactive/Maintenance</option>
+                        <option value="true">В эксплуатации</option>
+                        <option value="false">На обслуживании / Неактивен</option>
                     </select>
                 </div>
 
@@ -130,8 +130,8 @@
                 <input type="hidden" name="subgroup" value="aircraft">
 
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" id="cancelAircraftBtn">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Aircraft</button>
+                    <button type="button" class="btn-secondary" id="cancelAircraftBtn">Отмена</button>
+                    <button type="submit" class="btn-primary">Сохранить</button>
                 </div>
             </form>
         </div>

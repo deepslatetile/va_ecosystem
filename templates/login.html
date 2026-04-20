@@ -8,22 +8,22 @@
 <div class="auth-container">
     <div class="auth-card">
         <div class="auth-tabs">
-            <button class="tab-btn active" data-tab="login">Login</button>
-            <button class="tab-btn" data-tab="register">Register</button>
+            <button class="tab-btn active" data-tab="login">Вход</button>
+            <button class="tab-btn" data-tab="register">Регистрация</button>
         </div>
 
         <form id="loginForm" class="auth-form active">
-            <h2>Welcome Back</h2>
-            <p class="auth-subtitle">Sign in to your Cathay Pacific account</p>
+            <h2>С возвращением</h2>
+            <p class="auth-subtitle">Войдите в свой аккаунт Авиакомпании «Вектор»</p>
 
             <div class="form-group">
-                <label for="loginUsername">Username</label>
+                <label for="loginUsername">Имя пользователя</label>
                 <input type="text" id="loginUsername" name="username" required>
                 <i class="fas fa-user"></i>
             </div>
 
             <div class="form-group">
-                <label for="loginPassword">Password</label>
+                <label for="loginPassword">Пароль</label>
                 <input type="password" id="loginPassword" name="password" required>
                 <i class="fas fa-lock"></i>
             </div>
@@ -32,34 +32,34 @@
                 <!-- <label class="checkbox">
                     <input type="checkbox" name="remember">
                     <span class="checkmark"></span>
-                    Remember me
+                    Запомнить меня
                 </label> -->
             </div>
 
             <button type="submit" class="auth-btn">
                 <i class="fas fa-sign-in-alt"></i>
-                Sign In
+                Войти
             </button>
         </form>
 
         <form id="registerForm" class="auth-form">
-            <h2>Create Account</h2>
-            <p class="auth-subtitle">Join Cathay Pacific today</p>
+            <h2>Создать аккаунт</h2>
+            <p class="auth-subtitle">Присоединяйтесь к Авиакомпании «Вектор» сегодня</p>
 
             <div class="form-group">
-                <label for="regNickname">Nickname</label>
+                <label for="regNickname">Никнейм</label>
                 <input type="text" id="regNickname" name="nickname" required>
                 <i class="fas fa-user-tag"></i>
             </div>
 
             <div class="form-group">
-                <label for="regPassword">Password</label>
+                <label for="regPassword">Пароль</label>
                 <input type="password" id="regPassword" name="password" required>
                 <i class="fas fa-lock"></i>
             </div>
 
             <div class="form-group">
-                <label for="regConfirmPassword">Confirm Password</label>
+                <label for="regConfirmPassword">Подтверждение пароля</label>
                 <input type="password" id="regConfirmPassword" name="confirm_password" required>
                 <i class="fas fa-lock"></i>
             </div>
@@ -68,13 +68,13 @@
                 <label class="checkbox">
                     <input type="checkbox" name="terms" required>
                     <span class="checkmark"></span>
-                    I agree to the <a href="/tos" target="_blank">Terms of Service</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>
+                    Я принимаю <a href="/tos" target="_blank">Условия использования</a> и <a href="/privacy-policy" target="_blank">Политику конфиденциальности</a>
                 </label>
             </div>
 
             <button type="submit" class="auth-btn">
                 <i class="fas fa-user-plus"></i>
-                Create Account
+                Зарегистрироваться
             </button>
         </form>
     </div>

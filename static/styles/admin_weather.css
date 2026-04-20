@@ -5,8 +5,6 @@
 }
 
 .admin-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
     flex-wrap: wrap;
@@ -14,18 +12,18 @@
 }
 
 .admin-header h1 {
-    color: var(--dark);
+    color: #fff;
     font-size: 2rem;
     margin: 0;
 }
 
 .admin-breadcrumb {
-    color: var(--green);
-    font-size: 0.9rem;
+    color: #fff;
+    font-size: 16px;
 }
 
 .admin-breadcrumb a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -34,11 +32,11 @@
 }
 
 .weather-controls {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     border-radius: 12px;
     padding: 25px;
     margin-bottom: 25px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .airport-search {
@@ -51,10 +49,10 @@
 
 #icaoCode {
     padding: 12px 16px;
-    border: 1px solid var(--green);
+    border: 1px solid #bfd730;
     border-radius: 6px;
-    background: var(--dark);
-    color: var(--dark);
+    background: #252427;
+    color: white;
     font-size: 16px;
     text-transform: uppercase;
     width: 120px;
@@ -64,12 +62,12 @@
 
 #icaoCode:focus {
     outline: none;
-    border-color: var(--green);
-    box-shadow: 0 0 0 2px rgba(95, 246, 228, 0.2);
+    border-color: #bfd730;
+    box-shadow: 0 0 0 2px rgba(95, 172, 246, 0.2);
 }
 
 #icaoCode::placeholder {
-    color: var(--green);
+    color: #ccc;
 }
 
 .btn {
@@ -77,8 +75,8 @@
     align-items: center;
     gap: 8px;
     padding: 12px 20px;
-    background: var(--green);
-    color: var(--white);
+    background: #bfd730;
+    color: white;
     text-decoration: none;
     border-radius: 6px;
     border: none;
@@ -91,60 +89,60 @@
 }
 
 .btn:hover {
-    background: var(--green);
+    background: #bfd730;
     transform: translateY(-1px);
 }
 
 .btn-primary {
-    background: var(--green);
+    background: #46a41a;
 }
 
 .btn-primary:hover {
-    background: var(--green);
+    background: #bfd730;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.15);
-    color: var(--dark);
-    border-color: var(--green);
+    color: #fff;
+    border-color: #bfd730;
 }
 
 .btn-small {
     padding: 8px 16px;
     font-size: 13px;
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-small:hover {
     background: rgba(255, 255, 255, 0.15);
-    color: var(--dark);
-    border-color: var(--green);
+    color: #fff;
+    border-color: #bfd730;
 }
 
 .btn-danger {
-    background: #e74c3c;
+    background: #ba141a;
 }
 
 .btn-danger:hover {
-    background: #c0392b;
+    background: #ed1c24;
 }
 
 .favorite-stations {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .favorite-stations h3 {
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 12px;
     font-size: 1.1rem;
 }
@@ -165,20 +163,20 @@
 }
 
 .alert-success {
-    background: var(--lightgreen);
-    color: var(--dark);
-    border: 1px solid var(--lightgreen);
+    background: #27ae60;
+    color: white;
+    border: 1px solid #219653;
 }
 
 .alert-error {
     background: #e74c3c;
-    color: var(--dark);
-    border: 1px solid #c0392b;
+    color: white;
+    border: 1px solid #ba141a;
 }
 
 .alert-warning {
     background: #f39c12;
-    color: var(--dark);
+    color: white;
     border: 1px solid #d35400;
 }
 
@@ -191,7 +189,7 @@
     display: none;
     text-align: center;
     padding: 60px 20px;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .loading-spinner i {
@@ -200,7 +198,7 @@
 }
 
 .loading-spinner p {
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.1rem;
     margin: 0;
 }
@@ -213,10 +211,10 @@
 }
 
 .weather-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 12px;
     padding: 25px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -229,13 +227,13 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--green), var(--green));
+    background: linear-gradient(90deg, #bfd730, #bfd730);
 }
 
 .weather-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border-color: var(--green);
+    border-color: #bfd730;
 }
 
 .weather-header {
@@ -244,24 +242,24 @@
     align-items: flex-start;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .station-info h3 {
-    color: var(--dark);
+    color: #fff;
     margin: 0 0 8px 0;
     font-size: 1.4rem;
 }
 
 .station-location {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.9rem;
     margin: 4px 0;
     line-height: 1.4;
 }
 
 .station-location:last-child {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.85rem;
 }
 
@@ -276,32 +274,32 @@
 }
 
 .flight-category.vfr {
-    background: var(--lightgreen);
-    color: var(--dark);
+    background: #27ae60;
+    color: white;
     box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
 }
 
 .flight-category.mvfr {
     background: #3498db;
-    color: var(--dark);
+    color: white;
     box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
 }
 
 .flight-category.ifr {
     background: #e74c3c;
-    color: var(--dark);
+    color: white;
     box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
 }
 
 .flight-category.lifr {
-    background: #AC869E;
-    color: var(--dark);
+    background: #9b59b6;
+    color: white;
     box-shadow: 0 2px 8px rgba(155, 89, 182, 0.3);
 }
 
 .flight-category.unknown {
     background: #95a5a6;
-    color: var(--dark);
+    color: white;
 }
 
 .weather-details {
@@ -319,24 +317,24 @@
 }
 
 .weather-label {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .weather-value {
-    color: var(--dark);
+    color: #fff;
     font-size: 1.2rem;
     line-height: 1.2;
 }
 
 .weather-raw {
-    background: rgba(0, 100, 90, 0.25);
+    background: rgba(0, 0, 0, 0.25);
     padding: 15px;
     border-radius: 8px;
     margin-top: 15px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .cache-indicator {
@@ -345,8 +343,8 @@
     gap: 6px;
     padding: 4px 8px;
     background: rgba(155, 89, 182, 0.2);
-    color: #AC869E;
-    border: 1px solid #AC869E;
+    color: #9b59b6;
+    border: 1px solid #9b59b6;
     border-radius: 4px;
     font-size: 0.75rem;
     margin-top: 5px;
@@ -364,14 +362,14 @@
 }
 
 .cache-badge .cache-indicator {
-    background: rgba(172, 134, 158, 0.9);
-    color: var(--dark);
+    background: rgba(155, 89, 182, 0.9);
+    color: white;
     font-size: 0.7rem;
     padding: 3px 6px;
 }
 
 .raw-metar {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.9rem;
     line-height: 1.4;
     margin: 0;
@@ -394,7 +392,7 @@
 .empty-state h3 {
     font-size: 1.6rem;
     margin-bottom: 15px;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .empty-state p {
@@ -412,7 +410,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 100, 90, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
     z-index: 1000;
     align-items: center;
@@ -422,13 +420,13 @@
 }
 
 .modal-content {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #424045 0%, #666 100%);
     border-radius: 16px;
     width: 100%;
     max-width: 650px;
     max-height: 85vh;
     overflow: hidden;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -439,12 +437,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 25px 30px;
-    border-bottom: 1px solid var(--green);
-    background: rgba(0, 100, 90, 0.2);
+    border-bottom: 1px solid #46a41a;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .modal-header h3 {
-    color: var(--dark);
+    color: #fff;
     margin: 0;
     font-size: 1.4rem;
 }
@@ -452,7 +450,7 @@
 .modal-close {
     background: none;
     border: none;
-    color: var(--green);
+    color: #bfd730;
     font-size: 1.3rem;
     cursor: pointer;
     padding: 8px;
@@ -467,7 +465,7 @@
 
 .modal-close:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--dark);
+    color: #fff;
 }
 
 .modal-body {
@@ -486,10 +484,10 @@
 #multiStationsInput {
     flex: 1;
     padding: 14px 16px;
-    border: 1px solid var(--green);
+    border: 1px solid #bfd730;
     border-radius: 8px;
-    background: var(--dark);
-    color: var(--dark);
+    background: #252427;
+    color: white;
     font-size: 15px;
     text-transform: uppercase;
     min-height: 50px;
@@ -498,12 +496,12 @@
 
 #multiStationsInput:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #bfd730;
     box-shadow: 0 0 0 2px rgba(95, 172, 246, 0.2);
 }
 
 #multiStationsInput::placeholder {
-    color: var(--green);
+    color: #ccc;
     text-transform: none;
 }
 
@@ -520,16 +518,16 @@
 }
 
 .cache-status {
-    background: rgba(0, 100, 90, 0.2);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 20px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .cache-info-placeholder {
     text-align: center;
     padding: 40px 20px;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .cache-info-placeholder i {
@@ -558,13 +556,13 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 15px;
     border-radius: 6px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     text-align: center;
 }
 
 .stat-label {
     display: block;
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -573,7 +571,7 @@
 
 .stat-value {
     display: block;
-    color: var(--dark);
+    color: #fff;
     font-size: 1.3rem;
     /*font-weight: bold;*/
 }
@@ -587,7 +585,7 @@
 }
 
 .cache-entries-section h4 {
-    color: var(--dark);
+    color: #fff;
     margin-bottom: 12px;
     font-size: 1rem;
 }
@@ -605,17 +603,17 @@
     padding: 10px 12px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .entry-icao {
-    color: var(--dark);
+    color: #fff;
     /*font-weight: bold;*/
     font-size: 0.9rem;
 }
 
 .entry-time {
-    color: var(--green);
+    color: #bfd730;
     font-size: 0.8rem;
 }
 
@@ -803,10 +801,10 @@
 }
 
 .modal-body::-webkit-scrollbar-thumb {
-    background: var(--green);
+    background: #bfd730;
     border-radius: 3px;
 }
 
 .modal-body::-webkit-scrollbar-thumb:hover {
-    background: var(--green);
+    background: #bfd730;
 }

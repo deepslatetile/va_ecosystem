@@ -1,7 +1,6 @@
 .booking-container {
     max-width: 1200px;
     margin: 0 auto;
-    /* background: #060f30; */
 }
 
 .booking-steps {
@@ -18,7 +17,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--dark);
+    background: #bfd730;
     z-index: 1;
 }
 
@@ -35,31 +34,36 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--green);
-    color: var(--white);
+    background: #46a41a;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
-    border: 2px solid var(--dark);
+    border: 3px solid #424045;
+}
+
+.step.active .step-number {
+    background: #46a41a;
+    border-color: #bfd730;
 }
 
 .step-label {
     font-size: 0.9rem;
-    color: var(--green);
+    color: #bfd730;
     text-align: center;
 }
 
 .step.active .step-label {
-    color: var(--green);
+    color: #bfd730;
 }
 
 .booking-step {
     display: none;
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: #252427;
     border-radius: 12px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #bfd730;
     margin-bottom: 2rem;
 }
 
@@ -81,11 +85,11 @@
 }
 
 .flight-card {
-    background: linear-gradient(135deg, rgba(0, 100, 90, 0.3), var(--white));
+    background: linear-gradient(135deg, #252427 0%, #424045 100%);;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -95,8 +99,8 @@
 }
 
 .flight-card.selected {
-    background: rgba(255, 255, 255, 0.5);
-    border-color: var(--green);
+    background: rgba(70, 164, 26, 0.4);
+    border-color: #bfd730;
 }
 
 .flight-header {
@@ -109,15 +113,34 @@
 .flight-number {
     font-size: 1.2rem;
     /*font-weight: bold;*/
-    color: var(--green);
+    color: #bfd730;
 }
 
 .flight-status {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
-    background: var(--green);
     /*font-weight: 600;*/
+}
+
+.status-scheduled {
+    background: #bfd730;
+    color: white;
+}
+
+.status-departed {
+    background: #ffbb33;
+    color: black;
+}
+
+.status-arrived {
+    background: #46a41a;
+    color: white;
+}
+
+.status-cancelled {
+    background: #ed1c24;
+    color: white;
 }
 
 .flight-details {
@@ -139,12 +162,12 @@
 
 .city {
     font-size: 0.9rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .route-arrow {
     font-size: 2rem;
-    color: var(--green);
+    color: #bfd730;
     margin: 0 1rem;
 }
 
@@ -160,7 +183,7 @@
 
 .duration {
     font-size: 0.9rem;
-    color: var(--green);
+    color: #bfd730;
 }
 
 .flight-meta {
@@ -169,7 +192,7 @@
     gap: 1rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .meta-item {
@@ -178,7 +201,7 @@
 
 .meta-label {
     font-size: 0.8rem;
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 0.25rem;
 }
 
@@ -194,7 +217,7 @@
 }
 
 .seat-selected {
-    background: var(--green);
+    background: #ed1c24;
 }
 
 .seatmap-container {
@@ -206,7 +229,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     min-height: 500px;
     display: flex;
     flex-direction: column;
@@ -230,7 +253,7 @@
 .row-number {
     width: 25px;
     text-align: center;
-    color: var(--dark);
+    color: #666;
     font-size: 0.7rem;
 }
 
@@ -258,18 +281,18 @@
 }
 
 .seat.economy-class {
-    background: var(--lightgreen);
-    color: var(--white);
+    background: #bfd730;
+    color: white;
 }
 
 .seat.business-class {
-    background: var(--normgreen);
-    color: var(--white);
+    background: #46a41a;
+    color: white;
 }
 
 .seat.first-class {
-    background: var(--dark);
-    color: var(--white);
+    background: #ba141a;
+    color: white;
 }
 
 .seat.available:hover {
@@ -278,26 +301,26 @@
 }
 
 .seat.selected {
-    background: #b60000;
-    color: var(--white);
-    border-color: #ff6b6b;
+    background: #ed1c24;
+    color: white;
+    border-color: #ed1c24;
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(182, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
 }
 
 .seat.occupied {
-    background: #777D77;
-    color: #dfdfdf;
-    border-color: var(--green);
+    background: #666;
+    color: #ccc;
+    border-color: #666;
     cursor: not-allowed;
     opacity: 0.7;
 }
 
 .seat.disabled {
     background: rgba(255, 255, 255, 0.05);
-    border-color: var(--green);
-    color: var(--green);
-    cursor: not-allowed;
+    border-color: #46a41a;
+    color: #424045;
+    cursor: default;
     opacity: 0;
 }
 
@@ -309,8 +332,6 @@
 .seat-price {
     font-size: 0.5rem;
     margin-top: 1px;
-    color: #fff;
-    text-align: center;
 }
 
 .seatmap-sidebar {
@@ -323,7 +344,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .legend-item {
@@ -331,7 +352,7 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
 }
 
 .legend-item .seat {
@@ -343,11 +364,11 @@
 .class-legend {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .class-legend h4 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
 }
@@ -356,7 +377,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .seat-details {
@@ -366,12 +387,12 @@
 .price-info {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--green);
+    border-top: 1px solid #46a41a;
 }
 
 .price-amount {
     font-size: 1.8rem;
-    color: var(--lightgreen);
+    color: #bfd730;
     text-align: center;
 }
 
@@ -388,7 +409,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--green);
+    color: #ccc;
 }
 
 .form-group input,
@@ -396,9 +417,9 @@
     width: 100%;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -406,21 +427,21 @@
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: #46a41a;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(0, 100, 90, 0.2);
+    box-shadow: 0 0 0 2px rgb(191 215 48 / 20%);
 }
 
 .auth-info {
-    background: rgba(0, 100, 90, 0.1);
-    border: 1px solid var(--green);
+    background: rgb(70 164 26 / 10%);
+    border: 1px solid #46a41a;
     border-radius: 6px;
     padding: 1rem;
     margin-top: 1rem;
 }
 
 .auth-info a {
-    color: var(--green);
+    color: #bfd730;
     text-decoration: none;
 }
 
@@ -443,7 +464,7 @@
 
 .service-item {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     border-radius: 8px;
     padding: 1.5rem;
     cursor: pointer;
@@ -452,12 +473,12 @@
 
 .service-item:hover {
     background: rgba(255, 255, 255, 0.15);
-    border-color: var(--green);
+    border-color: #46a41a;
 }
 
 .service-item.selected {
-    background: rgba(0, 100, 90, 0.2);
-    border-color: var(--green);
+    background: rgba(191, 215, 48, 0.2);
+    border-color: #46a41a;
 }
 
 .service-header {
@@ -468,12 +489,12 @@
 }
 
 .service-name {
-    color: var(--dark);
+    color: #fff;
     margin: 0;
 }
 
 .service-description {
-    color: var(--green);
+    color: #ccc;
     font-size: 0.9rem;
     line-height: 1.4;
 }
@@ -482,7 +503,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .selected-list {
@@ -494,7 +515,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
 }
 
 .selected-service-item:last-child {
@@ -502,8 +523,8 @@
 }
 
 .remove-service {
-    background: var(--green);
-    color: var(--white);
+    background: #ed1c24;
+    color: white;
     border: none;
     border-radius: 4px;
     padding: 4px 8px;
@@ -525,13 +546,13 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 1.5rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
 }
 
 .summary-section h3 {
-    color: var(--green);
+    color: #bfd730;
     margin-bottom: 1rem;
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid #46a41a;
     padding-bottom: 0.5rem;
 }
 
@@ -543,11 +564,11 @@
 }
 
 .summary-label {
-    color: var(--green);
+    color: #999;
 }
 
 .summary-value {
-    color: var(--dark);
+    color: #fff;
     text-align: right;
 }
 
@@ -571,25 +592,25 @@
 }
 
 .btn-primary {
-    background: var(--dark);
-    color: var(--lightgreen);
+    background: #46a41a;
+    color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--green);
+    background: #bfd730;
     transform: translateY(-1px);
 }
 
 .btn-primary:disabled {
-    background: var(--green);
+    background: #46a41a;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: #ccc;
+    border: 1px solid #46a41a;
 }
 
 .btn-secondary:hover {
@@ -605,9 +626,9 @@
     width: 100%;
     padding: 12px 16px 12px 45px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--green);
+    border: 1px solid #bfd730;
     border-radius: 6px;
-    color: var(--dark);
+    color: #fff;
     font-size: 1rem;
 }
 
@@ -616,19 +637,19 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--green);
+    color: #ccc;
 }
 
 .no-services,
 .no-seat {
-    color: var(--green);
+    color: #999;
     font-style: italic;
 }
 
 .loading {
     text-align: center;
     padding: 2rem;
-    color: var(--green);
+    color: #fff;
 }
 
 .loading i {
@@ -645,20 +666,20 @@
 .success-message {
     text-align: center;
     padding: 2rem;
-    background: rgba(0, 200, 157, 0.1);
-    border: 1px solid var(--lightgreen);
+    background: rgba(0, 200, 81, 0.1);
+    border: 1px solid #bfd730;
     border-radius: 8px;
     margin-bottom: 2rem;
 }
 
 .success-icon {
     font-size: 4rem;
-    color: var(--lightgreen);
+    color: #bfd730;
     margin-bottom: 1rem;
 }
 
 .success-message h3 {
-    color: var(--lightgreen);
+    color: #bfd730;
     margin-bottom: 1rem;
 }
 
@@ -666,7 +687,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 2rem;
-    border: 1px solid var(--green);
+    border: 1px solid #46a41a;
     margin-bottom: 2rem;
 }
 
@@ -679,7 +700,7 @@
 }
 
 .boarding-pass-preview {
-    background: var(--green);
+    background: #252427;
     border-radius: 8px;
     padding: 1rem;
     min-height: 400px;
@@ -687,18 +708,18 @@
     align-items: center;
     justify-content: center;
     color: #333;
-    border: 2px dashed var(--green);
+    border: 2px dashed #46a41a;
 }
 
 .preview-placeholder {
     text-align: center;
-    color: var(--green);
+    color: #666;
 }
 
 .preview-placeholder i {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--green);
+    color: #46a41a;
 }
 
 .boarding-pass-preview img {
@@ -709,7 +730,7 @@
 }
 
 .boarding-pass-preview .loading {
-    color: var(--green);
+    color: #fff;
     text-align: center;
 }
 
@@ -719,7 +740,7 @@
 }
 
 .service-price {
-    color: var(--lightgreen);
+    color: #bfd730;
     font-size: 1.1rem;
 }
 
@@ -731,18 +752,18 @@
 }
 
 .selected-service-item .service-price {
-    color: var(--lightgreen);
+    color: #bfd730;
 }
 
 .total-price {
-    border-top: 2px solid var(--green);
+    border-top: 2px solid #46a41a;
     padding-top: 0.5rem;
     margin-top: 0.5rem;
     font-size: 1.2rem;
 }
 
 .total-price .summary-value {
-    color: var(--lightgreen);
+    color: #bfd730;
     font-size: 1.3rem;
 }
 

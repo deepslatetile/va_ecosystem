@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const authForms = document.querySelectorAll('.auth-form');
@@ -38,7 +37,7 @@ async function handleLogin() {
 
     const submitBtn = document.querySelector('#loginForm .auth-btn');
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Вход...';
     submitBtn.disabled = true;
 
     try {
@@ -54,7 +53,7 @@ async function handleLogin() {
         const result = await response.json();
 
         if (response.ok) {
-            showMessage('Login successful! Redirecting...', 'success');
+            showMessage('Вход выполнен успешно! Перенаправление...', 'success');
 
             const urlParams = new URLSearchParams(window.location.search);
             const redirectUrl = urlParams.get('redirect');
@@ -67,11 +66,11 @@ async function handleLogin() {
                 }
             }, 1000);
         } else {
-            showMessage('Login failed: ' + (result.error || 'Invalid credentials'), 'error');
+            showMessage('Ошибка входа: ' + (result.error || 'Неверные учетные данные'), 'error');
         }
     } catch (error) {
-        console.error('Login error:', error);
-        showMessage('Login failed. Please try again.', 'error');
+        console.error('Ошибка входа:', error);
+        showMessage('Ошибка входа. Пожалуйста, попробуйте снова.', 'error');
     } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
@@ -87,18 +86,18 @@ async function handleRegister() {
     };
 
     if (formData.password !== document.getElementById('regConfirmPassword').value) {
-        showMessage('Passwords do not match!', 'error');
+        showMessage('Пароли не совпадают!', 'error');
         return;
     }
 
     if (formData.password.length < 6) {
-        showMessage('Password must be at least 6 characters long!', 'error');
+        showMessage('Пароль должен содержать не менее 6 символов!', 'error');
         return;
     }
 
     const submitBtn = document.querySelector('#registerForm .auth-btn');
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Создание аккаунта...';
     submitBtn.disabled = true;
 
     try {
@@ -113,7 +112,7 @@ async function handleRegister() {
         const result = await response.json();
 
         if (response.ok) {
-            showMessage('Registration successful! Please login with your new account.', 'success');
+            showMessage('Регистрация успешна! Пожалуйста, войдите с новым аккаунтом.', 'success');
 
             setTimeout(() => {
                 document.querySelector('[data-tab="login"]').click();
@@ -124,11 +123,11 @@ async function handleRegister() {
             }, 1500);
         } else {
 
-            showMessage('Registration failed: ' + (result.error || 'Please try again'), 'error');
+            showMessage('Ошибка регистрации: ' + (result.error || 'Пожалуйста, попробуйте снова'), 'error');
         }
     } catch (error) {
-        console.error('Registration error:', error);
-        showMessage('Registration failed. Please try again.', 'error');
+        console.error('Ошибка регистрации:', error);
+        showMessage('Ошибка регистрации. Пожалуйста, попробуйте снова.', 'error');
     } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;

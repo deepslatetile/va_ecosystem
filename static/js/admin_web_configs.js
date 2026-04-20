@@ -1,20 +1,19 @@
-
 let currentPages = [];
 let pageToDelete = null;
 
 async function loadPages(state = '-1') {
     try {
         const container = document.getElementById('pagesList');
-        container.innerHTML = '<div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading pages...</div>';
+        container.innerHTML = '<div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Загрузка страниц...</div>';
 
         const response = await fetch(`/api/get/web_config/state/${state}`);
-        if (!response.ok) throw new Error('Failed to load pages');
+        if (!response.ok) throw new Error('Не удалось загрузить страницы');
 
         currentPages = await response.json();
         renderPages();
     } catch (error) {
-        console.error('Error loading pages:', error);
-        showAlert('Error loading pages: ' + error.message, 'error');
+        console.error('Ошибка загрузки страниц:', error);
+        showAlert('Ошибка загрузки страниц: ' + error.message, 'error');
     }
 }
 
@@ -25,8 +24,8 @@ function renderPages() {
         container.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-folder-open"></i>
-                <h3>No Pages Found</h3>
-                <p>Create your first page to get started!</p>
+                <h3>Страницы не найдены</h3>
+                <p>Создайте первую страницу!</p>
             </div>
         `;
         return;
@@ -39,22 +38,22 @@ function renderPages() {
                 <div class="page-details">
                     <span class="page-state ${page.state === 1 ? 'state-active' : 'state-inactive'}">
                         <i class="fas ${page.state === 1 ? 'fa-eye' : 'fa-eye-slash'}"></i>
-                        ${page.state === 1 ? 'Visible' : 'Hidden'}
+                        ${page.state === 1 ? 'Видима' : 'Скрыта'}
                     </span>
                     <span class="page-url">/${page.page_name}</span>
                 </div>
             </div>
             <div class="page-actions">
                 <button class="btn-icon btn-toggle" onclick="togglePageState(${page.id}, ${page.state})"
-                        title="${page.state === 1 ? 'Hide from navigation' : 'Show in navigation'}">
+                        title="${page.state === 1 ? 'Скрыть из навигации' : 'Показать в навигации'}">
                     <i class="fas ${page.state === 1 ? 'fa-eye-slash' : 'fa-eye'}"></i>
-                    ${page.state === 1 ? 'Hide' : 'Show'}
+                    ${page.state === 1 ? 'Скрыть' : 'Показать'}
                 </button>
-                <button class="btn-icon btn-edit" onclick="editPage(${page.id})" title="Edit">
-                    <i class="fas fa-edit"></i> Edit
+                <button class="btn-icon btn-edit" onclick="editPage(${page.id})" title="Редактировать">
+                    <i class="fas fa-edit"></i> Редактировать
                 </button>
-                <button class="btn-icon btn-delete" onclick="confirmDelete(${page.id}, '${page.page_display}')" title="Delete">
-                    <i class="fas fa-trash"></i> Delete
+                <button class="btn-icon btn-delete" onclick="confirmDelete(${page.id}, '${page.page_display}')" title="Удалить">
+                    <i class="fas fa-trash"></i> Удалить
                 </button>
             </div>
         </div>
@@ -63,7 +62,7 @@ function renderPages() {
 
 async function togglePageState(pageId, currentState) {
     const newState = currentState === 1 ? 0 : 1;
-    const action = newState === 1 ? 'shown' : 'hidden';
+    const action = newState === 1 ? 'показана' : 'скрыта';
 
     try {
         const response = await fetch(`/api/put/web_config/${pageId}/${newState}`, {
@@ -71,19 +70,19 @@ async function togglePageState(pageId, currentState) {
         });
 
         if (response.ok) {
-            showAlert(`Page ${action} in navigation successfully`, 'success');
+            showAlert(`Страница ${action} в навигации успешно`, 'success');
             loadPages(document.getElementById('stateFilter').value);
         } else {
-            throw new Error('Failed to update page state');
+            throw new Error('Не удалось обновить состояние страницы');
         }
     } catch (error) {
-        console.error('Error toggling page state:', error);
-        showAlert('Error updating page: ' + error.message, 'error');
+        console.error('Ошибка переключения состояния страницы:', error);
+        showAlert('Ошибка обновления страницы: ' + error.message, 'error');
     }
 }
 
 function createPage() {
-    document.getElementById('modalTitle').textContent = 'Add New Page';
+    document.getElementById('modalTitle').textContent = 'Добавить страницу';
     document.getElementById('pageForm').reset();
     document.getElementById('pageId').value = '';
     document.getElementById('pageState').value = '1';
@@ -93,11 +92,11 @@ function createPage() {
 async function editPage(pageId) {
     try {
         const response = await fetch(`/api/get/web_config/id/${pageId}`);
-        if (!response.ok) throw new Error('Failed to load page');
+        if (!response.ok) throw new Error('Не удалось загрузить страницу');
 
         const page = await response.json();
 
-        document.getElementById('modalTitle').textContent = 'Edit Page';
+        document.getElementById('modalTitle').textContent = 'Редактировать страницу';
         document.getElementById('pageId').value = page.id;
         document.getElementById('pageName').value = page.page_name;
         document.getElementById('pageDisplay').value = page.page_display;
@@ -105,8 +104,8 @@ async function editPage(pageId) {
 
         showModal('pageModal');
     } catch (error) {
-        console.error('Error loading page:', error);
-        showAlert('Error loading page: ' + error.message, 'error');
+        console.error('Ошибка загрузки страницы:', error);
+        showAlert('Ошибка загрузки страницы: ' + error.message, 'error');
     }
 }
 
@@ -116,7 +115,7 @@ async function savePage(formData) {
 
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
 
     try {
         const url = isEdit
@@ -134,19 +133,19 @@ async function savePage(formData) {
         });
 
         if (response.ok) {
-            showAlert(`Page ${isEdit ? 'updated' : 'created'} successfully`, 'success');
+            showAlert(`Страница ${isEdit ? 'обновлена' : 'создана'} успешно`, 'success');
             hideModal('pageModal');
             loadPages(document.getElementById('stateFilter').value);
         } else {
             const error = await response.json();
-            throw new Error(error.error || 'Failed to save page');
+            throw new Error(error.error || 'Не удалось сохранить страницу');
         }
     } catch (error) {
-        console.error('Error saving page:', error);
-        showAlert('Error saving page: ' + error.message, 'error');
+        console.error('Ошибка сохранения страницы:', error);
+        showAlert('Ошибка сохранения страницы: ' + error.message, 'error');
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Page';
+        submitBtn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
     }
 }
 
@@ -161,7 +160,7 @@ async function deletePage() {
 
     const deleteBtn = document.getElementById('confirmDeleteBtn');
     deleteBtn.disabled = true;
-    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Удаление...';
 
     try {
         const response = await fetch(`/api/delete/web_config/${pageToDelete}`, {
@@ -169,19 +168,19 @@ async function deletePage() {
         });
 
         if (response.ok) {
-            showAlert('Page deleted successfully', 'success');
+            showAlert('Страница успешно удалена', 'success');
             hideModal('deleteModal');
             loadPages(document.getElementById('stateFilter').value);
         } else {
-            throw new Error('Failed to delete page');
+            throw new Error('Не удалось удалить страницу');
         }
     } catch (error) {
-        console.error('Error deleting page:', error);
-        showAlert('Error deleting page: ' + error.message, 'error');
+        console.error('Ошибка удаления страницы:', error);
+        showAlert('Ошибка удаления страницы: ' + error.message, 'error');
     } finally {
         pageToDelete = null;
         deleteBtn.disabled = false;
-        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete Page';
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Удалить страницу';
     }
 }
 
@@ -223,12 +222,12 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         if (!formData.page_name) {
-            showAlert('Please enter a page URL', 'error');
+            showAlert('Пожалуйста, введите URL страницы', 'error');
             return;
         }
 
         if (!formData.page_display) {
-            showAlert('Please enter a display name', 'error');
+            showAlert('Пожалуйста, введите отображаемое имя', 'error');
             return;
         }
 

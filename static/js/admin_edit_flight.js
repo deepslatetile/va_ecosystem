@@ -12,15 +12,15 @@ async function loadFlightData(flightId) {
     try {
         const response = await fetch(`/api/get/schedule/${flightId}`);
         if (!response.ok) {
-            throw new Error('Failed to load flight data');
+            throw new Error('Не удалось загрузить данные рейса');
         }
 
         const flightData = await response.json();
         populateForm(flightData);
 
     } catch (error) {
-        console.error('Error loading flight data:', error);
-        showAlert('Error loading flight data: ' + error.message, 'error');
+        console.error('Ошибка загрузки данных рейса:', error);
+        showAlert('Ошибка загрузки данных рейса: ' + error.message, 'error');
     }
 }
 
@@ -38,7 +38,7 @@ function populateForm(flightData) {
     const departureDate = new Date(flightData.datetime * 1000);
     const departureDateTimeString = departureDate.toISOString().slice(0, 16);
     document.getElementById('datetime').value = departureDateTimeString;
-    
+
     // Форматируем arrival_time для input type="datetime-local"
     if (flightData.arrival_time) {
         const arrivalDate = new Date(flightData.arrival_time * 1000);
@@ -60,7 +60,7 @@ function populateForm(flightData) {
             }
         });
     } catch (e) {
-        console.error('Error parsing services:', e);
+        console.error('Ошибка парсинга услуг:', e);
     }
 }
 
@@ -110,17 +110,17 @@ async function loadConfigurations() {
         }
 
     } catch (error) {
-        console.error('Error loading configurations:', error);
-        showAlert('Error loading configuration data', 'error');
+        console.error('Ошибка загрузки конфигураций:', error);
+        showAlert('Ошибка загрузки данных конфигурации', 'error');
     }
 }
 
 function populateSeatmaps() {
     const select = document.getElementById('seatmap');
-    select.innerHTML = '<option value="">Select or enter custom...</option>';
+    select.innerHTML = '<option value="">Выберите или введите свой вариант...</option>';
 
     if (seatmaps.length === 0) {
-        select.innerHTML += '<option value="custom">Enter custom seatmap...</option>';
+        select.innerHTML += '<option value="custom">Введите свою схему мест...</option>';
         return;
     }
 
@@ -129,19 +129,19 @@ function populateSeatmaps() {
         option.value = seatmap.name;
         const seats = seatmap.data?.seats || 'N/A';
         const layout = seatmap.data?.layout || 'N/A';
-        option.textContent = `${seatmap.name} (${seats} seats, ${layout})`;
+        option.textContent = `${seatmap.name} (${seats} мест, ${layout})`;
         select.appendChild(option);
     });
 
-    select.innerHTML += '<option value="custom">Enter custom seatmap...</option>';
+    select.innerHTML += '<option value="custom">Введите свою схему мест...</option>';
 }
 
 function populateBoardingStyles() {
     const select = document.getElementById('boarding_pass_default');
-    select.innerHTML = '<option value="">Select boarding pass style...</option>';
+    select.innerHTML = '<option value="">Выберите стиль посадочного талона...</option>';
 
     if (boardingStyles.length === 0) {
-        select.innerHTML = '<option value="">No boarding styles available</option>';
+        select.innerHTML = '<option value="">Нет доступных стилей посадки</option>';
         return;
     }
 
@@ -160,7 +160,7 @@ function populateServices() {
     container.innerHTML = '';
 
     if (availableServices.length === 0) {
-        container.innerHTML = '<div class="loading-text">No services available</div>';
+        container.innerHTML = '<div class="loading-text">Нет доступных услуг</div>';
         return;
     }
 
@@ -175,7 +175,7 @@ function populateServices() {
             <input type="checkbox" id="service_${service.id}" name="services" value="${service.name}" data-price="${price}">
             <label for="service_${service.id}">
                 ${service.name}
-                <br><small style="color: var(--green);">${service.description || ''}</small>
+                <br><small style="color: #8fa3d8;">${service.description || ''}</small>
             </label>
             <span class="service-price">$${price.toFixed(2)}</span>
         `;
@@ -244,7 +244,7 @@ document.getElementById('editFlightForm').addEventListener('submit', async funct
 
     const departureDateTime = new Date(formData.get('datetime'));
     const datetime = Math.floor(departureDateTime.getTime() / 1000);
-    
+
     const arrivalDateTime = new Date(formData.get('arrival_time'));
     const arrival_time = Math.floor(arrivalDateTime.getTime() / 1000);
 
@@ -268,7 +268,7 @@ document.getElementById('editFlightForm').addEventListener('submit', async funct
 
     const updateBtn = document.getElementById('updateBtn');
     updateBtn.disabled = true;
-    updateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+    updateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обновление...';
 
     try {
         const response = await fetch(`/api/put/schedule/${flightId}`, {
@@ -280,17 +280,17 @@ document.getElementById('editFlightForm').addEventListener('submit', async funct
         });
 
         if (response.ok) {
-            showAlert('Flight updated successfully!', 'success');
+            showAlert('Рейс успешно обновлён!', 'success');
         } else {
             const error = await response.json();
-            showAlert('Failed to update flight: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось обновить рейс: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error updating flight:', error);
-        showAlert('Error updating flight: ' + error.message, 'error');
+        console.error('Ошибка обновления рейса:', error);
+        showAlert('Ошибка обновления рейса: ' + error.message, 'error');
     } finally {
         updateBtn.disabled = false;
-        updateBtn.innerHTML = '<i class="fas fa-save"></i> Update Flight';
+        updateBtn.innerHTML = '<i class="fas fa-save"></i> Обновить рейс';
     }
 });
 
@@ -313,7 +313,7 @@ async function confirmDelete() {
     const deleteBtn = document.getElementById('confirmDeleteBtn');
 
     deleteBtn.disabled = true;
-    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Удаление...';
 
     try {
         const response = await fetch(`/api/delete/schedule/${flightId}`, {
@@ -321,20 +321,20 @@ async function confirmDelete() {
         });
 
         if (response.ok) {
-            showAlert('Flight deleted successfully!', 'success');
+            showAlert('Рейс успешно удалён!', 'success');
             setTimeout(() => {
                 window.location.href = '/admin/bookings';
             }, 1500);
         } else {
             const error = await response.json();
-            showAlert('Failed to delete flight: ' + (error.error || 'Unknown error'), 'error');
+            showAlert('Не удалось удалить рейс: ' + (error.error || 'Неизвестная ошибка'), 'error');
         }
     } catch (error) {
-        console.error('Error deleting flight:', error);
-        showAlert('Error deleting flight: ' + error.message, 'error');
+        console.error('Ошибка удаления рейса:', error);
+        showAlert('Ошибка удаления рейса: ' + error.message, 'error');
     } finally {
         deleteBtn.disabled = false;
-        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete Flight';
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Удалить рейс';
         closeDeleteModal();
     }
 }
@@ -353,11 +353,11 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     // Определяем отображение маршрута
     let departureDisplay = formData.get('departure') || 'N/A';
     let arrivalDisplay = formData.get('arrival') || 'N/A';
-    
+
     if (routeType === 'ptfs') {
         const ptfsDeparture = formData.get('ptfs_departure');
         const ptfsArrival = formData.get('ptfs_arrival');
-        
+
         if (ptfsDeparture) departureDisplay = `${departureDisplay} (${ptfsDeparture})`;
         if (ptfsArrival) arrivalDisplay = `${arrivalDisplay} (${ptfsArrival})`;
     }
@@ -365,57 +365,57 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     // Форматируем время
     const departureDateTime = new Date(formData.get('datetime'));
     const departureTimeFormatted = departureDateTime.toLocaleString();
-    
+
     const arrivalDateTime = new Date(formData.get('arrival_time'));
     const arrivalTimeFormatted = arrivalDateTime.toLocaleString();
 
     let previewHTML = `
         <div class="preview-item">
-            <span class="preview-label">Flight Number:</span>
+            <span class="preview-label">Номер рейса:</span>
             <span class="preview-value">${formData.get('flight_number') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Aircraft:</span>
+            <span class="preview-label">Воздушное судно:</span>
             <span class="preview-value">${formData.get('aircraft') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Route (${routeType}):</span>
+            <span class="preview-label">Маршрут (${routeType}):</span>
             <span class="preview-value">${departureDisplay} → ${arrivalDisplay}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Departure Time:</span>
+            <span class="preview-label">Время вылета:</span>
             <span class="preview-value">${departureTimeFormatted || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Arrival Time:</span>
+            <span class="preview-label">Время прилёта:</span>
             <span class="preview-value">${arrivalTimeFormatted || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Status:</span>
+            <span class="preview-label">Статус:</span>
             <span class="preview-value">${status || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Route Type:</span>
-            <span class="preview-value">${routeType === 'ptfs' ? 'PTFS (with codes)' : 'Real (airport names only)'}</span>
+            <span class="preview-label">Тип маршрута:</span>
+            <span class="preview-value">${routeType === 'ptfs' ? 'PTFS (с кодами)' : 'Реальный (только названия аэропортов)'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">PTFS Departure Code:</span>
+            <span class="preview-label">Код вылета PTFS:</span>
             <span class="preview-value">${formData.get('ptfs_departure') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">PTFS Arrival Code:</span>
+            <span class="preview-label">Код прилёта PTFS:</span>
             <span class="preview-value">${formData.get('ptfs_arrival') || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Meal Service:</span>
+            <span class="preview-label">Питание на борту:</span>
             <span class="preview-value">${meal || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Seatmap:</span>
+            <span class="preview-label">Схема мест:</span>
             <span class="preview-value">${seatmap || 'N/A'}</span>
         </div>
         <div class="preview-item">
-            <span class="preview-label">Boarding Pass Style:</span>
+            <span class="preview-label">Стиль посадочного талона:</span>
             <span class="preview-value">${boardingPass || 'N/A'}</span>
         </div>
     `;
@@ -429,7 +429,7 @@ document.getElementById('previewBtn').addEventListener('click', function () {
     if (selectedServices.length > 0) {
         previewHTML += `
             <div class="preview-item">
-                <span class="preview-label">Services:</span>
+                <span class="preview-label">Услуги:</span>
                 <span class="preview-value">${selectedServices.join(', ')}</span>
             </div>
         `;
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const flightId = getFlightIdFromUrl();
 
     if (!flightId) {
-        showAlert('No flight ID provided', 'error');
+        showAlert('ID рейса не указан', 'error');
         return;
     }
 
@@ -471,5 +471,5 @@ document.addEventListener('DOMContentLoaded', function () {
     setupComboInputs();
     loadFlightData(flightId);
 
-    console.log("Admin edit flight page initialized for flight ID:", flightId);
+    console.log("Страница редактирования рейса инициализирована для ID:", flightId);
 });

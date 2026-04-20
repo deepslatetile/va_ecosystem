@@ -90,12 +90,12 @@ def put_user(user_id):
             update_query = f"UPDATE users SET {', '.join(update_fields)} WHERE id = ?"
             cursor.execute(update_query, update_values)
 
-            # Обновляем или создаем запись в oauth_connections для Discord
+            # Обновляем или создаем запись в oauth_connections для SOCIALNWK
             if 'social_id' in data and data['social_id']:
                 # Проверяем существующую запись
                 cursor.execute('''
                     SELECT id FROM oauth_connections 
-                    WHERE user_id = ? AND provider = 'discord'
+                    WHERE user_id = ? AND provider = 'SOCIALNWK'
                 ''', (user_id,))
 
                 existing_connection = cursor.fetchone()
@@ -107,7 +107,7 @@ def put_user(user_id):
                         UPDATE oauth_connections
                         SET provider_user_id = ?,
                             created_at = ?
-                        WHERE user_id = ? AND provider = 'discord'
+                        WHERE user_id = ? AND provider = 'SOCIALNWK'
                     ''', (
                         data['social_id'],
                         current_timestamp,
@@ -122,7 +122,7 @@ def put_user(user_id):
                         VALUES (?, ?, ?, NULL, NULL, NULL, ?)
                     ''', (
                         user_id,
-                        'discord',
+                        'SOCIALNWK',
                         data['social_id'],
                         current_timestamp
                     ))
@@ -181,7 +181,7 @@ def put_user(user_id):
 
             cursor.execute('''
                 SELECT id FROM oauth_connections 
-                WHERE user_id = ? AND provider = 'discord'
+                WHERE user_id = ? AND provider = 'SOCIALNWK'
             ''', (user_id,))
 
             existing_connection = cursor.fetchone()
@@ -190,7 +190,7 @@ def put_user(user_id):
                 cursor.execute('''
                     UPDATE oauth_connections
                     SET provider_user_id = ?
-                    WHERE user_id = ? AND provider = 'discord'
+                    WHERE user_id = ? AND provider = 'SOCIALNWK'
                 ''', (
                     data['social_id'],
                     user_id
@@ -203,7 +203,7 @@ def put_user(user_id):
                     VALUES (?, ?, ?, NULL, NULL, NULL, ?)
                 ''', (
                     user_id,
-                    'discord',
+                    'SOCIALNWK',
                     data['social_id'],
                     current_timestamp
                 ))

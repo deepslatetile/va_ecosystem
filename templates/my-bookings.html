@@ -7,16 +7,16 @@
 {% block content %}
 <div class="bookings-container">
     <div class="bookings-header">
-        <h1>My Bookings</h1>
+        <h1>Мои бронирования</h1>
         <div class="bookings-controls">
             <div class="filter-controls">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="active">Active</button>
-                <button class="filter-btn" data-filter="past">Past</button>
-                <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="active">Активные</button>
+                <button class="filter-btn" data-filter="past">Прошедшие</button>
+                <button class="filter-btn" data-filter="cancelled">Отменённые</button>
             </div>
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search bookings...">
+                <input type="text" id="searchInput" placeholder="Поиск бронирований...">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -29,7 +29,7 @@
     <div class="bookings-list" id="bookingsList">
         <div class="loading-spinner">
             <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading your bookings...</p>
+            <p>Загрузка ваших бронирований...</p>
         </div>
     </div>
 
@@ -37,17 +37,17 @@
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Booking Details</h2>
+                <h2 id="modalTitle">Детали бронирования</h2>
                 <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
                 <!-- Content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button class="btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn-danger" id="cancelBookingBtn" style="display: none;">Cancel Booking</button>
-                <button class="btn-primary" id="saveBookingBtn" style="display: none;">Save Changes</button>
-                <button class="btn-primary" id="viewBoardingPassBtn" style="display: none;">View Boarding Pass</button>
+                <button class="btn-secondary" onclick="closeModal()">Закрыть</button>
+                <button class="btn-danger" id="cancelBookingBtn" style="display: none;">Отменить бронирование</button>
+                <button class="btn-primary" id="saveBookingBtn" style="display: none;">Сохранить изменения</button>
+                <button class="btn-primary" id="viewBoardingPassBtn" style="display: none;">Посмотреть посадочный талон</button>
             </div>
         </div>
     </div>
